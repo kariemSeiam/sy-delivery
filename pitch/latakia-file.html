@@ -121,6 +121,7 @@ h1,h2,h3,h4{font-family:var(--font-head);font-weight:700;text-wrap:balance;margi
 .tabular{font-variant-numeric:tabular-nums}
 a{color:inherit}
 .wrap{display:grid;grid-template-columns:1fr 200px;gap:48px;align-items:start}
+.wrap>div{min-width:0}
 @media (max-width:980px){.wrap{grid-template-columns:1fr}}
 .rail{position:sticky;top:24px;padding-top:8px;display:flex;flex-direction:column;gap:2px}
 @media (max-width:980px){.rail{display:none}}
@@ -243,6 +244,7 @@ h2.stitle{font-size:clamp(21px,2.8vw,29px);margin-bottom:8px}
 
 /* map + grid */
 .mapwrap{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:28px;align-items:center}
+.mapwrap>div{min-width:0}
 @media (max-width:860px){.mapwrap{grid-template-columns:1fr}}
 .maplabel{font-size:11px;color:var(--muted);margin-top:8px;text-align:center}
 .scoregrid{width:100%;border-collapse:collapse;font-size:13px}
@@ -297,7 +299,7 @@ table.promise tr:last-child td{border-bottom:none}
 .seg .ans{font-size:12.5px;background:var(--sea-tint);color:var(--sea);border-radius:8px;padding:8px 10px;margin-top:auto}
 
 /* diagrams */
-.diagram{width:100%;height:auto;margin-top:24px}
+.diagram{display:block;width:100%;max-width:100%;height:auto;margin-top:24px}
 .node-fill{fill:var(--surface)}
 .node-line{stroke:var(--hair)}
 .host-fill{fill:var(--sea-tint)}
