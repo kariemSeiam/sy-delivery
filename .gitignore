@@ -5,3 +5,9 @@ build/
 .env
 .env.*
 *.log
+
+# agent runtime telemetry — not project content
+.venom/molt/loop-state-*.json
+.venom/molt/observations.jsonl
+.venom/molt/routing-outcomes.jsonl
+.venom/state/
