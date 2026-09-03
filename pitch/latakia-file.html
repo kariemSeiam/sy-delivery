@@ -1,0 +1,1433 @@
+<title>ملف اللاذقية</title>
+<style>
+:root,[data-brand="sy"]{
+  /* Navigator-compatible RGB triplets — same architecture as
+     Portfolio/src/brands/<slug>/tokens.css, so this page can drop into the
+     multibrand system unchanged. Palette: "ساحل وحبر". */
+  --canvas:235 239 237;
+  --canvas-2:255 255 255;
+  --canvas-3:245 248 246;
+  --ink-primary:11 22 20;
+  --ink-secondary:50 67 64;
+  --ink-tertiary:109 124 120;
+  --border-primary:217 224 221;
+  --border-soft:233 238 236;
+  --accent:11 93 81;
+  --accent-tint:226 239 234;
+  --atm-a:58 84 98;
+  --atm-a-tint:229 237 240;
+  --atm-b:138 75 18;
+  --atm-b-tint:249 237 223;
+  --atm-c:142 43 33;
+  --atm-c-tint:247 232 229;
+  --bubble-color:var(--accent);
+
+  /* Semantic names used across the page, resolved from the triplets above. */
+  --stone:rgb(var(--canvas));
+  --surface:rgb(var(--canvas-2));
+  --surface-2:rgb(var(--canvas-3));
+  --ink:rgb(var(--ink-primary));
+  --ink-rgb:var(--ink-primary);
+  --ink-2:rgb(var(--ink-secondary));
+  --muted:rgb(var(--ink-tertiary));
+  --hair:rgb(var(--border-primary));
+  --hair-soft:rgb(var(--border-soft));
+  --sea:rgb(var(--accent));
+  --sea-tint:rgb(var(--accent-tint));
+  --slate:rgb(var(--atm-a));
+  --slate-tint:rgb(var(--atm-a-tint));
+  --amber:rgb(var(--atm-b));
+  --amber-tint:rgb(var(--atm-b-tint));
+  --alert:rgb(var(--atm-c));
+  --alert-tint:rgb(var(--atm-c-tint));
+
+  --font-head:'IBM Plex Sans Arabic',Tahoma,sans-serif;
+  --font-body:'Cairo',Tahoma,sans-serif;
+  --ease-settle:cubic-bezier(.22,1,.36,1);
+  --grain-blend:multiply; --grain-opacity:.045;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --canvas:14 21 19;
+    --canvas-2:22 31 28;
+    --canvas-3:28 38 34;
+    --ink-primary:231 238 236;
+    --ink-secondary:185 198 194;
+    --ink-tertiary:126 145 141;
+    --border-primary:42 59 56;
+    --border-soft:34 50 47;
+    --accent:79 183 158;
+    --accent-tint:23 48 41;
+    --atm-a:127 160 174;
+    --atm-a-tint:30 44 49;
+    --atm-b:224 161 84;
+    --atm-b-tint:51 34 18;
+    --atm-c:226 119 106;
+    --atm-c-tint:58 29 24;
+    --grain-blend:screen; --grain-opacity:.04;
+  }
+}
+:root[data-theme="dark"]{
+    --canvas:14 21 19;
+    --canvas-2:22 31 28;
+    --canvas-3:28 38 34;
+    --ink-primary:231 238 236;
+    --ink-secondary:185 198 194;
+    --ink-tertiary:126 145 141;
+    --border-primary:42 59 56;
+    --border-soft:34 50 47;
+    --accent:79 183 158;
+    --accent-tint:23 48 41;
+    --atm-a:127 160 174;
+    --atm-a-tint:30 44 49;
+    --atm-b:224 161 84;
+    --atm-b-tint:51 34 18;
+    --atm-c:226 119 106;
+    --atm-c-tint:58 29 24;
+    --grain-blend:screen; --grain-opacity:.04;
+}
+*{box-sizing:border-box}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--sea);outline-offset:2px;border-radius:4px}
+@media (prefers-reduced-motion:reduce){*{transition-duration:.001ms!important;animation-duration:.001ms!important}}
+body{background:var(--stone);color:var(--ink);font-family:var(--font-body);margin:0;line-height:1.7;position:relative}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;opacity:var(--grain-opacity);mix-blend-mode:var(--grain-blend);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:180px 180px}
+.doc{direction:rtl;text-align:right;max-width:1180px;margin:0 auto;padding:0 24px;position:relative;overflow-x:hidden}
+@media (max-width:480px){.doc{padding:0 15px}}
+.scrollx{overflow-x:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+.scrollx::-webkit-scrollbar{height:5px}
+.scrollx::-webkit-scrollbar-thumb{background:var(--hair);border-radius:3px}
+.svgwrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.svgwrap.min720 svg{min-width:720px}
+.svgwrap.min620 svg{min-width:620px}
+.svgwrap.min780 svg{min-width:780px}
+h1,h2,h3,h4{font-family:var(--font-head);font-weight:700;text-wrap:balance;margin:0}
+.tabular{font-variant-numeric:tabular-nums}
+a{color:inherit}
+.wrap{display:grid;grid-template-columns:1fr 200px;gap:48px;align-items:start}
+@media (max-width:980px){.wrap{grid-template-columns:1fr}}
+.rail{position:sticky;top:24px;padding-top:8px;display:flex;flex-direction:column;gap:2px}
+@media (max-width:980px){.rail{display:none}}
+.rail a{display:flex;gap:10px;align-items:baseline;padding:7px 10px;border-radius:8px;font-size:12.5px;color:var(--muted);text-decoration:none;transition:background .22s var(--ease-settle),color .22s var(--ease-settle),transform .22s var(--ease-settle)}
+.rail a:hover{background:var(--surface);transform:translateX(-2px)}
+.rail a.active{background:var(--surface-2);color:var(--ink);font-weight:600}
+.rail .num{font-family:var(--font-head);font-size:11px;color:var(--sea);min-width:20px}
+.railtitle{font-size:11px;letter-spacing:.08em;color:var(--muted);padding:0 10px 8px;text-transform:uppercase}
+
+/* atmosphere wash — ambient blobs, same idea as the portfolio's brand atmosphere */
+.atm{position:fixed;inset:0;pointer-events:none;z-index:-1;overflow:hidden}
+.atm i{position:absolute;display:block;border-radius:50%;filter:blur(90px);opacity:.30}
+.atm i.a{width:52vw;height:52vw;background:rgb(var(--accent));top:-14vw;right:-10vw}
+.atm i.b{width:44vw;height:44vw;background:rgb(var(--atm-a));top:38vh;left:-14vw;opacity:.22}
+.atm i.c{width:38vw;height:38vw;background:rgb(var(--atm-b));bottom:-12vw;right:8vw;opacity:.16}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .atm i{opacity:.16}:root:not([data-theme="light"]) .atm i.b{opacity:.12}:root:not([data-theme="light"]) .atm i.c{opacity:.10}}
+:root[data-theme="dark"] .atm i{opacity:.16}
+
+/* creative intro */
+.intro{padding:96px 0 72px;position:relative}
+@media (max-width:600px){.intro{padding:60px 0 48px}}
+.intro .stamp{display:inline-flex;align-items:center;gap:9px;font-size:11.5px;letter-spacing:.06em;color:rgb(var(--accent));border:1px solid rgb(var(--accent) / .35);background:rgb(var(--accent) / .07);padding:6px 13px;border-radius:999px;font-family:var(--font-head);font-weight:600}
+.intro .stamp i{width:6px;height:6px;border-radius:50%;background:rgb(var(--accent));display:block;animation:pulse 2.8s var(--ease-settle) infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.82)}}
+.intro h1{margin-top:26px;font-size:clamp(30px,5.6vw,60px);line-height:1.22;max-width:19ch;letter-spacing:-.01em}
+.intro h1 em{font-style:normal;color:rgb(var(--accent));position:relative;white-space:nowrap}
+.intro h1 em::after{content:"";position:absolute;right:0;left:0;bottom:.08em;height:.14em;background:rgb(var(--accent) / .18);border-radius:2px}
+.intro .sub{margin-top:24px;font-size:clamp(15px,2vw,18px);color:var(--ink-2);max-width:54ch;line-height:1.85}
+.waypoints{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:44px}
+@media (max-width:760px){.waypoints{grid-template-columns:1fr}}
+.wp{background:rgb(var(--canvas-2) / .72);backdrop-filter:blur(6px);border:1px solid var(--hair);border-radius:14px;padding:18px 20px;transition:transform .3s var(--ease-settle),border-color .3s var(--ease-settle)}
+.wp:hover{transform:translateY(-3px);border-color:rgb(var(--accent) / .5)}
+.wp .n{font-family:var(--font-head);font-size:11px;font-weight:700;color:rgb(var(--accent));letter-spacing:.08em}
+.wp h3{font-size:16px;margin:9px 0 6px}
+.wp p{margin:0;font-size:13px;color:var(--muted);line-height:1.7}
+.scrollcue{display:flex;align-items:center;gap:10px;margin-top:44px;font-size:12.5px;color:var(--muted)}
+.scrollcue .line{width:44px;height:1px;background:var(--hair);position:relative;overflow:hidden}
+.scrollcue .line::after{content:"";position:absolute;inset:0;background:rgb(var(--accent));transform:translateX(100%);animation:sweep 2.6s var(--ease-settle) infinite}
+@keyframes sweep{0%{transform:translateX(100%)}55%,100%{transform:translateX(-100%)}}
+@media (prefers-reduced-motion:reduce){.intro .stamp i,.scrollcue .line::after{animation:none}}
+
+/* chapter dividers */
+.chapter{padding:64px 0 8px;border-bottom:none}
+@media (max-width:600px){.chapter{padding:42px 0 4px}}
+.chapter .bar{display:flex;align-items:baseline;gap:14px}
+.chapter .idx{font-family:var(--font-head);font-size:12px;font-weight:700;color:rgb(var(--accent));letter-spacing:.1em;white-space:nowrap}
+.chapter h2{font-size:clamp(19px,2.6vw,26px)}
+.chapter .rule{flex:1;height:1px;background:linear-gradient(to left,rgb(var(--accent) / .55),var(--hair))}
+.chapter p{margin:12px 0 0;font-size:14px;color:var(--muted);max-width:60ch}
+
+.hero{padding:64px 0 36px;border-bottom:1px solid var(--hair);position:relative;background-image:radial-gradient(rgba(var(--ink-rgb),.13) 1px,transparent 1px);background-size:20px 20px;-webkit-mask-image:linear-gradient(to bottom,black,transparent 92%);mask-image:linear-gradient(to bottom,black,transparent 92%)}
+.eyebrow{font-size:13px;color:var(--sea);font-weight:600;letter-spacing:.02em;margin-bottom:16px;display:flex;gap:10px;align-items:center}
+.eyebrow::before{content:"";width:22px;height:1.5px;background:var(--sea)}
+.hero h1{font-size:clamp(28px,4.2vw,46px);line-height:1.28;max-width:16ch}
+.hero .lede{font-size:16.5px;color:var(--ink-2);max-width:58ch;margin-top:18px}
+.deallines{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.dealline{font-size:12.5px;background:var(--surface);border:1px solid var(--hair);border-radius:10px;padding:8px 13px;color:var(--ink-2)}
+.dealline b{color:var(--ink);font-family:var(--font-head)}
+.factline{display:flex;flex-wrap:wrap;gap:9px 26px;margin-top:26px;font-size:13px}
+.factline b{font-family:var(--font-head);font-weight:700}
+.factline span{color:var(--muted)}
+
+section{padding:56px 0;border-bottom:1px solid var(--hair)}
+section:last-of-type{border-bottom:none}
+.secnum{font-family:var(--font-head);font-size:13px;color:var(--sea);font-weight:700;margin-bottom:10px;display:block}
+h2.stitle{font-size:clamp(21px,2.8vw,29px);margin-bottom:8px}
+.sdek{color:var(--ink-2);font-size:15px;max-width:62ch;margin-top:10px}
+.section-body{margin-top:34px}
+
+.card{background:var(--surface);border:1px solid var(--hair);border-radius:14px;padding:22px 24px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.grid5{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+@media (max-width:900px){.grid5{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:760px){.grid2,.grid3{grid-template-columns:1fr}}
+
+.tag{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:3px 10px;border-radius:999px;transform:rotate(-.6deg);transition:transform .22s var(--ease-settle)}
+.tag:hover{transform:rotate(0deg)}
+.tag.sea{background:var(--sea-tint);color:var(--sea)}
+.tag.amber{background:var(--amber-tint);color:var(--amber)}
+.tag.alert{background:var(--alert-tint);color:var(--alert)}
+.tag.slate{background:var(--slate-tint);color:var(--slate)}
+.code{font-family:ui-monospace,"SF Mono",Consolas,monospace;font-size:11.5px;background:var(--surface-2);padding:1px 7px;border-radius:5px;color:var(--muted)}
+
+/* method */
+.methodgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:8px}
+@media (max-width:900px){.methodgrid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.methodgrid{grid-template-columns:1fr}}
+.mcard{background:var(--surface);border:1px solid var(--hair);border-radius:12px;padding:18px}
+.mcard .k{font-family:var(--font-head);color:var(--sea);font-size:22px;font-weight:700}
+.mcard h4{font-size:14px;margin:8px 0 5px}
+.mcard p{margin:0;font-size:12.5px;color:var(--muted)}
+
+/* map + grid */
+.mapwrap{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:28px;align-items:center}
+@media (max-width:860px){.mapwrap{grid-template-columns:1fr}}
+.maplabel{font-size:11px;color:var(--muted);margin-top:8px;text-align:center}
+.scoregrid{width:100%;border-collapse:collapse;font-size:13px}
+.scoregrid th{font-family:var(--font-head);font-weight:600;font-size:11.5px;color:var(--muted);text-align:center;padding:8px 6px;border-bottom:1px solid var(--hair)}
+.scoregrid th:first-child{text-align:right}
+.scoregrid td{padding:9px 6px;border-bottom:1px solid var(--hair-soft);text-align:center}
+.scoregrid td:first-child{text-align:right;font-family:var(--font-head);font-weight:600}
+.scoregrid tr.pick td:first-child{color:var(--sea)}
+.scorecell{display:inline-flex;width:30px;height:24px;border-radius:6px;align-items:center;justify-content:center;font-weight:600;font-size:12.5px}
+.scoregrid .sum{font-family:var(--font-head);font-weight:700}
+.gridnote{font-size:12px;color:var(--muted);margin-top:12px}
+
+/* market facts */
+.factgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:28px}
+@media (max-width:760px){.factgrid{grid-template-columns:1fr}}
+.factcard{background:var(--surface);border:1px solid var(--hair);border-radius:12px;padding:16px 18px}
+.factcard .lbl{font-size:11.5px;color:var(--muted);margin-bottom:6px}
+.factcard .v{font-family:var(--font-head);font-size:18px;font-weight:700}
+.factcard .sub{font-size:12px;color:var(--ink-2);margin-top:4px}
+.proofbar{margin-top:6px}
+.proofrow{display:flex;justify-content:space-between;font-size:13.5px;margin-bottom:6px}
+.prtrack{height:14px;border-radius:7px;background:var(--surface-2)}
+.prfill{height:100%;border-radius:7px;background:var(--slate)}
+
+/* competitors */
+.compgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:28px}
+@media (max-width:900px){.compgrid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.compgrid{grid-template-columns:1fr}}
+.compcard{background:var(--surface);border:1px solid var(--hair);border-radius:14px;padding:18px 20px;transition:transform .25s var(--ease-settle),box-shadow .25s var(--ease-settle)}
+.compcard:hover{transform:translateY(-3px);box-shadow:0 12px 26px -16px rgba(var(--ink-rgb),.28)}
+.compcard .top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.compcard h4{font-size:16px}
+.compcard .verdict{font-size:10.5px;font-weight:700;padding:3px 9px;border-radius:999px;white-space:nowrap}
+.compcard .stat{font-family:var(--font-head);font-size:20px;font-weight:700;margin-top:10px}
+.compcard .statlbl{font-size:11px;color:var(--muted)}
+.compcard .ev{font-size:12.5px;color:var(--ink-2);margin-top:10px;padding-top:10px;border-top:1px solid var(--hair-soft);line-height:1.65}
+.compcard .ev b{color:var(--ink)}
+
+/* intent table */
+table.promise{width:100%;border-collapse:collapse;margin-top:8px}
+table.promise th{font-family:var(--font-head);text-align:right;font-size:12.5px;color:var(--muted);font-weight:600;padding:10px 14px;border-bottom:1px solid var(--hair)}
+table.promise td{padding:14px;border-bottom:1px solid var(--hair-soft);font-size:14.5px;vertical-align:top}
+table.promise tr:last-child td{border-bottom:none}
+
+/* audience / segments */
+.segrow{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:28px}
+@media (max-width:820px){.segrow{grid-template-columns:1fr}}
+.seg{background:var(--surface);border:1px solid var(--hair);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:10px}
+.seg .who{font-family:var(--font-head);font-weight:700;font-size:15px;color:var(--sea)}
+.seg .need{font-size:13px;color:var(--ink-2)}
+.seg .need b{color:var(--ink)}
+.seg .ans{font-size:12.5px;background:var(--sea-tint);color:var(--sea);border-radius:8px;padding:8px 10px;margin-top:auto}
+
+/* diagrams */
+.diagram{width:100%;height:auto;margin-top:24px}
+.node-fill{fill:var(--surface)}
+.node-line{stroke:var(--hair)}
+.host-fill{fill:var(--sea-tint)}
+.host-line{stroke:var(--sea)}
+.diagram text{fill:var(--ink);font-family:var(--font-body)}
+.diagram text.label-soft{fill:var(--muted);font-size:11px}
+.diagram line.link{stroke:var(--hair);stroke-width:1.5}
+.diagram circle.dot{fill:var(--sea)}
+
+.branchgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:24px}
+@media (max-width:900px){.branchgrid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){.branchgrid{grid-template-columns:1fr}}
+.branch{background:var(--surface);border:1px solid var(--hair);border-radius:10px;padding:14px 16px;transition:transform .25s var(--ease-settle),border-color .25s var(--ease-settle)}
+.branch:hover{transform:translateY(-2px);border-color:var(--alert)}
+.branch .n{font-family:var(--font-head);font-size:11px;color:var(--alert);font-weight:700;margin-bottom:6px}
+.branch h4{margin:0 0 6px;font-size:14px}
+.branch p{margin:0;font-size:12.5px;color:var(--muted)}
+
+/* demo phone */
+.demowrap{display:flex;gap:32px;align-items:flex-start;margin-top:28px;flex-wrap:wrap;justify-content:center}
+.phone{width:300px;max-width:86vw;border-radius:30px;background:var(--ink);padding:9px;box-shadow:0 22px 44px -22px rgba(var(--ink-rgb),.5);flex:0 0 auto}
+.phone .port{background:var(--stone);border-radius:22px;overflow:hidden}
+.sh{font-size:12px;line-height:1.5}
+.sysbar{display:flex;align-items:center;gap:8px;padding:7px 12px;background:var(--ink);color:var(--stone);font-size:10.5px}
+.sysbar .mode{display:flex;align-items:center;gap:5px;font-weight:600;color:var(--surface)}
+.sysbar .mode i{width:6px;height:6px;border-radius:2px;background:var(--sea);display:block}
+.sysbar .sp{flex:1}
+.sysbar .guest{opacity:.65}
+.dhead{background:var(--surface);border-bottom:1px solid var(--hair);padding:10px 12px}
+.dhead-row{display:flex;align-items:center;gap:8px}
+.dplace{flex:1;min-width:0;display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600}
+.dplace svg{color:var(--sea);flex:0 0 auto}
+.dplace small{display:block;font-size:9.5px;color:var(--muted);font-weight:400}
+.dbell{flex:0 0 auto;width:32px;height:32px;border-radius:9px;display:grid;place-items:center;color:var(--ink-2);position:relative;background:var(--surface-2)}
+.dbell .ddot{position:absolute;top:5px;left:6px;width:7px;height:7px;border-radius:50%;background:var(--amber);border:1.5px solid var(--surface)}
+.dsearch{margin-top:8px;background:var(--surface-2);border:1px solid var(--hair);border-radius:8px;padding:7px 10px;font-size:11px;color:var(--muted)}
+.dbody{padding:11px;display:flex;flex-direction:column;gap:11px;max-height:520px;overflow-y:auto;overscroll-behavior:contain}
+.dbanner-wrap{position:relative;height:68px}
+.dbanner{position:absolute;inset:0;opacity:0;background:var(--surface);border:1px solid var(--hair);border-radius:10px;display:flex;overflow:hidden;animation:dbcycle 12s infinite}
+.dbanner .art{width:46px;min-width:46px;max-width:46px;flex:0 0 46px;background:var(--m,var(--sea));position:relative;display:grid;place-items:center}
+.dbanner .art::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(-45deg,rgba(255,255,255,.16) 0 1px,transparent 1px 8px)}
+.dbanner .art .mk{position:relative;z-index:1;width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.22);display:grid;place-items:center;color:#fff;font-family:var(--font-head);font-weight:700;font-size:10px}
+.dbanner .txt{flex:1;min-width:0;padding:9px 10px;font-size:10.5px}
+.dbanner .txt b{display:block;font-size:11.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dbanner .why{margin-top:5px;display:inline-block;font-size:9.5px;background:var(--slate-tint);color:var(--slate);padding:2px 7px;border-radius:5px}
+.dbanner.s1{animation-delay:0s}
+.dbanner.s2{animation-delay:4s}
+.dbanner.s3{animation-delay:8s}
+@keyframes dbcycle{0%{opacity:0}8%{opacity:1}25%{opacity:1}33%{opacity:0}100%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.dbanner{animation:none;opacity:0}.dbanner.s1{opacity:1}}
+.dbdots{display:flex;gap:5px;justify-content:center;margin-top:6px}
+.dbdots i{width:5px;height:5px;border-radius:50%;background:var(--hair)}
+.dbdots i:first-child{background:var(--sea)}
+.dbcap{font-size:9px;color:var(--muted);text-align:center;margin-top:3px}
+.dcats{display:flex;gap:6px;overflow-x:auto}
+.dcat{flex:0 0 auto;background:var(--surface);border:1px solid var(--hair);border-radius:8px;padding:8px 5px 7px;text-align:center;width:58px;font-size:9.5px}
+.dcat svg{color:var(--sea);display:inline-block}
+.dcat b{display:block;font-size:10px;margin-top:4px;font-weight:600;white-space:nowrap}
+.dfilters{display:flex;gap:5px;overflow-x:auto}
+.dchip{flex:0 0 auto;border:1px solid var(--hair);background:var(--surface);border-radius:999px;padding:4px 10px;font-size:9.5px;color:var(--ink-2);white-space:nowrap}
+.dchip.on{background:var(--ink);border-color:var(--ink);color:var(--stone)}
+.dcard{background:var(--surface);border:1px solid var(--hair);border-radius:10px;overflow:hidden}
+.dcard-top{display:flex;gap:8px;padding:9px 10px 0}
+.dcover{width:44px;height:44px;border-radius:8px;flex:0 0 auto;display:grid;place-items:center;font-size:9px;font-weight:700;color:#fff}
+.dcard-h{flex:1;min-width:0}
+.dcard-h b{font-size:12px}
+.dcard-h .r{font-size:9.5px;color:var(--muted);display:block;margin-top:2px}
+.dfacts{display:flex;gap:6px;padding:8px 10px 10px;flex-wrap:wrap}
+.dfact{border:1px solid var(--hair);border-radius:6px;padding:3px 8px;font-size:9.5px;background:var(--surface-2)}
+.dfact b{font-family:var(--font-head)}
+details.dcalc{border-top:1px solid var(--hair-soft)}
+details.dcalc summary{list-style:none;padding:7px 10px;font-size:9.5px;color:var(--sea);cursor:pointer;display:flex;justify-content:space-between}
+details.dcalc summary::-webkit-details-marker{display:none}
+details.dcalc summary::after{content:"كيف انحسب ⌄"}
+details.dcalc[open] summary::after{content:"إقفال ⌃"}
+.dcalcbox{padding:0 10px 10px;font-size:9.5px}
+.dcalcrow{display:flex;justify-content:space-between;padding:3px 0;color:var(--ink-2)}
+.dcalcrow.tot{border-top:1px solid var(--hair-soft);margin-top:4px;padding-top:5px;font-weight:600;color:var(--ink)}
+.dtabbar{display:flex;background:var(--surface);border-top:1px solid var(--hair);padding:8px 4px 9px}
+.dtab{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;text-align:center;font-size:9.5px;color:var(--muted)}
+.dtab.on{color:var(--sea);font-weight:600}
+.demoann{max-width:340px;font-size:13.5px;color:var(--ink-2)}
+.demoann h4{font-size:15px;margin-bottom:8px}
+.demoann ul{margin:0;padding-right:18px}
+.demoann li{margin-bottom:8px}
+.demoann li b{color:var(--ink)}
+
+/* journey wireframe strip */
+.journey{display:flex;gap:14px;overflow-x:auto;margin-top:28px;padding-bottom:10px}
+.jstep{flex:0 0 auto;width:150px}
+.jframe{background:var(--surface-2);border:1.5px dashed var(--hair);border-radius:10px;height:200px;padding:8px;display:flex;flex-direction:column;gap:5px}
+.jbar{height:8px;background:var(--hair);border-radius:3px}
+.jbar.w60{width:60%}
+.jbar.w40{width:40%}
+.jblock{flex:1;background:var(--surface);border:1px solid var(--hair);border-radius:6px}
+.jblock.fail{background:var(--alert-tint);border-color:var(--alert)}
+.jstep .cap{font-size:11.5px;margin-top:8px;text-align:center}
+.jstep .cap b{display:block;font-family:var(--font-head);font-size:12px}
+.jstep .cap span{color:var(--muted);font-size:10.5px}
+
+/* roster */
+.roster{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:26px}
+@media (max-width:900px){.roster{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){.roster{grid-template-columns:1fr}}
+.rcard{background:var(--surface);border:1px solid var(--hair);border-radius:12px;padding:16px;transition:transform .25s var(--ease-settle)}
+.rcard:hover{transform:translateY(-2px)}
+.rcard.lead{border-color:var(--sea);background:var(--sea-tint)}
+.rcard h4{font-size:15px;margin-bottom:3px}
+.rcard .cat{font-size:10.5px;color:var(--muted);margin-bottom:8px}
+.rcard p{margin:0;font-size:12px;color:var(--ink-2);line-height:1.6}
+.rcard.lead .cat,.rcard.lead p{color:var(--sea)}
+
+/* deliverable inventory */
+.invtable{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:24px}
+.invtable th{font-family:var(--font-head);text-align:right;font-size:11.5px;color:var(--muted);font-weight:600;padding:9px 12px;border-bottom:1px solid var(--hair)}
+.invtable td{padding:13px 12px;border-bottom:1px solid var(--hair-soft);vertical-align:top}
+.invtable td:first-child{font-family:var(--font-head);font-weight:600;white-space:nowrap}
+.invtable tr:last-child td{border-bottom:none}
+.invtable .why{color:var(--muted);font-size:12.5px}
+
+/* browser frame + dashboards */
+.browserframe{background:var(--ink);border-radius:12px;padding:8px;box-shadow:0 20px 40px -24px rgba(var(--ink-rgb),.5);margin-top:8px}
+.browserbar{display:flex;align-items:center;gap:7px;padding:4px 6px 8px}
+.browserbar i{width:7px;height:7px;border-radius:50%;background:#33433F;display:block;flex:0 0 auto}
+.browserbar .url{flex:1;background:rgba(255,255,255,.08);border-radius:5px;padding:4px 9px;font-size:9.5px;color:#8DA09C}
+.browserport{background:var(--stone);border-radius:8px;overflow:hidden;padding:13px}
+.dashhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:11px}
+.dashhead b{font-family:var(--font-head);font-size:13px}
+.dashgrid2{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:11px}
+@media (max-width:620px){.dashgrid2{grid-template-columns:repeat(2,1fr)}}
+.dashkpi{background:var(--surface);border:1px solid var(--hair);border-radius:8px;padding:9px 10px}
+.dashkpi .k{font-size:9px;color:var(--muted)}
+.dashkpi .v{font-family:var(--font-head);font-weight:700;font-size:15px;margin-top:2px}
+.dashtable{width:100%;border-collapse:collapse;font-size:10.5px;background:var(--surface);border:1px solid var(--hair);border-radius:8px;overflow:hidden}
+.dashtable th{text-align:right;font-size:9px;color:var(--muted);font-weight:600;padding:7px 9px;border-bottom:1px solid var(--hair);background:var(--surface-2)}
+.dashtable td{padding:8px 9px;border-bottom:1px solid var(--hair-soft);color:var(--ink-2)}
+.dashtable tr:last-child td{border-bottom:none}
+.pill{font-size:9px;padding:2px 8px;border-radius:999px;font-weight:600;white-space:nowrap}
+.pill.ok{background:var(--sea-tint);color:var(--sea)}
+.pill.wait{background:var(--amber-tint);color:var(--amber)}
+.pill.bad{background:var(--alert-tint);color:var(--alert)}
+.mini-btn{font-size:9px;padding:3px 9px;border-radius:6px;background:var(--sea);color:#fff;font-weight:600;white-space:nowrap}
+.mini-btn.gh{background:none;border:1px solid var(--hair);color:var(--ink-2)}
+.dashsplit{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:620px){.dashsplit{grid-template-columns:1fr}}
+.dashcap{font-size:12.5px;color:var(--muted);margin-top:12px;text-align:center}
+
+/* journey click-through */
+.jstage{display:flex;gap:30px;flex-wrap:wrap;justify-content:center;margin-top:26px;align-items:flex-start}
+.jctrl{flex:1;min-width:280px;max-width:360px;display:flex;flex-direction:column;gap:14px}
+.jsteps{display:flex;flex-wrap:wrap;gap:6px}
+.jstepbtn{font-size:11.5px;padding:6px 11px;border-radius:999px;border:1px solid var(--hair);background:var(--surface);color:var(--ink-2);cursor:pointer;font-family:var(--font-body);transition:background .22s var(--ease-settle),color .22s var(--ease-settle),border-color .22s var(--ease-settle)}
+.jstepbtn:hover{border-color:var(--sea)}
+.jstepbtn.on{background:var(--ink);color:var(--stone);border-color:var(--ink);font-weight:600}
+.jswitch{display:flex;gap:4px;background:var(--surface-2);border:1px solid var(--hair);border-radius:10px;padding:3px;width:fit-content}
+.jswitch button{font-size:11.5px;padding:6px 15px;border-radius:8px;border:0;background:none;color:var(--muted);cursor:pointer;font-family:var(--font-body);transition:background .22s var(--ease-settle),color .22s var(--ease-settle)}
+.jswitch button.on{background:var(--surface);color:var(--ink);font-weight:600}
+.jswitch button.fail.on{color:var(--alert)}
+@media (max-width:600px){
+  .jstepbtn{padding:9px 13px;font-size:12.5px}
+  .jswitch button{padding:9px 16px;font-size:12.5px}
+  .jstage{gap:20px}
+  .jctrl{min-width:0;max-width:100%;width:100%}
+}
+.jscreen{display:none}
+.jscreen.on{display:block}
+.jnote{font-size:13px;color:var(--ink-2);background:var(--surface);border:1px solid var(--hair);border-radius:10px;padding:15px 16px;line-height:1.75}
+.jnote b{color:var(--ink);font-family:var(--font-head)}
+.jnote .cc{display:inline-block;font-family:ui-monospace,"SF Mono",monospace;font-size:10.5px;background:var(--sea-tint);color:var(--sea);padding:1px 6px;border-radius:4px}
+.jnote.failnote{border-color:var(--alert);background:var(--alert-tint)}
+.jnote.failnote b{color:var(--alert)}
+.jnote.failnote .cc{background:rgba(var(--ink-rgb),.06);color:var(--alert)}
+
+/* extra demo screen parts */
+.dsec{background:var(--surface);border:1px solid var(--hair);border-radius:10px;padding:10px}
+.dsec h5{font-size:11px;margin:0 0 7px;font-family:var(--font-head);color:var(--muted);font-weight:600}
+.drow{display:flex;justify-content:space-between;gap:8px;font-size:10.5px;padding:4px 0;color:var(--ink-2)}
+.drow.tot{border-top:1px solid var(--hair-soft);margin-top:5px;padding-top:6px;font-weight:700;color:var(--ink)}
+.dfield{background:var(--surface-2);border:1px solid var(--hair);border-radius:8px;padding:7px 9px;font-size:10px;color:var(--ink);margin-bottom:6px}
+.dfield small{display:block;color:var(--muted);font-size:9px;margin-bottom:2px}
+.dbtn{border-radius:8px;padding:10px;text-align:center;font-size:11px;font-weight:700;font-family:var(--font-head)}
+.dbtn.pri{background:var(--sea);color:#fff}
+.dbtn.gh{border:1px solid var(--hair);color:var(--ink-2)}
+.dbtn.dang{background:var(--alert);color:#fff}
+.dalert{background:var(--alert-tint);color:var(--alert);border-radius:8px;padding:9px 10px;font-size:10px;line-height:1.65}
+.dwarn{background:var(--amber-tint);color:var(--amber);border-radius:8px;padding:9px 10px;font-size:10px;line-height:1.65}
+.dok{background:var(--sea-tint);color:var(--sea);border-radius:8px;padding:9px 10px;font-size:10px;line-height:1.65}
+.dsteps{display:flex;gap:4px;padding:4px 0 2px}
+.dstepdot{flex:1;height:3px;border-radius:2px;background:var(--hair)}
+.dstepdot.done{background:var(--sea)}
+.dstepdot.now{background:var(--amber)}
+.dsteplbl{display:flex;justify-content:space-between;font-size:8.5px;color:var(--muted)}
+.drider{display:flex;gap:9px;align-items:center;background:var(--surface);border:1px solid var(--hair);border-radius:10px;padding:9px}
+.davatar{width:34px;height:34px;border-radius:50%;background:var(--slate-tint);color:var(--slate);display:grid;place-items:center;font-weight:700;font-size:12px;flex:0 0 auto;position:relative}
+.davatar::after{content:"";position:absolute;bottom:-1px;left:-1px;width:11px;height:11px;border-radius:50%;background:var(--sea);border:2px solid var(--surface)}
+.drider .info{flex:1;min-width:0;font-size:9.5px}
+.drider .info b{display:block;font-size:11.5px}
+.drider .info span{color:var(--muted);display:block}
+
+/* phases */
+.timeline{margin-top:32px;display:flex;flex-direction:column}
+.phase{display:grid;grid-template-columns:90px 1fr;gap:20px;padding:20px 0;border-top:1px solid var(--hair)}
+.phase:first-child{border-top:none}
+.phase .ph{font-family:var(--font-head);font-weight:700;font-size:14px;color:var(--sea)}
+.phase h3{font-size:17px;margin-bottom:8px}
+.phase p.desc{margin:0 0 10px;font-size:14px;color:var(--ink-2)}
+.gate{display:inline-flex;gap:8px;align-items:baseline;font-size:12.5px;background:var(--sea-tint);color:var(--sea);padding:5px 11px;border-radius:8px}
+.gate b{font-family:var(--font-head)}
+@media (max-width:600px){.phase{grid-template-columns:1fr;gap:6px}}
+
+/* honesty */
+.stackbar{height:34px;border-radius:8px;overflow:hidden;display:flex;margin-top:22px;border:1px solid var(--hair)}
+.stackbar .segb{height:100%;display:flex;align-items:center;justify-content:center;font-size:11px;font-family:var(--font-head);color:#fff}
+.segb.locked{background:var(--sea)}
+.segb.draft{background:var(--amber)}
+.segb.empty{background:var(--surface-2);color:var(--muted)}
+.legend{display:flex;gap:20px;margin-top:14px;flex-wrap:wrap;font-size:12.5px}
+.legend .dot3{width:9px;height:9px;border-radius:50%;display:inline-block;margin-left:6px}
+.covernum{font-family:var(--font-head);font-size:15px;color:var(--sea);font-weight:700}
+
+/* closing */
+.closer{padding:60px 0 90px}
+.closer .card{background:var(--surface-2);padding:34px 30px}
+.closer h2{font-size:23px;margin-bottom:14px}
+.closer p{color:var(--ink-2);font-size:15px;max-width:62ch;margin:0 0 18px}
+.closer ul{margin:0 0 20px;padding-right:20px;font-size:14px;color:var(--ink-2)}
+.closer ul li{margin-bottom:6px}
+
+@media (max-width:600px){
+  section{padding:38px 0}
+  .hero{padding:44px 0 28px}
+  .hero h1{max-width:none}
+  .hero .lede{max-width:none}
+  .section-body{margin-top:24px}
+  .sdek{max-width:none}
+  .dbody{max-height:380px}
+  .demowrap{gap:22px}
+  .demoann{max-width:none;width:100%}
+  .compcard:hover,.branch:hover,.quote:hover,.rcard:hover{transform:none}
+  .browserframe{padding:6px}
+  .browserport{padding:10px}
+  .dashkpi .v{font-size:13px}
+  table.promise td,table.invtable td{padding:11px 8px;font-size:13px}
+  .closer .card{padding:24px 20px}
+  .factline,.deallines{gap:8px}
+}
+@media (max-width:380px){
+  .phone{width:260px}
+  .doc{padding:0 12px}
+}
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@500;600;700&display=swap">
+
+<div class="atm" aria-hidden="true"><i class="a"></i><i class="b"></i><i class="c"></i></div>
+
+<div class="doc">
+<div class="wrap">
+<div>
+
+<header class="intro">
+  <div class="stamp"><i></i>بوصلة · اللاذقية · ٢٠٢٦</div>
+  <h1>في مدينة اتغيّر فيها كل شيء، إحنا بنبيع الحاجة الوحيدة اللي محدش بيبيعها: <em>اليقين</em>.</h1>
+  <p class="sub">العملة اتبدلت من شهور. النت بيوصل لتلت الناس. تمن منافسين موجودين، واتنين منهم موثّق عليهم إنهم بيسيبوا العميل في الفراغ لما حاجة تبوظ. الملف ده بيمشي معاك خطوة بخطوة: فين إنت في السوق ده، إيه اللي هنبنيه بالظبط، وإزاي بيشتغل لما يقع.</p>
+
+  <div class="waypoints">
+    <div class="wp"><div class="n">الفصل الأول</div><h3>فين إنت واقف</h3><p>سوق مقروء بأرقام حقيقية — أربع مدن اتقارنوا، وأربع منافسين اتفكّكوا بمصادر مباشرة لا صفحات تسويقية.</p></div>
+    <div class="wp"><div class="n">الفصل التاني</div><h3>إيه اللي هيتبني</h3><p>ستة أسطح ملموسة، بموديل معماري مثبت شغّال في السوق — مش مخطط نظري.</p></div>
+    <div class="wp"><div class="n">الفصل التالت</div><h3>إزاي بيشتغل</h3><p>رحلة كاملة قابلة للنقر، بحالتي النجاح والفشل — الجزء اللي محدش من المنافسين بيعرضه.</p></div>
+  </div>
+
+  <div class="scrollcue"><span class="line"></span>ابدأ من فوق لتحت — الملف مترتّب كرحلة، مش كقائمة</div>
+</header>
+
+<header class="hero">
+  <div class="eyebrow">الملف في سطر واحد</div>
+  <div class="deallines">
+    <div class="dealline"><b>الرؤية:</b> مضيف أصداف يبيع اليقين مش السرعة</div>
+    <div class="dealline"><b>الإثبات:</b> ٤ منافسين موثّقين بمصادر مباشرة</div>
+    <div class="dealline"><b>الصفقة:</b> نطاق يتقفل، وبعده رقم</div>
+  </div>
+  <div class="factline tabular">
+    <div><b>٦٠٦ ألف</b> <span>نسمة — اللاذقية</span></div>
+    <div><b>صفر أسطر كود</b> <span>لسه في مرحلة القرار</span></div>
+    <div><b>٦٤ قرار</b> <span>مسجّل، ≈٣١٪ محسوم</span></div>
+  </div>
+</header>
+
+<section id="method">
+  <span class="secnum">٠١ · طريقتنا</span>
+  <h2 class="stitle">إحنا وكالة بتقفل قرارات بالدليل، مش بتخمّن واجهات.</h2>
+  <p class="sdek">كل شاشة في الملف ده جاية من قرار مكتوب وسببه، وكل رقم عن السوق له مصدر وتاريخ. ده مش أسلوب تسويقي — ده نفس الانضباط اللي هنسلّمه في الكود.</p>
+  <div class="section-body">
+    <div class="methodgrid">
+      <div class="mcard"><div class="k tabular">٦٤</div><h4>قرار مسجّل</h4><p>كل واحد حالته: فارغ، مسودة، أو مقفول — وسجل قفل بتاريخ وسبب لأي رجوع</p></div>
+      <div class="mcard"><div class="k tabular">١٥+</div><h4>منافس فُحص</h4><p>عبر سوريا كلها، مش اللاذقية بس — بأرقام تحميل وتقييمات حقيقية لا صفحات تسويقية</p></div>
+      <div class="mcard"><div class="k tabular">١٢</div><h4>قيد مكتوب</h4><p>كل قيد كسبته فشلة موثّقة من منافس حقيقي، مش مبدأ حلو الشكل</p></div>
+      <div class="mcard"><div class="k tabular">٠</div><h4>رقم من الذاكرة</h4><p>سوريا اتغيّرت بالكامل بعد ديسمبر ٢٠٢٤ — أي معلومة أقدم اعتُبرت باطلة وأُعيد بحثها</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <span class="secnum">٠٢ · شغل بوصلة</span>
+  <h2 class="stitle">مش أول مرة نبني سوق بطرفين وتطبيق سائق ولوحة تشغيل.</h2>
+  <p class="sdek">أقرب مشروع لللي إنت طالبه اتبنى عندنا فعلاً: تطبيق عميل + تطبيق سائق + توزيع + إشعارات، على iOS وأندرويد. الباقي بيغطي الأجزاء التانية من نفس الشكل — نقاط بيع، لوحات تشغيل، كتالوج، وصحة.</p>
+
+  <div class="section-body">
+    <div class="roster">
+      <div class="rcard lead">
+        <h4>Taxi Arab</h4>
+        <div class="cat">نقل بطلب — عميل + سائق</div>
+        <p>سوق بطرفين كامل: تطبيق راكب، تطبيق سائق، توزيع رحلات، وحملات إشعارات موجّهة لكل جمهور. ده <b>نفس شكل مشروعك بالظبط</b>، متبني ومشحون.</p>
+      </div>
+      <div class="rcard">
+        <h4>HVAR</h4>
+        <div class="cat">نقطة بيع + ERP + CRM</div>
+        <p>منظومة تشغيل متعددة الأسطح: مخزون، تذاكر، ورشة، وتكامل شحن فعلي مع شركة توصيل. اللوحة اللي بتشغّل تاجر حقيقي كل يوم.</p>
+      </div>
+      <div class="rcard">
+        <h4>صحة وعافية</h4>
+        <div class="cat">منصة صحية — iOS + أندرويد</div>
+        <p>تطبيقات مرضى على المنصتين فوق باك-إند واحد، مع منظومة محتوى وتشغيل. إثبات إننا بنشحن موبايل حقيقي، مش ديمو.</p>
+      </div>
+      <div class="rcard">
+        <h4>GeoLink</h4>
+        <div class="cat">خدمات موقع وخرائط</div>
+        <p>طبقة جيو مستقلة اتبنت واتربطت بمنتجات تانية — بالظبط الجزء اللي أي تطبيق توصيل بيقف عليه.</p>
+      </div>
+      <div class="rcard">
+        <h4>Wilson</h4>
+        <div class="cat">تجارة وكتالوج</div>
+        <p>كتالوج منتجات وبيانات تجارية، بهوية بصرية مستخرجة من مادة العلامة نفسها لا من قوالب جاهزة.</p>
+      </div>
+      <div class="rcard">
+        <h4>Smart Line</h4>
+        <div class="cat">منتج تشغيلي</div>
+        <p>ضمن محفظة بوصلة التشغيلية.</p>
+      </div>
+      <div class="rcard">
+        <h4>Dinamo</h4>
+        <div class="cat">منتج تشغيلي</div>
+        <p>ضمن محفظة بوصلة التشغيلية.</p>
+      </div>
+      <div class="rcard" style="background:var(--surface-2);border-style:dashed">
+        <h4>+ غيرهم</h4>
+        <div class="cat">المحفظة أوسع</div>
+        <p>دي عيّنة بتغطي الأجزاء اللي مشروعك محتاجها تحديداً — سوق بطرفين، لوحة تشغيل، موبايل على المنصتين، وطبقة جيو.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="market">
+  <span class="secnum">٠٣ · السوق</span>
+  <h2 class="stitle">ليه اللاذقية بالذات — على خريطة حقيقية، مش على كلام.</h2>
+  <p class="sdek">فحصنا أربع مدن سورية بنفس المعايير. اللاذقية كسبت لأنها متوسطة الحجم، منافسة أقل بالاسم، واستثمار طازج بيتحرّك دلوقتي — لا لأنها الأسهل نظرياً.</p>
+
+  <div class="section-body">
+    <div class="mapwrap">
+      <div>
+        <svg class="diagram" viewBox="0 0 420 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="خريطة توضيحية لسوريا بأربع مدن مقارَنة">
+          <defs>
+            <radialGradient id="glowSea"><stop offset="0%" stop-color="var(--sea)" stop-opacity=".55"/><stop offset="100%" stop-color="var(--sea)" stop-opacity="0"/></radialGradient>
+            <radialGradient id="glowAmber"><stop offset="0%" stop-color="var(--amber)" stop-opacity=".38"/><stop offset="100%" stop-color="var(--amber)" stop-opacity="0"/></radialGradient>
+            <radialGradient id="glowSlate"><stop offset="0%" stop-color="var(--slate)" stop-opacity=".38"/><stop offset="100%" stop-color="var(--slate)" stop-opacity="0"/></radialGradient>
+          </defs>
+          <path d="M55,40 L48,90 L52,140 L85,155 L75,190 L110,200 L95,230 L130,235 L140,260 L230,275 L310,290 L365,300 L390,220 L395,150 L410,90 L370,60 L300,35 L220,25 L150,30 L90,35 Z" fill="var(--surface-2)" stroke="var(--hair)" stroke-width="1.5"></path>
+
+          <circle cx="170" cy="270" r="42" fill="url(#glowAmber)"></circle>
+          <circle cx="170" cy="270" r="7" class="node-fill" stroke="var(--amber)" stroke-width="2"></circle>
+          <text x="170" y="252" text-anchor="middle" font-size="12" font-family="var(--font-head)" font-weight="600">دمشق</text>
+          <text x="170" y="300" text-anchor="middle" class="label-soft">الأعلى تنافسية</text>
+
+          <circle cx="140" cy="70" r="38" fill="url(#glowAmber)"></circle>
+          <circle cx="140" cy="70" r="7" class="node-fill" stroke="var(--amber)" stroke-width="2"></circle>
+          <text x="140" y="52" text-anchor="middle" font-size="12" font-family="var(--font-head)" font-weight="600">حلب</text>
+          <text x="140" y="98" text-anchor="middle" class="label-soft">سوق أكبر، أصعب</text>
+
+          <circle cx="112" cy="190" r="28" fill="url(#glowSlate)"></circle>
+          <circle cx="112" cy="190" r="6" class="node-fill" stroke="var(--slate)" stroke-width="2"></circle>
+          <text x="112" y="212" text-anchor="middle" font-size="12" font-family="var(--font-head)" font-weight="600">حمص</text>
+          <text x="112" y="228" text-anchor="middle" class="label-soft">بديل هادئ</text>
+
+          <circle cx="58" cy="105" r="54" fill="url(#glowSea)"></circle>
+          <circle cx="58" cy="105" r="10" class="node-fill" stroke="var(--sea)" stroke-width="2.5"></circle>
+          <text x="58" y="78" text-anchor="middle" font-size="13.5" font-family="var(--font-head)" font-weight="700" fill="var(--sea)">اللاذقية</text>
+          <text x="58" y="132" text-anchor="middle" class="label-soft">المدينة المختارة</text>
+        </svg>
+        <div class="maplabel">خريطة توضيحية — نسب لا إحداثيات جغرافية دقيقة</div>
+      </div>
+
+      <div>
+        <div class="scrollx">
+        <table class="scoregrid tabular">
+          <tr><th>المدينة</th><th>الحجم</th><th>سهولة الدخول</th><th>استثمار طازج</th><th>الفجوة الرقمية</th><th>المجموع</th></tr>
+          <tr class="pick"><td>اللاذقية</td><td><span class="scorecell" style="background:rgba(11,93,81,.85);color:#fff">٤</span></td><td><span class="scorecell" style="background:rgba(11,93,81,.85);color:#fff">٤</span></td><td><span class="scorecell" style="background:rgba(11,93,81,1);color:#fff">٥</span></td><td><span class="scorecell" style="background:rgba(11,93,81,1);color:#fff">٥</span></td><td class="sum">١٨</td></tr>
+          <tr><td>حمص</td><td><span class="scorecell" style="background:rgba(11,93,81,.5);color:#fff">٣</span></td><td><span class="scorecell" style="background:rgba(11,93,81,1);color:#fff">٥</span></td><td><span class="scorecell" style="background:rgba(11,93,81,.25)">٢</span></td><td><span class="scorecell" style="background:rgba(11,93,81,.5);color:#fff">٣</span></td><td class="sum">١٣</td></tr>
+          <tr><td>حلب</td><td><span class="scorecell" style="background:rgba(11,93,81,.15)">٢</span></td><td><span class="scorecell" style="background:rgba(11,93,81,.15)">٢</span></td><td><span class="scorecell" style="background:rgba(11,93,81,.5);color:#fff">٣</span></td><td><span class="scorecell" style="background:rgba(11,93,81,.5);color:#fff">٣</span></td><td class="sum">١٠</td></tr>
+          <tr><td>دمشق</td><td><span class="scorecell" style="background:rgba(11,93,81,.15)">٢</span></td><td><span class="scorecell" style="background:rgba(11,93,81,0)">١</span></td><td><span class="scorecell" style="background:rgba(11,93,81,1);color:#fff">٥</span></td><td><span class="scorecell" style="background:rgba(11,93,81,0)">١</span></td><td class="sum">٩</td></tr>
+        </table>
+        </div>
+        <div class="gridnote">تقدير توضيحي من بوصلة (١-٥)، مش مؤشر منشور. السكان والاستثمار أرقام مصدَّرة؛ سهولة الدخول والفجوة الرقمية قراءتنا لكثافة المنافسين المكتشَفين. أعمق تفصيل في research/syria-market-scan §٨-٩.</div>
+      </div>
+    </div>
+
+    <div class="factgrid">
+      <div class="factcard"><div class="lbl">العملة</div><div class="v tabular">١٠,٥٠٠ ل.س/$</div><div class="sub">الليرة اتعاد تسميتها يناير ٢٠٢٦ (حذف صفرين). الدولار مقبول واقعياً فوق المصروف اليومي</div></div>
+      <div class="factcard"><div class="lbl">الدفع</div><div class="v">هجين، لا كاش بحت</div><div class="sub">Sham Cash وSyriatel Cash عندهم API فعلي، لكن onboarding يدوي — COD افتراضي فعلي للمرحلة الأولى</div></div>
+      <div class="factcard"><div class="lbl">القانوني</div><div class="v">نافذة مفتوحة وبتتحسّن</div><div class="sub">SWIFT رجع مايو ٢٠٢٦، Visa/Mastercard فُعّلت أغسطس ٢٠٢٦ — مش مجهول قانوني معقّد</div></div>
+      <div class="factcard"><div class="lbl">التوزيع</div><div class="v">عائق واحد، وله حل</div><div class="sub">Google Play مقفول للكيان السوري — بوصلة (مصرية) تسجّل وتنشر نيابة عن العميل</div></div>
+    </div>
+
+    <div class="proofbar" style="margin-top:26px">
+      <div class="proofrow"><span>عندهم موبايل شغّال</span><b class="tabular">٧٧٫٧٪</b></div>
+      <div class="prtrack"><div class="prfill" style="width:77.7%"></div></div>
+      <div class="proofrow" style="margin-top:14px"><span>عندهم إنترنت شغّال باستمرار</span><b class="tabular">٣٥٫٨٪</b></div>
+      <div class="prtrack"><div class="prfill" style="width:35.8%;background:var(--amber)"></div></div>
+    </div>
+    <div class="gridnote">أغلب اللي عنده موبايل، مش عنده نت شغال باستمرار. ده بيقفل الأوفلاين-فيرست كضرورة مش اختيار.</div>
+  </div>
+</section>
+
+<section id="competitors">
+  <span class="secnum">٠٤ · المنافسون</span>
+  <h2 class="stitle">مش ٨ منافسين. أربعة حقيقيون، وكل واحد له ملف.</h2>
+  <p class="sdek">فحصنا ١٥+ اسم عبر سوريا كلها. الأربعة دول بس عندهم دليل حقيقي — تحميلات، تقييمات مقروءة، مصادر صحفية. الباقي إما بلا منتج شغّال أو بلا وجود في مدينتنا.</p>
+
+  <div class="section-body">
+    <div class="compgrid">
+      <div class="compcard">
+        <div class="top"><h4>BeeOrder</h4><span class="tag alert" style="font-size:10.5px">خرق موثّق</span></div>
+        <div class="stat tabular">٤٦٢ ألف+</div><div class="statlbl">تحميل · تأسس ٢٠١٦ · الأقدم والأوسع تغطية</div>
+        <div class="ev">خرق <b>C2</b> (الصمت عند الفشل) و<b>C3</b> (صورة مندوب مش مطابقة) — مؤكَّد بمصادر صحفية مستقلة + تقييمات متكررة</div>
+      </div>
+      <div class="compcard">
+        <div class="top"><h4>Movo</h4><span class="tag alert" style="font-size:10.5px">أعمق خرق</span></div>
+        <div class="stat tabular">١٠٠ ألف+</div><div class="statlbl">تحميل · ٢,٥١٦ تقييم · نشط، آخر تحديث أغسطس ٢٠٢٦</div>
+        <div class="ev">مراجعة حقيقية مقروءة: حظر حساب عميل بعد تواصله مع الدعم — أعمق خرق ثقة لقيناه في كل البحث</div>
+      </div>
+      <div class="compcard">
+        <div class="top"><h4>Labby</h4><span class="tag amber" style="font-size:10.5px">لسه مش هنا</span></div>
+        <div class="stat tabular">$10M</div><div class="statlbl">تمويل سعودي/إماراتي يوليو ٢٠٢٦ · أول تمويل مؤسسي لتك سوري</div>
+        <div class="ev">موديلها مطابق لفكرتنا، لكنها دمشق بس حالياً — حلب أول، بعدها اللاذقية. نافذة توقيت حقيقية</div>
+      </div>
+      <div class="compcard">
+        <div class="top"><h4>طلباتي (talabatee.com)</h4><span class="tag slate" style="font-size:10.5px">الأضعف</span></div>
+        <div class="stat">واتساب بس</div><div class="statlbl">مفيش تطبيق مؤكَّد، مفيش أسعار معلنة</div>
+        <div class="ev">مندوب لاذقاني بالاسم، لكن عمله الرقمي كونسيرج ضعيف — منافس بالاسم لا بالتنفيذ</div>
+      </div>
+      <div class="compcard">
+        <div class="top"><h4>Wee-Sy</h4><span class="tag slate" style="font-size:10.5px">راقب</span></div>
+        <div class="stat tabular">"0+"</div><div class="statlbl">تحميل — المنتج المنشور نقل بس</div>
+        <div class="ev">أقرب موديل فلسفياً لفكرتنا (نقل+تسوق+محفظة)، لكن وحدة التسوق لسه "قريباً" في موقعهم — مش شغّالة</div>
+      </div>
+      <div class="compcard" style="background:var(--surface-2);border-style:dashed">
+        <div class="top"><h4>الفجوة المشتركة</h4></div>
+        <div class="stat" style="font-size:15px">مفيش حد بيعمل الثلاثة</div>
+        <div class="ev">تتبّع لحظي حقيقي، رسوم شفافة محسوبة، وتعامل معلن مع الفشل — الفجوة دي مفتوحة عند الأربعة كلهم</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="intent">
+  <span class="secnum">٠٥ · النية</span>
+  <h2 class="stitle">إحنا مش بنبيع أكل. بنبيع لحظة واحدة في اليوم بتمشي زي ما اتقال بالظبط.</h2>
+  <p class="sdek">كل قيد بنشتغل بيه هو نفس الفكرة، مكتوبة بستة أشكال. اختبار أي فيتشر جديد: بيشيل مفاجأة، ولا بيضيف واحدة؟</p>
+  <div class="section-body">
+    <div class="scrollx">
+    <table class="promise">
+      <tr><th>القيد</th><th>متتفاجئش بـ</th></tr>
+      <tr><td><span class="code">C1</span> الرسوم قبل الدخول للمتجر</td><td>الحساب بعد ما تبني سلة كاملة</td></tr>
+      <tr><td><span class="code">C2</span> كل حالة فشل ليها شاشة وسبب</td><td>طلب واقف من غير ما تعرف ليه</td></tr>
+      <tr><td><span class="code">C3</span> صورة المندوب = اللي بيجي فعلاً</td><td>حد غريب على بابك</td></tr>
+      <tr><td><span class="code">C9</span> الوقت نطاق محسوب لا رقم ثابت</td><td>الانتظار من غير تفسير</td></tr>
+      <tr><td><span class="code">C10</span> التقييم برقم وعدد المراجعات</td><td>جودة متجر مش حقيقية</td></tr>
+      <tr><td><span class="code">C8</span> صيغة عملة واحدة، كل شاشة</td><td>الرقم نفسه بيتلخبط</td></tr>
+    </table>
+    </div>
+  </div>
+</section>
+
+<section id="audience">
+  <span class="secnum">٠٦ · الجمهور الثلاثي</span>
+  <h2 class="stitle">مش عميل واحد. تلاتة، وكل واحد ليه احتياج مختلف تماماً.</h2>
+  <p class="sdek">أي سوبر-آب حقيقي بيخدم ثلاث سوق مش واحد. اللي بيغلط في الأولوية بينهم بيبني منتج ناقص، حتى لو الكود مثالي.</p>
+  <div class="section-body">
+    <div class="segrow">
+      <div class="seg">
+        <div class="who">العميل النهائي</div>
+        <div class="need">مش عايز <b>تشكيلة أوسع</b> — عايز <b>يعرف قبل ما يتفاجئ</b>: السعر، الوقت، مين جاي</div>
+        <div class="ans">إجابتنا: رسوم ووقت وهوية مندوب ظاهرين قبل أي خطوة ملزمة</div>
+      </div>
+      <div class="seg">
+        <div class="who">التاجر</div>
+        <div class="need">حضوره الرقمي غالباً <b>صفحة فيسبوك وبس</b> — مفيش لينك، مفيش منيو محترم</div>
+        <div class="ans">إجابتنا: وجود رقمي جاهز قبل ما نطلب موافقته — هو بيسوّق لنفسه، فبيسوّق لينا</div>
+      </div>
+      <div class="seg">
+        <div class="who">المندوب</div>
+        <div class="need">عمالة موجودة ومتعرّفة على الموديل (YallaGo/Delivery Syria) — لكن <b>النت مش مضمون</b></div>
+        <div class="ans">إجابتنا: مسار حرج ثلاث خطوات بس، يتسامح مع الانقطاع من يوم واحد</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="model">
+  <span class="secnum">٠٧ · النموذج</span>
+  <h2 class="stitle">مضيف الأصداف — مش تطبيق فيه أقسام، تطبيق بيحمّل هويات كاملة.</h2>
+  <p class="sdek">بنية واحدة (هوية، عنوان، دفع، ليدجر) بتحمّل أصداف مختلفة — كل واحدة بناڤيجيشن وثيم وتصنيف خاص بيها. مثبت شغّال ومشحون في طلباتي العراقي، عبر ٣ دول.</p>
+
+  <div class="section-body">
+    <div class="svgwrap min720">
+    <svg class="diagram" viewBox="0 0 720 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="مضيف مركزي متصل بثلاث أصداف">
+      <rect x="180" y="18" width="360" height="76" rx="14" class="host-fill" stroke="var(--sea)" stroke-width="1.5"></rect>
+      <text x="360" y="48" text-anchor="middle" font-family="var(--font-head)" font-weight="700" font-size="17">المضيف</text>
+      <text x="360" y="72" text-anchor="middle" class="label-soft" font-size="11.5">هوية · جلسة · موقع · عنوان · دفع · ليدجر · إشعارات</text>
+
+      <line x1="360" y1="94" x2="360" y2="130" class="link"></line>
+      <line x1="360" y1="130" x2="150" y2="130" class="link"></line>
+      <line x1="360" y1="130" x2="570" y2="130" class="link"></line>
+      <line x1="150" y1="130" x2="150" y2="160" class="link"></line>
+      <line x1="360" y1="130" x2="360" y2="160" class="link"></line>
+      <line x1="570" y1="130" x2="570" y2="160" class="link"></line>
+
+      <g>
+        <rect x="60" y="160" width="180" height="112" rx="12" class="node-fill node-line" stroke-width="1.5"></rect>
+        <text x="150" y="188" text-anchor="middle" font-family="var(--font-head)" font-weight="700" font-size="14">صدفة التوصيل</text>
+        <text x="150" y="210" text-anchor="middle" class="label-soft">مطاعم · وجبات</text>
+        <text x="150" y="228" text-anchor="middle" class="label-soft">٣ تابات · فوري</text>
+      </g>
+      <g>
+        <rect x="270" y="160" width="180" height="112" rx="12" class="node-fill node-line" stroke-width="1.5"></rect>
+        <text x="360" y="188" text-anchor="middle" font-family="var(--font-head)" font-weight="700" font-size="14">صدفة السوق</text>
+        <text x="360" y="210" text-anchor="middle" class="label-soft">SKU · وزن · مخزون</text>
+        <text x="360" y="228" text-anchor="middle" class="label-soft">سلة متعددة</text>
+      </g>
+      <g>
+        <rect x="480" y="160" width="180" height="112" rx="12" class="node-fill node-line" stroke-width="1.5"></rect>
+        <text x="570" y="188" text-anchor="middle" font-family="var(--font-head)" font-weight="700" font-size="14">صدفة "هاتلي"</text>
+        <text x="570" y="210" text-anchor="middle" class="label-soft">بلا كاتالوج</text>
+        <text x="570" y="228" text-anchor="middle" class="label-soft">تسعير بعدي</text>
+      </g>
+    </svg>
+    </div>
+    <div class="gridnote">النطاق الحالي ٣ أصداف — صدفة التجارة (أزياء/إلكترونيات) خارج النطاق بقرارك ٢٠٢٦-٠٩-٠٢.</div>
+  </div>
+</section>
+
+<section id="surfaces">
+  <span class="secnum">٠٨ · اللي بتشتريه</span>
+  <h2 class="stitle">ستة أسطح، مش "تطبيق". وكل واحد ليه سبب وجود.</h2>
+  <p class="sdek">ده مش دايجرام معماري — ده جرد التسليم. كل سطر تحت هو حاجة ملموسة بتتسلّم لك، وبتفضل ملكك بالكامل.</p>
+
+  <div class="section-body">
+    <div class="scrollx">
+    <table class="invtable">
+      <tr><th>السطح</th><th>إيه هو</th><th>ليه من يوم واحد</th></tr>
+      <tr><td>تطبيق العميل</td><td>iOS + أندرويد · تصفّح كضيف، طلب، تتبّع، محفظة</td><td class="why">هو المنتج نفسه — كل حاجة تانية بتخدمه</td></tr>
+      <tr><td>تطبيق المندوب</td><td>خفيف · مسار حرج ٣ خطوات · يشتغل والنت مقطوع</td><td class="why">بدونه مفيش توصيل. و٣٥٫٨٪ بس عندهم نت مستقر</td></tr>
+      <tr><td>لوحة التاجر</td><td>Lite أول: فتح/قفل + قبول/رفض + توفّر الأصناف</td><td class="why">تاجر مستني رد = طلب ضايع. الكامل بعد ما يثبت السوق</td></tr>
+      <tr><td>لوحة الأدمن</td><td>مناطق · تسعير · توزيع · تسوية · تقارير</td><td class="why">من غيرها إنت أعمى عن تشغيلك — مش رفاهية</td></tr>
+      <tr><td>صفحات المتاجر</td><td>SSR عامة بألوان التاجر · لينك يتشارك</td><td class="why">أرخص قناة اكتساب: التاجر بيسوّق لنفسه فبيسوّق لك</td></tr>
+      <tr><td>الباك-إند</td><td>ليدجر · عمود فقري للتصنيف · آلة حالات بأفرع الفشل</td><td class="why">الطبقة الوحيدة اللي غلطها مبيتصلّحش بعدين</td></tr>
+    </table>
+    </div>
+
+    <div style="margin-top:34px">
+      <h3 style="font-size:16px;margin-bottom:6px">لوحة التاجر — Lite</h3>
+      <p style="font-size:13px;color:var(--muted);margin:0 0 4px">شاشة واحدة تكفي المرحلة الأولى: يقبل، يرفض، يقفل صنف خلص، ويشوف فلوسه.</p>
+      <div class="browserframe">
+        <div class="browserbar"><i></i><i></i><i></i><div class="url">لوحة التاجر · سومر — اللاذقية</div></div>
+        <div class="browserport">
+          <div class="dashhead"><b>سومر · الصليبة</b><span class="pill ok">مفتوح للطلبات</span></div>
+          <div class="dashgrid2">
+            <div class="dashkpi"><div class="k">طلبات النهارده</div><div class="v tabular">١٤</div></div>
+            <div class="dashkpi"><div class="k">متوسط التحضير</div><div class="v tabular">٢٢ د</div></div>
+            <div class="dashkpi"><div class="k">مستحق لك</div><div class="v tabular">٤٨٠ ألف</div></div>
+            <div class="dashkpi"><div class="k">معدل الرفض</div><div class="v tabular">٣٪</div></div>
+          </div>
+          <div class="scrollx">
+          <table class="dashtable">
+            <tr><th>الطلب</th><th>الأصناف</th><th>القيمة</th><th>الحالة</th><th></th></tr>
+            <tr><td>#٤٤١</td><td>٣ أصناف</td><td class="tabular">٤٥,٠٠٠</td><td><span class="pill wait">مستني قبولك</span></td><td><span class="mini-btn">قبول</span> <span class="mini-btn gh">رفض</span></td></tr>
+            <tr><td>#٤٤٠</td><td>صنف واحد</td><td class="tabular">١٢,٠٠٠</td><td><span class="pill ok">قيد التحضير</span></td><td><span class="mini-btn gh">جاهز</span></td></tr>
+            <tr><td>#٤٣٨</td><td>٥ أصناف</td><td class="tabular">٦٧,٥٠٠</td><td><span class="pill ok">مع المندوب</span></td><td></td></tr>
+            <tr><td>سمك مشوي</td><td>صنف في المنيو</td><td class="tabular">—</td><td><span class="pill bad">خلص النهارده</span></td><td><span class="mini-btn gh">رجّعه</span></td></tr>
+          </table>
+          </div>
+        </div>
+      </div>
+      <div class="dashcap">قفل الصنف من هنا بيمنع فرع الفشل ٠٢ (نفاد بعد الطلب) قبل ما يحصل أصلاً.</div>
+    </div>
+
+    <div style="margin-top:34px">
+      <h3 style="font-size:16px;margin-bottom:6px">لوحة الأدمن — دماغ التشغيل</h3>
+      <p style="font-size:13px;color:var(--muted);margin:0 0 4px">المناطق وحدة تسعير حقيقية، والتوزيع يدوي عن قصد لحد أول ١٠٠ طلب.</p>
+      <div class="browserframe">
+        <div class="browserbar"><i></i><i></i><i></i><div class="url">لوحة الأدمن · اللاذقية</div></div>
+        <div class="browserport">
+          <div class="dashhead"><b>تشغيل اللاذقية — الآن ٨:٤٧ م</b><span class="pill wait">ذروة مسائية</span></div>
+          <div class="dashgrid2">
+            <div class="dashkpi"><div class="k">طلبات جارية</div><div class="v tabular">٢٣</div></div>
+            <div class="dashkpi"><div class="k">مندوبين متاحين</div><div class="v tabular">٦</div></div>
+            <div class="dashkpi"><div class="k">متأخر عن النطاق</div><div class="v tabular" style="color:var(--alert)">٢</div></div>
+            <div class="dashkpi"><div class="k">COD غير مسوّى</div><div class="v tabular">١٫٢ م</div></div>
+          </div>
+          <div class="dashsplit">
+            <div class="scrollx">
+            <table class="dashtable">
+              <tr><th>المنطقة</th><th>أساس التوصيل</th><th>الذروة</th></tr>
+              <tr><td>الصليبة</td><td class="tabular">٨,٠٠٠</td><td><span class="pill ok">عادي</span></td></tr>
+              <tr><td>الأمريكان</td><td class="tabular">٨,٠٠٠</td><td><span class="pill ok">عادي</span></td></tr>
+              <tr><td>الزراعة</td><td class="tabular">٩,٥٠٠</td><td><span class="pill ok">عادي</span></td></tr>
+              <tr><td>الكورنيش</td><td class="tabular">٨,٥٠٠</td><td><span class="pill wait">+٢٠٪</span></td></tr>
+            </table>
+            </div>
+            <div class="scrollx">
+            <table class="dashtable">
+              <tr><th>طلب</th><th>الحالة</th><th>إسناد</th></tr>
+              <tr><td>#٤٤١ · الصليبة</td><td><span class="pill wait">بلا مندوب</span></td><td><span class="mini-btn">إسناد</span></td></tr>
+              <tr><td>#٤٣٩ · الكورنيش</td><td><span class="pill bad">متأخر ١٤ د</span></td><td><span class="mini-btn gh">بلّغ العميل</span></td></tr>
+              <tr><td>#٤٣٨ · الأمريكان</td><td><span class="pill ok">مع باسل م.</span></td><td></td></tr>
+              <tr><td>#٤٣٧ · الزراعة</td><td><span class="pill ok">تم التسليم</span></td><td></td></tr>
+            </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="dashcap">"بلّغ العميل" مش زرار تجميلي — ده تنفيذ حرفي لـ C2: الصمت كذب.</div>
+    </div>
+  </div>
+</section>
+
+<section id="demo">
+  <span class="secnum">٠٩ · الديمو</span>
+  <h2 class="stitle">مش موك-اب. ده تشريح شاشة حقيقية، بقرارها المكتوب جنبها.</h2>
+  <p class="sdek">الشاشة دي مستخرجة من دراسة UI/UX/CX كاملة بنيناها فعلاً — كل عنصر فيها من قرار مسجّل، مش "شكله حلو".</p>
+
+  <div class="section-body">
+    <div class="demowrap">
+      <div class="phone">
+        <div class="port">
+          <div class="sysbar">
+            <span class="mode"><i></i>التوصيل</span>
+            <span class="sp"></span>
+            <span class="guest">ضيف</span>
+            <span>ل.س ⇄</span>
+          </div>
+          <div class="dhead">
+            <div class="dhead-row">
+              <div class="dplace">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s7-6 7-11a7 7 0 1 0-14 0c0 5 7 11 7 11ZM12 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/></svg>
+                <span>اللاذقية · الصليبة<small>التوصيل إلى</small></span>
+              </div>
+              <button class="dbell" aria-label="الإشعارات">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6M10 20a2 2 0 0 0 4 0"/></svg>
+                <i class="ddot"></i>
+              </button>
+            </div>
+            <div class="dsearch">دوّر على مطعم أو صنف</div>
+          </div>
+          <div class="dbody">
+            <div class="dbanner-wrap">
+              <div class="dbanner s1" style="--m:#7A4B10">
+                <div class="art"><span class="mk">بيت</span></div>
+                <div class="txt"><b>بيت اللاذقية — فطور الجمعة</b>خصم ٢٠٪ على أطباق الفطور<span class="why">ضمن ٣ كم من المتجر</span></div>
+              </div>
+              <div class="dbanner s2" style="--m:#0B5D51">
+                <div class="art"><span class="mk">سو</span></div>
+                <div class="txt"><b>سومر — عرض المأكولات البحرية</b>خصم ١٥٪ على وجبات الغداء<span class="why">ضمن ٢ كم من المتجر</span></div>
+              </div>
+              <div class="dbanner s3" style="--m:#1F5570">
+                <div class="art"><span class="mk">فيو</span></div>
+                <div class="txt"><b>ذا فيو — جلسة الغروب</b>قهوة مجانية بعد ٦ م<span class="why">داخل نطاق توصيل الكورنيش</span></div>
+              </div>
+            </div>
+            <div class="dbdots"><i></i><i></i><i></i></div>
+            <div class="dbcap">بانرات تلقائية بألوان كل تاجر — مقيّدة جغرافياً (placeholder)</div>
+            <div class="dcats">
+              <div class="dcat"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3v7a2 2 0 0 0 4 0V3M9 10v11M17 3c-1.4 1-2 2.6-2 4.6s.7 3 2 3.4V21"/></svg><b>مطاعم</b></div>
+              <div class="dcat"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h16l-1.4 10.2a2 2 0 0 1-2 1.8H7.4a2 2 0 0 1-2-1.8L4 8ZM8.5 8 12 3l3.5 5"/></svg><b>سوبرماركت</b></div>
+              <div class="dcat"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8v8M8 12h8M6.5 4h11A2.5 2.5 0 0 1 20 6.5v11a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 17.5v-11A2.5 2.5 0 0 1 6.5 4Z"/></svg><b>صيدلية</b></div>
+              <div class="dcat"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6v3H9zM7.5 6h9l1 12.2a2 2 0 0 1-2 1.8h-7a2 2 0 0 1-2-1.8L7.5 6ZM9.5 12h5"/></svg><b>عطارة</b></div>
+            </div>
+            <div class="dfilters">
+              <div class="dchip on">مفتوح الآن</div>
+              <div class="dchip">يوصّل لمنطقتك</div>
+              <div class="dchip">يقبل المحفظة</div>
+            </div>
+            <div class="dcard">
+              <div class="dcard-top">
+                <div class="dcover" style="background:#0B5D51">سومر</div>
+                <div class="dcard-h"><b>سومر</b><span class="r">٤٫٦ · ٢١٤ تقييم · الصليبة</span></div>
+              </div>
+              <div class="dfacts">
+                <div class="dfact"><small>التوصيل</small> <b>٦,٤٠٠ ل.س</b></div>
+                <div class="dfact"><small>الوقت</small> <b>٣٥–٤٥ د</b></div>
+              </div>
+              <details class="dcalc"><summary>كيف انحسب التوصيل</summary>
+                <div class="dcalcbox">
+                  <div class="dcalcrow"><span>أساس منطقة الصليبة</span><span>٤,٠٠٠ ل.س</span></div>
+                  <div class="dcalcrow"><span>مسافة ١٫٢ كم</span><span>٢,٤٠٠ ل.س</span></div>
+                  <div class="dcalcrow tot"><span>الإجمالي</span><span>٦,٤٠٠ ل.س</span></div>
+                </div>
+              </details>
+            </div>
+            <div class="dcard">
+              <div class="dcard-top">
+                <div class="dcover" style="background:#7A4B10">بيت</div>
+                <div class="dcard-h"><b>بيت اللاذقية</b><span class="r">٤٫٤ · ١٣٧ تقييم · الصليبة</span></div>
+              </div>
+              <div class="dfacts">
+                <div class="dfact"><small>التوصيل</small> <b>٥,٠٠٠ ل.س</b></div>
+                <div class="dfact"><small>الحد الأدنى</small> <b>٤٠,٠٠٠ ل.س</b></div>
+              </div>
+            </div>
+          </div>
+          <div class="dtabbar">
+            <div class="dtab on"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11 12 4l8 7v8a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1v-8Z"/></svg><span>الرئيسية</span></div>
+            <div class="dtab"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l-1 12H7L6 8ZM9 8V6a3 3 0 0 1 6 0v2"/></svg><span>طلباتي</span></div>
+            <div class="dtab"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg><span>المزيد</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="demoann">
+        <h4>دوس "كيف انحسب التوصيل" — جرّبها فوق</h4>
+        <ul>
+          <li><b>C1</b> الرسوم والحد الأدنى ظاهرين على الكارت قبل الدخول — ومعاهم سببهم، مش رقم بلا تفسير</li>
+          <li><b>C10</b> التقييم برقم وعدد مراجعات حقيقي — مش شارة نصّية زي "جيد جداً"</li>
+          <li><b>0007§2</b> البانر مقيّد جغرافياً — بيظهر بس لمين يقدر يطلب منه فعلاً</li>
+          <li><b>0007§4</b> فلاتر بالقدرة (يقبل المحفظة، توصيلنا) مجانية من العمود الفقري، مش تصنيف تسويقي</li>
+          <li>الأسماء (سومر، بيت اللاذقية) وأحياء اللاذقية حقيقية من مسح ميداني §١١.١</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="journey">
+  <span class="secnum">١٠ · رحلة العميل</span>
+  <h2 class="stitle">من غير تسجيل لحد الباب — كل خطوة، وفرع الفشل اللي مصمَّم لها.</h2>
+  <p class="sdek">الضيف بيتصفّح ويطلب لحد لحظة الدفع بس. وكل خطوة بعد كده ليها حالة فشل معروضة، مش شاشة تحميل لا نهائية.</p>
+  <div class="section-body">
+    <div class="jstage">
+      <div class="phone">
+        <div class="port">
+
+          <div class="jscreen on" data-step="1" data-state="ok">
+            <div class="sysbar"><span class="mode"><i></i>التوصيل</span><span class="sp"></span><span class="guest">ضيف</span></div>
+            <div class="dbody">
+              <div class="dsec"><h5>التوصيل إلى</h5>
+                <div class="dfield"><small>المدينة</small>اللاذقية</div>
+                <div class="drow"><span>الصليبة — الأقدم ومركزي</span><span class="pill ok">مختار</span></div>
+                <div class="drow"><span>الأمريكان — سكني</span><span></span></div>
+                <div class="drow"><span>الزراعة (تشرين)</span><span></span></div>
+                <div class="drow"><span>الكورنيش الجنوبي</span><span></span></div>
+              </div>
+              <div class="dok">اختيارك للمنطقة هو اللي بيحسب رسومك ووقتك — مش إعداد مدفون.</div>
+              <div class="dbtn pri">كمّل كضيف</div>
+              <div class="dbtn gh">عندي حساب</div>
+            </div>
+          </div>
+
+          <div class="jscreen" data-step="2" data-state="ok">
+            <div class="sysbar"><span class="mode"><i></i>التوصيل</span><span class="sp"></span><span class="guest">ضيف</span><span>ل.س ⇄</span></div>
+            <div class="dbody">
+              <div class="dfilters"><span class="dchip on">مفتوح الآن</span><span class="dchip">يقبل المحفظة</span><span class="dchip">توصيلنا</span></div>
+              <div class="dcard"><div class="dcard-top"><div class="dcover" style="background:#0B5D51">سومر</div><div class="dcard-h"><b>سومر</b><span class="r">٤٫٦ · ٢١٤ تقييم · الصليبة</span></div></div>
+                <div class="dfacts"><span class="dfact"><small>التوصيل</small> <b>٦,٤٠٠</b></span><span class="dfact"><small>الوقت</small> <b>٣٥–٤٥ د</b></span></div></div>
+              <div class="dcard"><div class="dcard-top"><div class="dcover" style="background:#7A4B10">بيت</div><div class="dcard-h"><b>بيت اللاذقية</b><span class="r">٤٫٤ · ١٣٧ تقييم · الصليبة</span></div></div>
+                <div class="dfacts"><span class="dfact"><small>التوصيل</small> <b>٥,٠٠٠</b></span><span class="dfact"><small>أقل طلب</small> <b>٤٠,٠٠٠</b></span></div></div>
+              <div class="dcard"><div class="dcard-top"><div class="dcover" style="background:#8A6516">فرن</div><div class="dcard-h"><b>فرن الصليبة</b><span class="r">جديد · ٧ تقييمات</span></div></div>
+                <div class="dfacts"><span class="dfact"><small>التوصيل</small> <b>٤,٠٠٠</b></span></div></div>
+            </div>
+          </div>
+          <div class="jscreen" data-step="2" data-state="fail">
+            <div class="sysbar" style="background:var(--alert)"><span class="mode"><i style="background:#fff"></i>غير متصل</span><span class="sp"></span><span class="guest">ضيف</span></div>
+            <div class="dbody">
+              <div class="dwarn">معروض من الذاكرة — آخر تحديث ٨:٣٤ م. الأسعار ممكن تكون اتغيّرت.</div>
+              <div class="dcard" style="opacity:.75"><div class="dcard-top"><div class="dcover" style="background:#0B5D51">سومر</div><div class="dcard-h"><b>سومر</b><span class="r">محفوظ ٨:٣٤ م</span></div></div>
+                <div class="dfacts"><span class="dfact"><small>التوصيل</small> <b>٦,٤٠٠</b></span></div></div>
+              <div class="dcard" style="opacity:.75"><div class="dcard-top"><div class="dcover" style="background:#7A4B10">بيت</div><div class="dcard-h"><b>بيت اللاذقية</b><span class="r">محفوظ ٨:٣٤ م</span></div></div>
+                <div class="dfacts"><span class="dfact"><small>التوصيل</small> <b>٥,٠٠٠</b></span></div></div>
+              <div class="dalert">التطبيق بيقول إنه أوفلاين. مش بيدّعي إن الرقم لحظي وهو مش كده.</div>
+            </div>
+          </div>
+
+          <div class="jscreen" data-step="3" data-state="ok">
+            <div class="sysbar"><span class="mode"><i></i>سومر</span><span class="sp"></span><span class="guest">ضيف</span></div>
+            <div class="dbody">
+              <div class="dsec"><h5>معلومات التوصيل</h5>
+                <div class="drow"><span>وقت التوصيل</span><b>٣٥–٤٥ د</b></div>
+                <div class="drow"><span>سعر التوصيل</span><b>٦,٤٠٠ ل.س</b></div>
+                <div class="drow"><span>الحد الأدنى</span><b>٤٥,٠٠٠ ل.س</b></div>
+              </div>
+              <div class="dcard"><div class="dcard-top"><div class="dcover" style="background:#0B5D51">سمك</div><div class="dcard-h"><b>سمك مشوي</b><span class="r">مع أرز وسلطة</span></div></div><div class="dfacts"><span class="dfact"><b>٦٥,٠٠٠</b></span></div></div>
+              <div class="dcard"><div class="dcard-top"><div class="dcover" style="background:#1F5570">فطور</div><div class="dcard-h"><b>فطور لاذقاني</b><span class="r">للشخصين</span></div></div><div class="dfacts"><span class="dfact"><b>٤٨,٠٠٠</b></span></div></div>
+              <div class="dok">الوقت نطاق محسوب من تحضير المتجر + المسافة + الذروة — مش رقم إداري ثابت.</div>
+            </div>
+          </div>
+          <div class="jscreen" data-step="3" data-state="fail">
+            <div class="sysbar"><span class="mode"><i style="background:var(--alert)"></i>فرن الصليبة</span><span class="sp"></span><span class="guest">ضيف</span></div>
+            <div class="dbody">
+              <div class="dalert"><b>مغلق الآن</b><br>بيفتح ٦:٠٠ ص. مبيتشالش من القائمة — إنت تعرف إنه موجود بس مقفول.</div>
+              <div class="dbtn pri">نبّهني لما يفتح</div>
+              <div class="dsec" style="opacity:.6"><h5>المنيو (معروض للاطلاع)</h5>
+                <div class="drow"><span>معجنات بالجبنة</span><b>١٢,٠٠٠</b></div>
+                <div class="drow"><span>خبز طازة</span><b>٤,٠٠٠</b></div>
+              </div>
+              <div class="dwarn">الاختفاء الصامت بيخلّي المستخدم يدوّر ويفشل من غير ما يفهم. إحنا بنقول.</div>
+            </div>
+          </div>
+
+          <div class="jscreen" data-step="4" data-state="ok">
+            <div class="sysbar"><span class="mode"><i></i>السلة</span><span class="sp"></span><span class="guest">ضيف</span></div>
+            <div class="dbody">
+              <div class="dsec"><h5>سومر · الصليبة</h5>
+                <div class="drow"><span>سمك مشوي × ١</span><span class="tabular">٦٥,٠٠٠</span></div>
+                <div class="drow"><span>فطور لاذقاني × ١</span><span class="tabular">٤٨,٠٠٠</span></div>
+                <div class="drow"><span>التوصيل</span><span class="tabular">٦,٤٠٠</span></div>
+                <div class="drow tot"><span>الإجمالي</span><span class="tabular">١١٩,٤٠٠ ل.س</span></div>
+              </div>
+              <div class="dfield"><small>كود خصم</small>عندك كود؟ اكتبه هنا</div>
+              <div class="dok">كل رقم ظهر قبل ما تدخل. مفيش سطر جديد بيطلع دلوقتي.</div>
+              <div class="dbtn pri">متابعة للعنوان</div>
+            </div>
+          </div>
+          <div class="jscreen" data-step="4" data-state="fail">
+            <div class="sysbar"><span class="mode"><i style="background:var(--alert)"></i>السلة</span><span class="sp"></span><span class="guest">ضيف</span></div>
+            <div class="dbody">
+              <div class="dalert"><b>سمك مشوي خلص من المتجر</b><br>التاجر قفله من لوحته من ٣ دقايق.</div>
+              <div class="dsec"><h5>اختار إنت</h5>
+                <div class="drow"><span>بدّله بـ سمك صيادية — ٦٢,٠٠٠</span><span class="mini-btn">استبدال</span></div>
+                <div class="drow"><span>احذفه وعدّل الإجمالي</span><span class="mini-btn gh">حذف</span></div>
+                <div class="drow tot"><span>الإجمالي بعد الحذف</span><span class="tabular">٥٤,٤٠٠ ل.س</span></div>
+              </div>
+              <div class="dwarn">فرع الفشل ٠٢. القرار قرارك — مش بنستبدل من ورا ظهرك ولا بنلغي الطلب كله.</div>
+            </div>
+          </div>
+
+          <div class="jscreen" data-step="5" data-state="ok">
+            <div class="sysbar"><span class="mode"><i></i>العنوان</span><span class="sp"></span><span class="guest">ضيف</span></div>
+            <div class="dbody">
+              <div class="dfield"><small>عنوانك بكلامك إنت</small>الصليبة — شارع الأطباء، عمارة زرقا</div>
+              <div class="dfield"><small>أقرب نقطة دالة</small>جنب صيدلية الأمل، دور ٣</div>
+              <div class="dfield"><small>رقم بديل</small>٠٩٣٣ ××× ×××</div>
+              <div class="dfield"><small>الدبّوس على الخريطة (اختياري)</small>مضبوط تقريبي — المندوب بيقرا كلامك</div>
+              <div class="dok">بنخزّن كلامك والخريطة الاتنين. في سوريا الخريطة غالباً غلط، والمستخدم غالباً صح.</div>
+            </div>
+          </div>
+          <div class="jscreen" data-step="5" data-state="fail">
+            <div class="sysbar"><span class="mode"><i style="background:var(--alert)"></i>العنوان</span><span class="sp"></span><span class="guest">ضيف</span></div>
+            <div class="dbody">
+              <div class="dalert"><b>سومر ما بيوصّلش للزراعة</b><br>بيوصّل لـ: الصليبة، الأمريكان، الكورنيش.</div>
+              <div class="dsec"><h5>حلولك</h5>
+                <div class="drow"><span>غيّر عنوانك لمنطقة مخدومة</span><span class="mini-btn">تغيير</span></div>
+                <div class="drow"><span>شوف متاجر بتوصّل للزراعة</span><span class="mini-btn gh">٧ متاجر</span></div>
+              </div>
+              <div class="dwarn">بنقولها قبل الدفع، مش بعده. الإلغاء بعد الدفع هو أسوأ لحظة ممكنة.</div>
+            </div>
+          </div>
+
+          <div class="jscreen" data-step="6" data-state="ok">
+            <div class="sysbar"><span class="mode"><i></i>الدفع</span><span class="sp"></span><span class="guest">تسجيل مطلوب</span></div>
+            <div class="dbody">
+              <div class="dwarn">دي أول وآخر مرة نطلب منك تسجيل — عند الدفع بس، وسلتك محفوظة.</div>
+              <div class="dsec"><h5>طريقة الدفع</h5>
+                <div class="drow"><span>نقداً عند الاستلام</span><span class="pill ok">افتراضي</span></div>
+                <div class="drow"><span>شام كاش / سيريتل كاش</span><span></span></div>
+                <div class="drow"><span>بطاقة</span><span></span></div>
+              </div>
+              <div class="dsec"><div class="drow"><span>الطلب</span><span class="tabular">١١٣,٠٠٠</span></div>
+                <div class="drow"><span>التوصيل</span><span class="tabular">٦,٤٠٠</span></div>
+                <div class="drow tot"><span>الإجمالي</span><span class="tabular">١١٩,٤٠٠ ل.س</span></div></div>
+              <div class="dbtn pri">أكّد الطلب</div>
+            </div>
+          </div>
+          <div class="jscreen" data-step="6" data-state="fail">
+            <div class="sysbar" style="background:var(--alert)"><span class="mode"><i style="background:#fff"></i>غير متصل</span><span class="sp"></span><span class="guest">في الطابور</span></div>
+            <div class="dbody">
+              <div class="dwarn"><b>طلبك في صندوق الصادر</b><br>اتسجّل عندنا ٨:٤٧ م بوقته الحقيقي، وهيتبعت أول ما النت يرجع.</div>
+              <div class="dsec"><h5>الحالة</h5>
+                <div class="drow"><span>اتسجّل محلياً</span><span class="pill ok">تم</span></div>
+                <div class="drow"><span>وصل للمتجر</span><span class="pill wait">مستني الشبكة</span></div>
+                <div class="drow"><span>تأكيد المتجر</span><span class="pill wait">—</span></div>
+              </div>
+              <div class="dalert">مش بندّعي نجاح ما حصلش. "تم الطلب" وإنت أوفلاين = كذبة هتنكشف بعد نص ساعة.</div>
+            </div>
+          </div>
+
+          <div class="jscreen" data-step="7" data-state="ok">
+            <div class="sysbar"><span class="mode"><i></i>طلب #٤٤١</span><span class="sp"></span><span class="guest">جاري</span></div>
+            <div class="dbody">
+              <div class="dsteps"><div class="dstepdot done"></div><div class="dstepdot done"></div><div class="dstepdot now"></div><div class="dstepdot"></div><div class="dstepdot"></div></div>
+              <div class="dsteplbl"><span>تأكيد</span><span>تحضير</span><span>مع المندوب</span><span>في الطريق</span><span>تسليم</span></div>
+              <div class="dsec"><h5>الوصول المتوقّع</h5>
+                <div class="drow"><span>من بدء التحضير</span><b>٩:٠١ – ٩:١٦</b></div>
+              </div>
+              <div class="drider"><div class="davatar">ب</div><div class="info"><b>باسل م.</b><span>دراجة نارية · ٤٧–٣٢١٩</span><span>صورته محدَّثة ١٨ آب ٢٠٢٦</span></div><span class="mini-btn gh">اتصل</span></div>
+              <div class="dok">اللي على الشاشة هو اللي على الباب. لو اتغيّر المندوب، هتعرف قبل ما يوصل.</div>
+            </div>
+          </div>
+          <div class="jscreen" data-step="7" data-state="fail">
+            <div class="sysbar"><span class="mode"><i style="background:var(--amber)"></i>طلب #٤٤١</span><span class="sp"></span><span class="guest">متأخر</span></div>
+            <div class="dbody">
+              <div class="dwarn"><b>تأخير ١٤ دقيقة</b><br>بلّغناك ٨:٤٤ م — قبل ما الوقت الأول يعدّي.</div>
+              <div class="dsec"><h5>الوقت</h5>
+                <div class="drow"><span style="text-decoration:line-through;color:var(--muted)">٩:٠١ – ٩:١٦</span><b>٩:١٥ – ٩:٣٠</b></div>
+                <div class="drow"><span>السبب</span><span>المندوب اتأخر عند المتجر — الطلب اللي قبلك على الكورنيش</span></div>
+              </div>
+              <div class="drider"><div class="davatar">ب</div><div class="info"><b>باسل م.</b><span>دراجة نارية · ٤٧–٣٢١٩</span></div><span class="mini-btn gh">اتصل</span></div>
+              <div class="dalert">فرع الفشل ٠٥. الطلب اللي وقف ولا يعرف صاحبه ليه — بق.</div>
+            </div>
+          </div>
+
+          <div class="jscreen" data-step="8" data-state="ok">
+            <div class="sysbar"><span class="mode"><i></i>تم التسليم</span><span class="sp"></span><span class="guest">٩:٢٢ م</span></div>
+            <div class="dbody">
+              <div class="dok"><b>وصل الطلب ٩:٢٢ م</b><br>داخل النطاق اللي قلناه (٩:١٥ – ٩:٣٠).</div>
+              <div class="dsec"><h5>الفاتورة</h5>
+                <div class="drow"><span>الطلب</span><span class="tabular">١١٣,٠٠٠</span></div>
+                <div class="drow"><span>التوصيل — الصليبة ١٫٢ كم</span><span class="tabular">٦,٤٠٠</span></div>
+                <div class="drow tot"><span>المدفوع نقداً</span><span class="tabular">١١٩,٤٠٠ ل.س</span></div>
+              </div>
+              <div class="dsec"><h5>قيّم تجربتك</h5><div class="drow"><span>سومر</span><span>☆ ☆ ☆ ☆ ☆</span></div><div class="drow"><span>باسل م.</span><span>☆ ☆ ☆ ☆ ☆</span></div></div>
+            </div>
+          </div>
+          <div class="jscreen" data-step="8" data-state="fail">
+            <div class="sysbar"><span class="mode"><i style="background:var(--alert)"></i>فشل التوصيل</span><span class="sp"></span><span class="guest">٩:٣٤ م</span></div>
+            <div class="dbody">
+              <div class="dalert"><b>المندوب ما لقاش العنوان</b><br>حاول يتصل مرتين على الرقمين — ما فيش رد.</div>
+              <div class="dsec"><h5>اختار</h5>
+                <div class="drow"><span>محاولة تانية النهارده</span><span class="mini-btn">أعد المحاولة</span></div>
+                <div class="drow"><span>رجّع الطلب للمتجر</span><span class="mini-btn gh">إرجاع</span></div>
+              </div>
+              <div class="dsec"><h5>فلوسك</h5>
+                <div class="drow"><span>الدفع كان نقدي عند الاستلام</span><span class="pill ok">ما اتخصمش</span></div>
+                <div class="drow"><span>رسوم المحاولة</span><span class="pill ok">صفر</span></div>
+              </div>
+              <div class="dwarn">فرع الفشل ٠٤. كل حركة اتسجّلت في الليدجر — قابلة للتدقيق بعد شهر.</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="jctrl">
+        <div class="jsteps">
+          <button class="jstepbtn on" data-jstep="1">١ الفتح</button>
+          <button class="jstepbtn" data-jstep="2">٢ التصفّح</button>
+          <button class="jstepbtn" data-jstep="3">٣ المتجر</button>
+          <button class="jstepbtn" data-jstep="4">٤ السلة</button>
+          <button class="jstepbtn" data-jstep="5">٥ العنوان</button>
+          <button class="jstepbtn" data-jstep="6">٦ الدفع</button>
+          <button class="jstepbtn" data-jstep="7">٧ التتبّع</button>
+          <button class="jstepbtn" data-jstep="8">٨ التسليم</button>
+        </div>
+        <div class="jswitch">
+          <button class="on" data-jstate="ok">الطلب مشى صح</button>
+          <button class="fail" data-jstate="fail">الطلب باظ</button>
+        </div>
+
+        <div class="jnote on" data-note="1-ok"><b>مفيش حائط تسجيل.</b> المنطقة أول قرار في الرحلة لأن كل رقم بعدها بيتحسب منها. <span class="cc">0012</span> <span class="cc">0005</span></div>
+        <div class="jnote failnote" data-note="1-fail"><b>مفيش فرع فشل هنا — وده مقصود.</b> اختيار المنطقة محلي بالكامل، مبيحتاجش شبكة ولا سيرفر. أول نقطة فشل حقيقية بتبدأ من التصفّح.</div>
+        <div class="jnote" data-note="2-ok"><b>الفلاتر بالقدرة مش بالفئة.</b> "يقبل المحفظة" و"توصيلنا" حالة تشغيلية بتيجي مجاناً من العمود الفقري. <span class="cc">0007§4</span> <span class="cc">0008</span></div>
+        <div class="jnote failnote" data-note="2-fail"><b>أوفلاين = نسخة محفوظة بتاريخها.</b> ٣٥٫٨٪ بس عندهم نت مستقر. التطبيق بيقول حالته بدل ما يسكت أو يفضل بيلف. <span class="cc">C6</span></div>
+        <div class="jnote" data-note="3-ok"><b>الرسوم والحد الأدنى قبل أي التزام.</b> والوقت نطاق محسوب مربوط بلحظة مرجعية معلنة. <span class="cc">C1</span> <span class="cc">C9</span></div>
+        <div class="jnote failnote" data-note="3-fail"><b>المتجر المقفول بيفضل في القائمة.</b> بحالته وميعاد فتحه، مش بيختفي. الاختفاء الصامت بيخلّي المستخدم يفشل من غير ما يفهم. <span class="cc">C2</span></div>
+        <div class="jnote" data-note="4-ok"><b>مفيش سطر جديد في السلة.</b> كل رقم هنا كان ظاهر قبل الدخول — ده الفرق بيننا وبين شكوى BeeOrder رقم واحد. <span class="cc">C1</span></div>
+        <div class="jnote failnote" data-note="4-fail"><b>نفاد صنف = قرارك إنت.</b> استبدال توافق عليه، أو حذف وتعديل الإجمالي. مش إلغاء كامل ولا استبدال صامت. <span class="cc">فرع ٠٢</span></div>
+        <div class="jnote" data-note="5-ok"><b>أربع حقول، مش دبّوس واحد.</b> كلامك + النقطة الدالة + رقم بديل + الخريطة. المندوب بيقرا كلامك، النظام بيحسب بالإحداثيات. <span class="cc">C5</span> <span class="cc">0006</span></div>
+        <div class="jnote failnote" data-note="5-fail"><b>خارج النطاق يتقال قبل الدفع.</b> ومعاه بديل فوري: مين بيوصّل لمنطقتك. الرفض بلا بديل = مستخدم راح لمنافس. <span class="cc">C2</span></div>
+        <div class="jnote" data-note="6-ok"><b>الاحتكاك الوحيد المسموح.</b> التسجيل عند الدفع بس، والسلة والعنوان بينتقلوا للحساب — مبيضيعوش. <span class="cc">C4</span> <span class="cc">0005</span></div>
+        <div class="jnote failnote" data-note="6-fail"><b>صندوق الصادر مرئي.</b> الفعل اتخزّن بوقته الحقيقي، والحالة معروضة بصراحة: اتسجّل، لسه ما وصلش، لسه ما اتأكدش. <span class="cc">C6</span> <span class="cc">0010</span></div>
+        <div class="jnote" data-note="7-ok"><b>المندوب اللي في الشاشة هو اللي على الباب.</b> اسم ومركبة ولوحة وتاريخ آخر تحديث للصورة — رد مباشر على شكوى BeeOrder الموثّقة. <span class="cc">C3</span></div>
+        <div class="jnote failnote" data-note="7-fail"><b>التأخير بيتقال قبل ما يحصل.</b> الوقت القديم مشطوب، الجديد معلن، السبب مكتوب، ووقت التبليغ مسجّل. <span class="cc">فرع ٠٥</span> <span class="cc">C2</span></div>
+        <div class="jnote" data-note="8-ok"><b>الفاتورة بتفكّ نفسها.</b> والتقييم بيتاخد للمتجر وللمندوب منفصلين — عشان الرقم يبقى له معنى. <span class="cc">C10</span></div>
+        <div class="jnote failnote" data-note="8-fail"><b>الفشل مالوش تكلفة عليك.</b> صفر رسوم محاولة، وكل حركة في الليدجر قابلة للتدقيق. التسوية مع التاجر مش هتنفجر الشهر الجاي. <span class="cc">فرع ٠٤</span> <span class="cc">C7</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="spine">
+  <span class="secnum">١١ · العمود الفقري</span>
+  <h2 class="stitle">السر: كل صنف مصنَّف على ثمن أبعاد، مش قائمة واحدة.</h2>
+  <p class="sdek">الشاشة الرئيسية بتتولّد من استعلامات على الأبعاد دي، متتكتبش بالإيد. مدينة جديدة = نفس العمود الفقري، بيانات مختلفة.</p>
+  <div class="section-body">
+    <div class="svgwrap min620">
+    <svg class="diagram" viewBox="-60 -30 620 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="صنف واحد مصنف على ثمانية أبعاد">
+      <line x1="250" y1="250" x2="250" y2="70" class="link"></line>
+      <line x1="250" y1="250" x2="377" y2="123" class="link"></line>
+      <line x1="250" y1="250" x2="430" y2="250" class="link"></line>
+      <line x1="250" y1="250" x2="377" y2="377" class="link"></line>
+      <line x1="250" y1="250" x2="250" y2="430" class="link"></line>
+      <line x1="250" y1="250" x2="123" y2="377" class="link"></line>
+      <line x1="250" y1="250" x2="70" y2="250" class="link"></line>
+      <line x1="250" y1="250" x2="123" y2="123" class="link"></line>
+      <circle cx="250" cy="250" r="54" class="host-fill" stroke="var(--sea)" stroke-width="1.5"></circle>
+      <text x="250" y="246" text-anchor="middle" font-family="var(--font-head)" font-weight="700" font-size="13">شاورما</text>
+      <text x="250" y="263" text-anchor="middle" font-family="var(--font-head)" font-weight="700" font-size="13">عربي</text>
+      <circle cx="250" cy="70" r="7" class="dot"></circle><text x="250" y="45" text-anchor="middle" font-size="13">تصنيف تجاري</text>
+      <circle cx="377" cy="123" r="7" class="dot"></circle><text x="392" y="110" text-anchor="start" font-size="13">تصنيف استهلاكي</text>
+      <circle cx="430" cy="250" r="7" class="dot"></circle><text x="446" y="255" text-anchor="start" font-size="13">مكان</text>
+      <circle cx="377" cy="377" r="7" class="dot"></circle><text x="392" y="400" text-anchor="start" font-size="13">قدرة تشغيلية</text>
+      <circle cx="250" cy="430" r="7" class="dot"></circle><text x="250" y="458" text-anchor="middle" font-size="13">شكل الكاتالوج</text>
+      <circle cx="123" cy="377" r="7" class="dot"></circle><text x="108" y="400" text-anchor="end" font-size="13">وقت</text>
+      <circle cx="70" cy="250" r="7" class="dot"></circle><text x="54" y="255" text-anchor="end" font-size="13">ثقة</text>
+      <circle cx="123" cy="123" r="7" class="dot"></circle><text x="108" y="110" text-anchor="end" font-size="13">لون/بصري</text>
+    </svg>
+    </div>
+  </div>
+</section>
+
+<section id="lifecycle">
+  <span class="secnum">١٢ · دورة حياة الطلب</span>
+  <h2 class="stitle">المرجع (سونيك مارت) غطّى ٥ حالات فرحة بس. هنا الفشل هو المنتج.</h2>
+  <p class="sdek">كل انتقال حالة = event له وقت وفاعل، مش تعديل حقل. سبعة أفرع فشل مصمَّمة من يوم واحد.</p>
+  <div class="section-body">
+    <div class="svgwrap min780">
+    <svg class="diagram" viewBox="0 0 900 110" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="مسار الطلب من الإنشاء للتوصيل">
+      <g font-family="var(--font-head)" font-weight="600" font-size="12.5">
+        <rect x="760" y="30" width="120" height="50" rx="10" class="node-fill node-line" stroke-width="1.5"></rect>
+        <text x="820" y="60" text-anchor="middle">تم الإنشاء</text>
+        <line x1="758" y1="55" x2="622" y2="55" class="link" marker-start="url(#arrow)"></line>
+        <rect x="620" y="30" width="120" height="50" rx="10" class="node-fill node-line" stroke-width="1.5"></rect>
+        <text x="680" y="60" text-anchor="middle">مؤكَّد</text>
+        <line x1="618" y1="55" x2="482" y2="55" class="link" marker-start="url(#arrow)"></line>
+        <rect x="480" y="30" width="120" height="50" rx="10" class="node-fill node-line" stroke-width="1.5"></rect>
+        <text x="540" y="60" text-anchor="middle">قيد التحضير</text>
+        <line x1="478" y1="55" x2="342" y2="55" class="link" marker-start="url(#arrow)"></line>
+        <rect x="340" y="30" width="120" height="50" rx="10" class="node-fill node-line" stroke-width="1.5"></rect>
+        <text x="400" y="60" text-anchor="middle">جاهز</text>
+        <line x1="338" y1="55" x2="202" y2="55" class="link" marker-start="url(#arrow)"></line>
+        <rect x="200" y="30" width="120" height="50" rx="10" class="node-fill node-line" stroke-width="1.5"></rect>
+        <text x="260" y="60" text-anchor="middle">مع المندوب</text>
+        <line x1="198" y1="55" x2="142" y2="55" class="link" marker-start="url(#arrow)"></line>
+        <rect x="20" y="30" width="120" height="50" rx="10" class="host-fill" stroke="var(--sea)" stroke-width="1.5"></rect>
+        <text x="80" y="60" text-anchor="middle" fill="var(--sea)">تم التوصيل</text>
+      </g>
+      <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="var(--hair)"></path></marker></defs>
+    </svg>
+    </div>
+    <div class="branchgrid">
+      <div class="branch"><div class="n">فرع الفشل ٠١</div><h4>رفض التاجر</h4><p>التاجر مقفول فعلياً أو مش قادر ينفّذ → استرداد كامل فوري.</p></div>
+      <div class="branch"><div class="n">فرع الفشل ٠٢</div><h4>نفاد منتج بعد الطلب</h4><p>التاجر يعرض استبدال يوافق عليه العميل، أو تعديل الإجمالي.</p></div>
+      <div class="branch"><div class="n">فرع الفشل ٠٣</div><h4>إلغاء العميل</h4><p>قبل التحضير: استرداد كامل بلا سؤال. بعدها: رسوم جزئية محتملة.</p></div>
+      <div class="branch"><div class="n">فرع الفشل ٠٤</div><h4>فشل التوصيل</h4><p>عنوان غلط أو رفض استلام → محاولات محدودة، ثم رجوع للتاجر.</p></div>
+      <div class="branch"><div class="n">فرع الفشل ٠٥</div><h4>تأخير SLA</h4><p>تجاوز النطاق المعلن → إشعار استباقي + تعويض.</p></div>
+      <div class="branch"><div class="n">فرع الفشل ٠٦</div><h4>نزاع بعد التسليم</h4><p>"الطلب مش اللي اتفق عليه" → تذكرة نزاع ومراجعة.</p></div>
+      <div class="branch"><div class="n">فرع الفشل ٠٧</div><h4>مرتجع جزئي</h4><p>جزء مرفوض عند الاستلام → تعديل الإجمالي ورد الفرق فقط.</p></div>
+      <div class="branch" style="background:var(--sea-tint);border-color:transparent"><div class="n" style="color:var(--sea)">القاعدة</div><h4>كل فرع = event + ledger</h4><p>مش تعديل مباشر لحقل status — وإلا التسوية مع التاجر بتبقى غير قابلة للتدقيق.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="phases">
+  <span class="secnum">١٣ · المراحل</span>
+  <h2 class="stitle">إيه يتبني إمتى — كل مرحلة بوابتها إن اللي قبلها اشتغل فعلاً.</h2>
+  <p class="sdek">مش جدول زمني — الجدول محتاج ميزانية وفريق. ده ترتيب منطقي، ومفيش مرحلة بتتخطى بوابتها.</p>
+  <div class="timeline">
+    <div class="phase"><div class="ph">مرحلة ٠</div><div><h3>الحسم — مفيش كود</h3><p class="desc">نموذج الملكية، مصادر الإيراد، فيرتيكالز الـMVP، ستاك الموبايل.</p><span class="gate"><b>البوابة:</b> مكالمة واحدة، صفر كود قبلها</span></div></div>
+    <div class="phase"><div class="ph">مرحلة ١</div><div><h3>الأساس اللي مبيتصلّحش بعدين</h3><p class="desc">الليدجر، العمود الفقري، آلة الحالات بالسبع أفرع، نموذج العنوان، الهوية + OTP.</p><span class="gate"><b>البوابة:</b> طلب وهمي يعدّي دورة حياة كاملة بما فيها إلغاء واسترداد</span></div></div>
+    <div class="phase"><div class="ph">مرحلة ٢</div><div><h3>أول رحلة حقيقية</h3><p class="desc">عميل موبايل (ضيف → طلب → تتبّع) + تاجر-Lite + أدمن بالحد الأدنى.</p><span class="gate"><b>البوابة:</b> ٢٠ طلب حقيقي في اللاذقية بمندوبين حقيقيين</span></div></div>
+    <div class="phase"><div class="ph">مرحلة ٣</div><div><h3>سلاح التجار</h3><p class="desc">صفحات المتاجر العامة SSR بألوان التاجر + طبقات العلامة.</p><span class="gate"><b>البوابة:</b> ٥ تجار شاركوا لينكاتهم بنفسهم بلا ما نطلب منهم</span></div></div>
+    <div class="phase"><div class="ph">مرحلة ٤</div><div><h3>الأوفلاين والمندوب الكامل</h3><p class="desc">سجل أفعال بصندوق صادر، تتبّع لحظي، تطبيق مندوب كامل.</p><span class="gate"><b>البوابة:</b> المرحلتين ٢ و٣ بيدونا قايمة الأفعال الحقيقية</span></div></div>
+    <div class="phase"><div class="ph">مرحلة ٥</div><div><h3>الاتساع</h3><p class="desc">صدفة تانية، ويب بتكافؤ كامل، خرائط حرارية، مدينة تانية.</p><span class="gate"><b>البوابة:</b> اللاذقية بتحقق أرقام مستقرة قبل أي توسّع</span></div></div>
+  </div>
+</section>
+
+<section id="honesty">
+  <span class="secnum">١٤ · الحالة الحقيقية</span>
+  <h2 class="stitle">٦٤ قرار. الأمانة في العدّ نفسه هي اللي بتبيع.</h2>
+  <p class="sdek">المسودة بتتعدّ نص، مش قفل. علشان الرقم ميكدبش علينا — ولا عليك.</p>
+  <div class="section-body">
+    <div class="stackbar tabular">
+      <div class="segb locked" style="flex:4.7">٣</div>
+      <div class="segb draft" style="flex:53.1">٣٤</div>
+      <div class="segb empty" style="flex:42.2">٢٧</div>
+    </div>
+    <div class="legend">
+      <div><span class="dot3" style="background:var(--sea)"></span>مقفول — اتفقنا فعلاً (٣)</div>
+      <div><span class="dot3" style="background:var(--amber)"></span>مسودة — رأي قوي، محتاج تأكيدك (٣٤)</div>
+      <div><span class="dot3" style="background:var(--surface-2);border:1px solid var(--hair)"></span>فارغ — لسه مفتوح (٢٧)</div>
+    </div>
+    <p style="margin-top:18px;font-size:14.5px;color:var(--ink-2)">التغطية الفعلية (مقفول + نص المسودة): <span class="covernum tabular">≈٣١٫٣٪</span> من ٦٤ قرار.</p>
+  </div>
+</section>
+
+</div>
+
+<nav class="rail" id="rail">
+  <div class="railtitle">الفهرس</div>
+  <a href="#method" data-target="method"><span class="num">٠١</span>طريقتنا</a>
+  <a href="#work" data-target="work"><span class="num">٠٢</span>شغل بوصلة</a>
+  <a href="#market" data-target="market"><span class="num">٠٣</span>السوق</a>
+  <a href="#competitors" data-target="competitors"><span class="num">٠٤</span>المنافسون</a>
+  <a href="#intent" data-target="intent"><span class="num">٠٥</span>النية</a>
+  <a href="#audience" data-target="audience"><span class="num">٠٦</span>الجمهور</a>
+  <a href="#model" data-target="model"><span class="num">٠٧</span>النموذج</a>
+  <a href="#surfaces" data-target="surfaces"><span class="num">٠٨</span>اللي بتشتريه</a>
+  <a href="#demo" data-target="demo"><span class="num">٠٩</span>الديمو</a>
+  <a href="#journey" data-target="journey"><span class="num">١٠</span>الرحلة</a>
+  <a href="#spine" data-target="spine"><span class="num">١١</span>التصنيف</a>
+  <a href="#lifecycle" data-target="lifecycle"><span class="num">١٢</span>الطلب</a>
+  <a href="#phases" data-target="phases"><span class="num">١٣</span>المراحل</a>
+  <a href="#honesty" data-target="honesty"><span class="num">١٤</span>الحالة</a>
+  <a href="#deal" data-target="deal"><span class="num">١٥</span>الصفقة</a>
+</nav>
+</div>
+
+<section id="deal" class="closer" style="border-bottom:none">
+  <span class="secnum">١٥ · الصفقة</span>
+  <div class="card">
+    <h2>السعر مش هنا لسه — وده قرار، مش نسيان.</h2>
+    <p>نموذج الملكية بيغيّر بنية السعر نفسها — مشروع تنفيذ بسعر مرحلي، مقابل بناء + اشتراك منصة مستمر. رقم قبل الحسم ده تخمين، مش عرض. اللي إنت شفته في الملف ده هو دليل طريقة شغلنا — مش بروشور.</p>
+    <ul>
+      <li>مكالمة واحدة تحسم نموذج الملكية ومصادر الإيراد</li>
+      <li>نطاق المرحلة ٠-٢ (الأساس + أول رحلة حقيقية) يتحول لرقم ومدة</li>
+      <li>ميزانية الإطلاق (حشد تجار/مندوبين) تتضاف كبند منفصل، مش مخفي</li>
+    </ul>
+    <div class="tag amber" style="font-size:13px;padding:8px 16px">بوصلة جاهزة للمكالمة دي</div>
+  </div>
+</section>
+
+</div>
+
+<script>
+(function(){
+  try{
+    var step='1', state='ok';
+    var screens=document.querySelectorAll('.jscreen');
+    var notes=document.querySelectorAll('.jnote');
+    var stepBtns=document.querySelectorAll('.jstepbtn');
+    var stateBtns=document.querySelectorAll('.jswitch button');
+    function paint(){
+      var key=step+'-'+state;
+      var found=null;
+      screens.forEach(function(s){
+        var m=(s.dataset.step===step && s.dataset.state===state);
+        if(m) found=s;
+        s.classList.toggle('on', m);
+      });
+      if(!found){
+        screens.forEach(function(s){
+          s.classList.toggle('on', s.dataset.step===step && s.dataset.state==='ok');
+        });
+      }
+      notes.forEach(function(n){ n.classList.toggle('on', n.dataset.note===key); });
+      stepBtns.forEach(function(b){ b.classList.toggle('on', b.dataset.jstep===step); });
+      stateBtns.forEach(function(b){ b.classList.toggle('on', b.dataset.jstate===state); });
+    }
+    stepBtns.forEach(function(b){ b.addEventListener('click', function(){ step=b.dataset.jstep; paint(); }); });
+    stateBtns.forEach(function(b){ b.addEventListener('click', function(){ state=b.dataset.jstate; paint(); }); });
+    paint();
+  }catch(e){}
+  try{
+    var links=document.querySelectorAll('#rail a');
+    var map={};
+    links.forEach(function(l){map[l.dataset.target]=l});
+    var sections=document.querySelectorAll('section[id]');
+    if('IntersectionObserver' in window){
+      var io=new IntersectionObserver(function(entries){
+        entries.forEach(function(en){
+          if(en.isIntersecting && map[en.target.id]){
+            links.forEach(function(l){l.classList.remove('active')});
+            map[en.target.id].classList.add('active');
+          }
+        });
+      },{rootMargin:'-40% 0px -50% 0px'});
+      sections.forEach(function(s){io.observe(s)});
+    }
+  }catch(e){}
+})();
+</script>

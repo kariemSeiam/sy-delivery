@@ -1,0 +1,11 @@
+# MOLT — patterns promoted to instincts
+# rung: pattern(0.6,3x) → instinct(0.9,5x) → reflex(1.0,7x)
+instincts:
+  - trigger: "Bash:/bin/ls -la"
+    rung: pattern
+    status: active
+    confidence: 0.6
+    sightings: 3
+    success_ratio: 1.00
+    evidence: "seen 3x, 100% success"
+    learned: "2026-09-02"

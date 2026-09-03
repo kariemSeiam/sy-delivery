@@ -1,0 +1,1 @@
+{"last":{"tool":"Bash","target":"git init -q && git add -A && git status --short | head -40 && echo \"---count---\" && git status --short | wc -l"},"streak":1}
