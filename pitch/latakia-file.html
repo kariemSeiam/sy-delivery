@@ -1,4 +1,19 @@
-<title>ملف اللاذقية</title>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ملف اللاذقية — بوصلة</title>
+<meta name="description" content="في مدينة اتغيّر فيها كل شيء، بوصلة بتبيع اليقين مش السرعة. ملف السوق والمنتج الكامل لسوبر-آب التوصيل في اللاذقية — منافسون بمصادر حقيقية، نموذج مضيف الأصداف، ورحلة عميل قابلة للتجربة.">
+<meta property="og:title" content="ملف اللاذقية — بوصلة">
+<meta property="og:description" content="في مدينة اتغيّر فيها كل شيء، بوصلة بتبيع اليقين مش السرعة. ملف السوق والمنتج الكامل لسوبر-آب التوصيل في اللاذقية.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ar_AR">
+<meta name="theme-color" content="#0B5D51">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A7%AD%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@500;600;700&display=swap">
 <style>
 :root,[data-brand="sy"]{
   /* Navigator-compatible RGB triplets — same architecture as
@@ -88,6 +103,8 @@
 }
 *{box-sizing:border-box}
 a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--sea);outline-offset:2px;border-radius:4px}
+.skiplink{position:absolute;top:-48px;right:12px;background:var(--ink);color:var(--stone);padding:10px 16px;border-radius:8px;z-index:100;font-size:13px;font-weight:600;text-decoration:none;transition:top .2s var(--ease-settle)}
+.skiplink:focus{top:12px}
 @media (prefers-reduced-motion:reduce){*{transition-duration:.001ms!important;animation-duration:.001ms!important}}
 body{background:var(--stone);color:var(--ink);font-family:var(--font-body);margin:0;line-height:1.7;position:relative}
 body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;opacity:var(--grain-opacity);mix-blend-mode:var(--grain-blend);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:180px 180px}
@@ -113,6 +130,28 @@ a{color:inherit}
 .rail .num{font-family:var(--font-head);font-size:11px;color:var(--sea);min-width:20px}
 .railtitle{font-size:11px;letter-spacing:.08em;color:var(--muted);padding:0 10px 8px;text-transform:uppercase}
 
+/* mobile section nav — replaces .rail below 980px */
+.mobtoc{display:none}
+@media (max-width:980px){
+  .mobtoc{display:block}
+  .mobtoc-fab{position:fixed;left:14px;bottom:14px;z-index:80;display:flex;align-items:center;gap:8px;background:var(--ink);color:var(--stone);border:none;border-radius:999px;padding:12px 15px;font-family:var(--font-body);font-size:12.5px;font-weight:600;box-shadow:0 12px 26px -12px rgba(var(--ink-rgb),.5);cursor:pointer;max-width:min(74vw,320px)}
+  .mobtoc-fab .num{font-family:var(--font-head);color:var(--stone);background:rgb(var(--accent) / .55);border-radius:6px;padding:2px 7px;font-size:11px;flex:0 0 auto}
+  .mobtoc-fab .lbl{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;min-width:0;text-align:right}
+  .mobtoc-fab svg{flex:0 0 auto;transition:transform .25s var(--ease-settle)}
+  .mobtoc.open .mobtoc-fab svg{transform:rotate(180deg)}
+  .mobtoc-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.42);opacity:0;pointer-events:none;transition:opacity .25s var(--ease-settle);z-index:81}
+  .mobtoc.open .mobtoc-backdrop{opacity:1;pointer-events:auto}
+  .mobtoc-sheet{position:fixed;left:0;right:0;bottom:0;background:var(--canvas-2);border-radius:20px 20px 0 0;padding:10px 18px calc(16px + env(safe-area-inset-bottom));z-index:82;transform:translateY(106%);transition:transform .32s var(--ease-settle);max-height:72vh;overflow-y:auto;-webkit-overflow-scrolling:touch;box-shadow:0 -20px 44px -20px rgba(var(--ink-rgb),.4)}
+  .mobtoc.open .mobtoc-sheet{transform:translateY(0)}
+  .mobtoc-handle{width:36px;height:4px;border-radius:2px;background:var(--hair);margin:2px auto 14px}
+  .mobtoc-title{font-size:11px;letter-spacing:.08em;color:var(--muted);text-transform:uppercase;margin-bottom:4px}
+  .mobtoc-sheet a{display:flex;gap:10px;align-items:baseline;padding:13px 6px;border-radius:10px;text-decoration:none;color:var(--ink-2);font-size:14.5px;border-bottom:1px solid var(--hair-soft)}
+  .mobtoc-sheet a:last-of-type{border-bottom:none}
+  .mobtoc-sheet a.active{color:rgb(var(--accent));font-weight:700}
+  .mobtoc-sheet a .num{font-family:var(--font-head);font-size:11.5px;color:rgb(var(--accent));min-width:22px}
+}
+@media (prefers-reduced-motion:reduce){.mobtoc-fab svg,.mobtoc-backdrop,.mobtoc-sheet{transition:none}}
+
 /* atmosphere wash — ambient blobs, same idea as the portfolio's brand atmosphere */
 .atm{position:fixed;inset:0;pointer-events:none;z-index:-1;overflow:hidden}
 .atm i{position:absolute;display:block;border-radius:50%;filter:blur(90px);opacity:.30}
@@ -121,6 +160,11 @@ a{color:inherit}
 .atm i.c{width:38vw;height:38vw;background:rgb(var(--atm-b));bottom:-12vw;right:8vw;opacity:.16}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .atm i{opacity:.16}:root:not([data-theme="light"]) .atm i.b{opacity:.12}:root:not([data-theme="light"]) .atm i.c{opacity:.10}}
 :root[data-theme="dark"] .atm i{opacity:.16}
+@media (max-width:760px){.atm i{filter:blur(46px)}}
+
+/* scroll progress */
+.progress{position:fixed;top:0;left:0;right:0;height:3px;z-index:90;background:rgb(var(--ink-rgb) / .06);pointer-events:none}
+.progress i{display:block;height:100%;width:0%;background:rgb(var(--accent))}
 
 /* creative intro */
 .intro{padding:96px 0 72px;position:relative}
@@ -341,19 +385,6 @@ details.dcalc[open] summary::after{content:"إقفال ⌃"}
 .demoann li{margin-bottom:8px}
 .demoann li b{color:var(--ink)}
 
-/* journey wireframe strip */
-.journey{display:flex;gap:14px;overflow-x:auto;margin-top:28px;padding-bottom:10px}
-.jstep{flex:0 0 auto;width:150px}
-.jframe{background:var(--surface-2);border:1.5px dashed var(--hair);border-radius:10px;height:200px;padding:8px;display:flex;flex-direction:column;gap:5px}
-.jbar{height:8px;background:var(--hair);border-radius:3px}
-.jbar.w60{width:60%}
-.jbar.w40{width:40%}
-.jblock{flex:1;background:var(--surface);border:1px solid var(--hair);border-radius:6px}
-.jblock.fail{background:var(--alert-tint);border-color:var(--alert)}
-.jstep .cap{font-size:11.5px;margin-top:8px;text-align:center}
-.jstep .cap b{display:block;font-family:var(--font-head);font-size:12px}
-.jstep .cap span{color:var(--muted);font-size:10.5px}
-
 /* roster */
 .roster{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:26px}
 @media (max-width:900px){.roster{grid-template-columns:repeat(2,1fr)}}
@@ -505,8 +536,11 @@ details.dcalc[open] summary::after{content:"إقفال ⌃"}
   .doc{padding:0 12px}
 }
 </style>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@500;600;700&display=swap">
+</head>
+<body>
 
+<a class="skiplink" href="#method">تخطى إلى المحتوى</a>
+<div class="progress" aria-hidden="true"><i id="progressBar"></i></div>
 <div class="atm" aria-hidden="true"><i class="a"></i><i class="b"></i><i class="c"></i></div>
 
 <div class="doc">
@@ -1383,6 +1417,34 @@ details.dcalc[open] summary::after{content:"إقفال ⌃"}
 
 </div>
 
+<div class="mobtoc" id="mobtoc">
+  <div class="mobtoc-backdrop" id="mobtocBackdrop"></div>
+  <div class="mobtoc-sheet" id="mobtocSheet" role="dialog" aria-modal="true" aria-label="فهرس الأقسام">
+    <div class="mobtoc-handle"></div>
+    <div class="mobtoc-title">الفهرس</div>
+    <a href="#method" data-target="method" data-num="٠١" data-label="طريقتنا"><span class="num">٠١</span>طريقتنا</a>
+    <a href="#work" data-target="work" data-num="٠٢" data-label="شغل بوصلة"><span class="num">٠٢</span>شغل بوصلة</a>
+    <a href="#market" data-target="market" data-num="٠٣" data-label="السوق"><span class="num">٠٣</span>السوق</a>
+    <a href="#competitors" data-target="competitors" data-num="٠٤" data-label="المنافسون"><span class="num">٠٤</span>المنافسون</a>
+    <a href="#intent" data-target="intent" data-num="٠٥" data-label="النية"><span class="num">٠٥</span>النية</a>
+    <a href="#audience" data-target="audience" data-num="٠٦" data-label="الجمهور"><span class="num">٠٦</span>الجمهور</a>
+    <a href="#model" data-target="model" data-num="٠٧" data-label="النموذج"><span class="num">٠٧</span>النموذج</a>
+    <a href="#surfaces" data-target="surfaces" data-num="٠٨" data-label="اللي بتشتريه"><span class="num">٠٨</span>اللي بتشتريه</a>
+    <a href="#demo" data-target="demo" data-num="٠٩" data-label="الديمو"><span class="num">٠٩</span>الديمو</a>
+    <a href="#journey" data-target="journey" data-num="١٠" data-label="الرحلة"><span class="num">١٠</span>الرحلة</a>
+    <a href="#spine" data-target="spine" data-num="١١" data-label="التصنيف"><span class="num">١١</span>التصنيف</a>
+    <a href="#lifecycle" data-target="lifecycle" data-num="١٢" data-label="الطلب"><span class="num">١٢</span>الطلب</a>
+    <a href="#phases" data-target="phases" data-num="١٣" data-label="المراحل"><span class="num">١٣</span>المراحل</a>
+    <a href="#honesty" data-target="honesty" data-num="١٤" data-label="الحالة"><span class="num">١٤</span>الحالة</a>
+    <a href="#deal" data-target="deal" data-num="١٥" data-label="الصفقة"><span class="num">١٥</span>الصفقة</a>
+  </div>
+  <button class="mobtoc-fab" id="mobtocFab" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="mobtocSheet">
+    <span class="num" id="mobtocNum">٠١</span>
+    <span class="lbl" id="mobtocLbl">طريقتنا</span>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+  </button>
+</div>
+
 <script>
 (function(){
   try{
@@ -1412,10 +1474,15 @@ details.dcalc[open] summary::after{content:"إقفال ⌃"}
     stateBtns.forEach(function(b){ b.addEventListener('click', function(){ state=b.dataset.jstate; paint(); }); });
     paint();
   }catch(e){}
+  var mobtocLinks={};
   try{
     var links=document.querySelectorAll('#rail a');
     var map={};
     links.forEach(function(l){map[l.dataset.target]=l});
+    var mtLinks=document.querySelectorAll('#mobtocSheet a');
+    mtLinks.forEach(function(l){mobtocLinks[l.dataset.target]=l});
+    var mobtocNum=document.getElementById('mobtocNum');
+    var mobtocLbl=document.getElementById('mobtocLbl');
     var sections=document.querySelectorAll('section[id]');
     if('IntersectionObserver' in window){
       var io=new IntersectionObserver(function(entries){
@@ -1423,11 +1490,46 @@ details.dcalc[open] summary::after{content:"إقفال ⌃"}
           if(en.isIntersecting && map[en.target.id]){
             links.forEach(function(l){l.classList.remove('active')});
             map[en.target.id].classList.add('active');
+            mtLinks.forEach(function(l){l.classList.remove('active')});
+            var mt=mobtocLinks[en.target.id];
+            if(mt){
+              mt.classList.add('active');
+              if(mobtocNum) mobtocNum.textContent=mt.dataset.num;
+              if(mobtocLbl) mobtocLbl.textContent=mt.dataset.label;
+            }
           }
         });
       },{rootMargin:'-40% 0px -50% 0px'});
       sections.forEach(function(s){io.observe(s)});
     }
   }catch(e){}
+  try{
+    var mobtoc=document.getElementById('mobtoc');
+    var fab=document.getElementById('mobtocFab');
+    var backdrop=document.getElementById('mobtocBackdrop');
+    function openSheet(){mobtoc.classList.add('open');fab.setAttribute('aria-expanded','true');}
+    function closeSheet(){mobtoc.classList.remove('open');fab.setAttribute('aria-expanded','false');}
+    fab.addEventListener('click', function(){ mobtoc.classList.contains('open') ? closeSheet() : openSheet(); });
+    backdrop.addEventListener('click', closeSheet);
+    document.querySelectorAll('#mobtocSheet a').forEach(function(l){ l.addEventListener('click', closeSheet); });
+    document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeSheet(); });
+  }catch(e){}
+  try{
+    var bar=document.getElementById('progressBar');
+    var ticking=false;
+    function updateProgress(){
+      var h=document.documentElement;
+      var max=(h.scrollHeight-h.clientHeight)||1;
+      var pct=Math.min(100, Math.max(0, (window.scrollY/max)*100));
+      bar.style.width=pct+'%';
+      ticking=false;
+    }
+    window.addEventListener('scroll', function(){
+      if(!ticking){ window.requestAnimationFrame(updateProgress); ticking=true; }
+    }, {passive:true});
+    updateProgress();
+  }catch(e){}
 })();
 </script>
+</body>
+</html>
