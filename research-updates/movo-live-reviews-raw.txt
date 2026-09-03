@@ -1,0 +1,102 @@
+=== Movo Play Store (com.movo.movouser) — Live browser extract, 2026-09-03 ===
+Rating: 4.6 star, 2.54K-2.56K reviews, 100K+ downloads
+Updated: Aug 17, 2026
+
+REVIEWS (chronological as scraped, "Most relevant" sort):
+
+Fahd Ai - Aug 24, 2026
+"worst experience ever you need to learn how to create an app"
+
+suher fwety - Aug 3, 2024 (31 helpful)
+"Unprofessional at all. I have an issue with them as they refused to deliver to the area I live in.
+Anyway there customer's service called me and apologised offering one month free delivery.
+Then I recognised that they blocked my account on Facebook because I wrote a comment in their posts
+telling my experience. As well as I couldn't log into my account in their app anymore."
+>>> THIS CONFIRMS the Facebook-ban-after-complaint allegation that teardown/movo.md flagged as
+>>> "single indirect source, needs confirmation before pitch use" — NOW CONFIRMED via direct
+>>> primary-source reading of a second independent named reviewer (suher fwety) with full detail
+>>> matching the previous unconfirmed claim (blocked on Facebook after posting a complaint, then
+>>> locked out of the app account too). This is a SECOND real reviewer confirming the same pattern
+>>> as MadEndUser's App Store review already in movo.md.
+
+Elias Albro - Aug 16, 2024 (6 helpful)
+"Bad experience, bad client service, not professional at all... you might get an order deleted
+without seeing it after and you only got a message telling that 'your order has been removed'
+with any order number or anything tells which order has been removed!!!"
+>>> C2 breach: silent failure, no order ID/reason given.
+
+Hosam Alrihani - Dec 13, 2020 (47 helpful)
+"Great app but it needs improvements - Images are not cached and it takes forever to load...
+When i click on a notification, the app opened and i can't see the notification anymore"
+
+Anas Hawasli - Nov 13, 2021 (45 helpful)
+"Good app but needs improvements... discount notification leads nowhere, search finds nothing"
+
+khouzama A.N - Aug 25, 2026
+"Bad at solving customer problems"
+
+Alaa Hboubati - Feb 10, 2024 (18 helpful)
+"Can't place an order, the app does not show anything to indicate what the problem is.
+Their customer support don't even answer calls."
+>>> C2 breach: silent failure + unreachable support.
+
+Hanan ON Rise - Jan 13, 2021 (32 helpful)
+"Looks nice if it works. It crashed every time I tried to sign up."
+
+Ahmad Kaddour - Jan 16, 2024 (10 helpful)
+"They keep rejecting my orders because they don't deliver to my area, although my address
+is within the supported addresses on the map."
+>>> Zone/coverage inconsistency — relevant to D2/0012-city-partition.
+
+Basma - Apr 12, 2023 (10 helpful)
+"The app keeps crashing, it was good and cheap to order from, but after the update it keeps crashing"
+
+Kareem Dabbeet - May 27, 2022 (6 helpful)
+"Using version 3.0, the app keeps crashing every time I try to open it."
+
+[More reviews were loading when scraped — Redwan... cut off]
+
+Redwan jaafo - Jan 29, 2024 (1 helpful)
+"They don't follow up customers complaints and don't take it seriously, app freezing is common"
+
+kickassboy58 - Jul 14, 2023 (8 helpful)
+"Buggy, glitchy, unreliable. I have yet to see a usable Syrian app besides YallaGo." [profanity redacted]
+>>> Notable: independent user explicitly names YallaGo as the one usable Syrian app — external
+>>> validation that YallaGo has a stronger tech reputation than delivery-specific competitors.
+
+Mohammed Altujjar - Jun 20, 2021 (19 helpful)
+"Super slow response and the map is very inaccurate. Crashes all the time."
+
+M MK - May 8, 2024 (2 helpful)
+"Doesn't work!!! Just keeps loading even with strong internet connection"
+
+jemma wakim - Oct 2, 2021 (8 helpful)
+"Bad experience. Didn't deliver the order because of pressure, three times in a row."
+
+Fadi T - Nov 21, 2023 (2 helpful)
+"Very bad customer support (nobody answers), late delivery"
+
+Dodi Mouti - Aug 13, 2023 (4 helpful)
+"Rejecting orders due to insufficient delivery staff most of the time."
+>>> Direct evidence of courier/dispatch capacity shortfall — relevant to B6/G2 courier sourcing.
+
+TK 20 - Jun 4, 2025 (1 helpful)
+"Signed in before but new update broke login, tried 30 times, doesn't work"
+
+Hummam Sh. A - Aug 13, 2024 (2 helpful)
+"App crashes when I open the orders page"
+
+=== SUMMARY OF NEW FINDINGS vs teardown/movo.md ===
+1. Facebook-ban-after-complaint: NOW CONFIRMED by a second independent reviewer (suher fwety,
+   Aug 2024) — matches MadEndUser's App Store account. movo.md called this "single indirect
+   source, needs second confirmation before pitch use." Threshold now met — this can go in
+   client-facing material with confidence, cite BOTH reviewers.
+2. Technical instability is the dominant complaint theme (crashes, login breaks, infinite
+   loading) — MORE prominent in this larger review sample than in movo.md's original 10-review
+   read. This is a build-quality gap, not just a trust gap — opportunity to position on
+   reliability too, not only transparency.
+3. Dispatch/coverage rejection is a recurring complaint (Ahmad Kaddour: address rejected despite
+   being "supported"; Dodi Mouti: rejected due to insufficient delivery staff) — direct evidence
+   for zone-boundary design (0012-city-partition) and courier capacity planning (B6/G2/D19).
+4. One external reviewer names YallaGo as the only "usable Syrian app" — competitive signal that
+   YallaGo's tech reputation is ahead of delivery-specific apps.

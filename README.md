@@ -89,9 +89,9 @@ by design. **64 counted decisions:**
 | | Count | Share |
 |---|---:|---:|
 | 🔒 Locked (agreed — won't reopen without a written reason) | 3 | ≈4.7% |
-| 📝 Draft (strong opinion, needs confirmation) | 34 | ≈53.1% *(counted at half-credit)* |
-| ⬜ Empty (not even an opinion yet) | 27 | — |
-| **Effective coverage** | | **≈31.3%** |
+| 📝 Draft (strong opinion, needs confirmation) | 35 | ≈54.7% *(counted at half-credit)* |
+| ⬜ Empty (not even an opinion yet) | 26 | — |
+| **Effective coverage** | | **≈32.0%** |
 
 Source of truth: [`brain/REGISTER.md`](brain/REGISTER.md) — this is a point-in-time snapshot, not
 synced automatically. Any coverage number elsewhere in this repo is stale by definition.
@@ -109,7 +109,14 @@ Aleppo or Damascus and a real timing window before better-funded rivals arrive.
 2. **Q6/Q7** — contracted merchants? Budget and timing? Blocks B1, B4, F1–F3 — not researchable, only
    answerable.
 3. **D8/G2** — courier employment model (employee vs. freelance), needed before the dispatch engine
-   can lock.
+   can lock. 🟡 Market data now available: independent-contractor model, $100-250/mo income, BeeOrder's
+   full contract terms documented (0% commission from courier income, exclusivity clause banning
+   multi-apping). The business decision (match this model or differentiate) still needs Kariem's word.
+4. **🔴 Watch YallaGo closely** — reclassified 2026-09-03 from "driver labor pool" to the single most
+   dangerous competitor found in the whole project: 1M+ confirmed users, a live delivery stack
+   (YallaMart/YallaVendor), direct government backing, and an on-record statement it's evaluating
+   entering food/goods delivery. If it ships delivery before we launch, it inherits a ready-made user
+   base instead of building one.
 
 <details>
 <summary><b>All 14 architecture decisions (ADRs)</b></summary>
@@ -138,14 +145,27 @@ Aleppo or Damascus and a real timing window before better-funded rivals arrive.
 
 ## 🔍 Competitive intel
 
-The real threat circle for Latakia, narrowed from 9 competitors scanned for actual download numbers
-([scan](brain/teardown/competitor-scale-scan.md)):
+🔴 **Critical update 2026-09-03**: the threat ranking below is outdated. A live-browser research pass
+(first time the browser tool actually worked) plus 3 parallel research agents overturned the ranking —
+full detail in [`research-updates/MASTER-BRIEFING-2026-09-03.md`](research-updates/MASTER-BRIEFING-2026-09-03.md).
+**YallaGo is now the top threat** (1M+ confirmed users, live delivery stack, government backing —
+was previously miscategorized as just a "driver labor pool"). Two brand-new entrants surfaced: **My Syria**
+(founder publicly named Latakia as the next expansion city) and **Darro** (small live super-app with a
+quick-commerce feature that overlaps directly with our core use case). BeeOrder jumped to 4.9★/500k+
+downloads (was 4.0★/462k). The exchange rate baseline used across this repo was also wrong by ~100x —
+corrected to 122 SYP/USD (Central Bank of Syria, verified directly) from the old 10,000-11,500 figure.
+
+The threat circle below (pre-correction, from 9 competitors scanned for actual download numbers,
+[scan](brain/teardown/competitor-scale-scan.md)):
 
 | Competitor | What's confirmed |
 |---|---|
-| 🔴 **BeeOrder** | Confirmed breach of the "no silence" and "real courier" rules. 462k downloads, 4.0★. [teardown](brain/teardown/beeorder.md) |
-| 🔴 **Movo** | The only one genuinely popular — 100k+ downloads, 2,516 reviews, 4.2–4.7★. The single worst trust breach found across the whole scan: a real, readable App Store review reporting an account ban *after* the user contacted support about a problem the app itself caused. [teardown](brain/teardown/movo.md) |
-| 🟡 **Labby** | Best-funded by far — $10M raised from Saudi/UAE investors, July 2026, the first institutional foreign funding any Syrian tech startup has received. Damascus-only today, Aleppo next, Latakia after — a real timing window, not a false one. |
+| 🔴 **YallaGo** | ⚠️ **New #1 threat (2026-09-03).** 1M+ confirmed users, live 4-app ecosystem (taxi, courier "Safeer", YallaMart delivery, YallaVendor merchant), direct Ministry of Communications backing, exhibited at LEAP 2026 Riyadh. On record considering entering food/goods delivery. [teardown](brain/teardown/yallago.md) |
+| 🔴 **BeeOrder** | Confirmed breach of the "no silence" and "real courier" rules. Updated 2026-09-03: 500k+ downloads, 4.9★ (was 462k, 4.0★). [teardown](brain/teardown/beeorder.md) |
+| 🟡 **My Syria** 🆕 | New entrant, not in prior scans. Live tourism super-app (hotels, airport taxi, car rental, restaurants), Damascus-only, 15k downloads since July 29 launch. Founder publicly stated the expansion roadmap: "Aleppo, then Latakia, Tartus, or Homs." [teardown](brain/teardown/my-syria-darro.md) |
+| 🔴 **Movo** | The only one genuinely popular — 100k+ downloads, 2,516 reviews, 4.2–4.7★. The single worst trust breach found across the whole scan: a real, readable App Store review reporting an account ban *after* the user contacted support about a problem the app itself caused — now confirmed by a second, independent review on a different platform. [teardown](brain/teardown/movo.md) |
+| 🟡 **Labby** | Best-funded by far — $10M raised from Saudi/UAE investors, July 2026, the first institutional foreign funding any Syrian tech startup has received. Still has no shipped product as of late Aug 2026 ("Well, there is none, at least at the moment"). Damascus-only today, Aleppo next, Latakia after — a real timing window, not a false one. |
+| 🟢 **Darro** 🆕 | New entrant, not in prior scans. Small live super-app (500+ installs) — Shop + "Minutes" quick-commerce + Gifts, marketed explicitly as "Syria's super app" on Instagram. UAE-backed dev shop. [teardown](brain/teardown/my-syria-darro.md) |
 | ⚪ **Talabatey** | Weakest of the confirmed four locally — but its Iraqi sibling is the architecture reference for the shell-host model. [teardown](brain/teardown/talabatey-iq.md) |
 | ⚪ **Wee-Sy** | Closest philosophical model on paper, but the shipped app is transport-only with "0+" downloads — worth watching, not chasing. [teardown](brain/teardown/wee-sy.md) |
 

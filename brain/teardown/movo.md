@@ -19,6 +19,8 @@
 
 ## ١. الاكتشاف الأهم — دُعوى "الحظر بعد الشكوى" **اتأكدت بقراءة مباشرة**، مش ملخّص بحث
 
+✅ **تحديث ٣ سبتمبر ٢٠٢٦ — اتأكدت بمصدر ثانٍ مستقل تماماً:** مراجعة حقيقية على Google Play (لا App Store) من مستخدمة تانية باسم **suher fwety** (٣ أغسطس ٢٠٢٤): *"...they blocked my account on Facebook because I wrote a comment in their posts telling my experience. As well as I couldn't log into my account in their app anymore."* — نفس النمط بالظبط (حظر بعد شكوى، فيسبوك ثم التطبيق)، بمستخدم مختلف وتاريخ مختلف ومنصة مختلفة (Play مش App Store). **الحد المطلوب للاستخدام في مواد pitch اتحقق فعلياً — دلوقتي مصدرين مستقلين، مش واحد.**
+
 [[competitor-scale-scan]] كان علّم الدعوى دي "مصدر واحد غير مباشر، محتاجة تأكيد قبل أي استخدام في pitch". فتحت صفحة تقييمات App Store مباشرة (`apps.apple.com/us/app/1487602510?see-all=reviews`) وقريت النص الحقيقي:
 
 > **"Bad customer service"** — المستخدم **MadEndUser**، بتاريخ **١٥ فبراير** (السنة مش ظاهرة في الواجهة، لكن التقييمات المجاورة بتاريخ ٢٠٢٥-٢٠٢٦):

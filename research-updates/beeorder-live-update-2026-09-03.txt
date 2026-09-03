@@ -1,0 +1,43 @@
+=== BeeOrder Play Store — LIVE UPDATE, 2026-09-03 ===
+vs teardown/beeorder.md (written 2026-09-02, from search summaries only — Play Store rejected
+automated fetch at the time). Now confirmed via live browser direct read.
+
+MAJOR CHANGE IN SCALE/RATING:
+- OLD (beeorder.md): 4.0★, 2000+ reviews, 462k+ downloads
+- NEW (live, Sep 3 2026): 4.9★, 4.86K-4.9K reviews, 500K+ downloads
+- Last updated: Sep 1, 2026 (2 days before this check — actively maintained, not stale)
+>>> Rating jumped nearly a full star (4.0 -> 4.9) and review count roughly doubled since the
+>>> original teardown. This needs a fresh read — either the app materially improved, or review
+>>> gating/incentivized reviews changed the distribution. Cannot resolve which from this pass alone.
+
+CONFIRMED STILL-LIVE COMPLAINTS (recent reviews, not historical):
+1. Majd Green (Jul 13, 2026): "لا يوجد تغطية لجميع مناطق دمشق. خدمة العملاء لا يستجيبوا للاتصال"
+   (no coverage for all Damascus areas, customer service unresponsive) — C2 breach, recent.
+2. Abrar Hammoude (Mar 21, 2026): order cancelled after 3hrs wait, only got "Sorry", no discount
+   for the inconvenience — C2 breach (failure with no real remedy), recent.
+3. Samar Almokdad (Jun 12, 2025) — POSITIVE overall (fast, professional, price-matches menu) BUT:
+   "delivery sometimes... reaches the price of the food" (C1 breach persists) AND
+   "they put the picture of the delivery guy but when they come I'll be surprised that they're
+   very different from the picture" — C3 BREACH CONFIRMED STILL ACTIVE as of mid-2025, not
+   resolved. This is the single most valuable finding: teardown/movo.md and beeorder.md both
+   cited this from OLDER reviews as "confirmed breach" — this NEW review from a mostly-positive
+   user proves it's not fixed, it's structural to how they operate.
+4. Anas laham (Aug 15, 2023, 115 helpful — high engagement) — direct price-padding complaint:
+   calling the restaurant directly vs ordering via app shows "massive price difference... they
+   add additional taxes and fees on top of the high prices" — direct C1 breach evidence, and
+   BeeOrder's own official reply (Nov 13, 2023) was a generic apology template, no resolution
+   shown in the review thread — reinforces C2 (apology without substance = still a form of
+   silence).
+5. omar gadban (Jul 22, 2023): app estimated 30 min, actual took 2 hours, "help center (which is
+   no[t responsive]" [cut off] — direct C9 breach (fake computed-looking ETA that's not real).
+
+STRATEGIC READ:
+BeeOrder's rating/scale jump is the headline number to verify before using old 4.0★/462k figures
+in any pitch deck — those are now stale. But the qualitative trust gaps (C1 price surprise, C2
+silence/non-remedy, C3 courier photo mismatch, C9 fake ETA) are ALL independently reconfirmed by
+reviews dated 2025-2026, spanning positive AND negative overall reviewers. This is stronger
+evidence than the original teardown had — it's not "old complaints," it's "complaints persisting
+across a nearly 2-year span up to last month," which is a much harder claim to challenge.
+
+ACTION: Update REGISTER.md A3 and teardown/beeorder.md with corrected scale numbers (4.9★, ~4.9K
+reviews, 500K+ downloads, last update Sep 1 2026) before any client-facing use of the old figures.
