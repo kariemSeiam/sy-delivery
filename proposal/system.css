@@ -113,13 +113,17 @@ td.n,th.n{text-align:right}
 .scrim{display:none;position:fixed;inset:0;background:rgba(14,34,40,.55);z-index:55;backdrop-filter:blur(2px)}
 @media (max-width:1000px){
   .shell{grid-template-columns:1fr}
+  /* drawer sits on the inline-start edge (right, in RTL) and is pushed
+     off-canvas with a positive translateX — translateX is physical, not
+     direction-aware, so +105% always moves toward the right. */
   .side{position:fixed;inset-block:0;inset-inline-start:0;width:min(86vw,320px);z-index:56;
-    transform:translateX(105%);transition:transform .28s ease}
-  html[dir="rtl"] .side{transform:translateX(105%)}
-  .side.is-open{transform:translateX(0)}
+    transform:translateX(105%);transition:transform .28s ease,visibility .28s;
+    visibility:hidden}
+  .side.is-open{transform:translateX(0);visibility:visible}
   .sidebtn{display:flex}
   .scrim.is-on{display:block}
   .doc{padding-top:var(--s8)}
+  body.no-scroll{overflow:hidden}
 }
 
 /* scroll progress */

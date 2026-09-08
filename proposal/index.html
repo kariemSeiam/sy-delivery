@@ -101,9 +101,21 @@
     side.classList.toggle('is-open',open);
     scrim.classList.toggle('is-on',open);
     btn.setAttribute('aria-expanded',String(open));
+    btn.setAttribute('aria-label',open?'إغلاق الفهرس':'فتح الفهرس');
+    document.body.classList.toggle('no-scroll',open);
+    btn.innerHTML=open
+      ? '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>'
+      : '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>';
   }
   btn.addEventListener('click',function(){toggle(!side.classList.contains('is-open'));});
   scrim.addEventListener('click',function(){toggle(false);});
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'&&side.classList.contains('is-open'))toggle(false);
+  });
+  // reset state if resized back to desktop
+  window.addEventListener('resize',function(){
+    if(window.innerWidth>1000&&side.classList.contains('is-open'))toggle(false);
+  });
 
   // active section in TOC
   var links=[].slice.call(document.querySelectorAll('#toc a'));
