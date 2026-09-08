@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>اللاذقية — من الفكرة للتشغيل | مقترح بوصلة</title>
+<meta name="description" content="مقترح بناء وتشغيل منصة توصيل هايبر-لوكال في اللاذقية، سوريا. من الفكرة للسوق للأركتكتشر للتعاقد.">
+<meta name="theme-color" content="#052A32">
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=IBM+Plex+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="system.css">
+</head>
+<body>
+
+<div class="progress" aria-hidden="true"><i id="prog"></i></div>
+<div class="scrim" id="scrim" aria-hidden="true"></div>
+
+<div class="shell">
+
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="side" id="side">
+    <div class="side__brand">اللاذقية<br>من الفكرة للتشغيل</div>
+    <p class="side__sub">مقترح بناء وتشغيل · بوصلة · سبتمبر ٢٠٢٦</p>
+    <nav id="toc" aria-label="فهرس المستند">
+      <a href="#ch01"><i>01</i><span>الملخّص التنفيذي</span></a>
+      <a href="#ch02"><i>02</i><span>مين إحنا، وإيه اللي بنيناه</span></a>
+      <a href="#ch03"><i>03</i><span>الفكرة: إيه اللي بنبيعه فعلاً</span></a>
+      <a href="#ch04"><i>04</i><span>السوق: مش فاضي، ومتسابق</span></a>
+      <a href="#ch05"><i>05</i><span>الأرض السورية: اللي بيكسر الافتراضات</span></a>
+      <a href="#ch06"><i>06</i><span>المستخدم ورحلته</span></a>
+      <a href="#ch07"><i>07</i><span>الأركتكتشر: مضيف الأصداف</span></a>
+      <a href="#ch08"><i>08</i><span>العمود الفقري للتصنيف</span></a>
+      <a href="#ch09"><i>09</i><span>الأسطح: إيه اللي بيتبني</span></a>
+      <a href="#ch10"><i>10</i><span>الفشل هو المنتج</span></a>
+      <a href="#ch11"><i>11</i><span>الفلوس: الليدجر والعملة</span></a>
+      <a href="#ch12"><i>12</i><span>التقنية والأمان</span></a>
+      <a href="#ch13"><i>13</i><span>التوزيع: إزاي التطبيق يوصل</span></a>
+      <a href="#ch14"><i>14</i><span>الإطلاق: أول ٢٠ تاجر</span></a>
+      <a href="#ch15"><i>15</i><span>المراحل والبوابات</span></a>
+      <a href="#ch16"><i>16</i><span>التكلفة التشغيلية</span></a>
+      <a href="#ch17"><i>17</i><span>القانون والكيان</span></a>
+      <a href="#ch18"><i>18</i><span>المخاطر بصراحة</span></a>
+      <a href="#ch19"><i>19</i><span>التعاقد</span></a>
+      <a href="#ch20"><i>20</i><span>الملاحق والمصادر</span></a>
+    </nav>
+    <div class="side__foot">
+      وثيقة سرّية · مُعدّة لأصحاب الفكرة<br>
+      كل رقم فيها له مصدر ومؤرَّخ<br>
+      <span class="en">© 2026 Bosla</span>
+    </div>
+  </aside>
+
+  <!-- ============ MAIN ============ -->
+  <main class="main">
+    <div class="doc">
+
+      <!-- ============ COVER ============ -->
+      <header class="cover">
+        <p class="cover__eyebrow">مقترح بناء وتشغيل · سرّي</p>
+        <h1>اللاذقية.<br>من الفكرة، للأركتكتشر، <em>للتشغيل</em>.</h1>
+        <p class="cover__lead">
+          إنتوا عندكم الفكرة. الوثيقة دي مش بتحاول تقنعكم بيها — بتقولكم إزاي تتبني،
+          وبكام، وفي قد إيه، وإيه اللي هيكسرها لو حد كذب عليكم في رقم.
+        </p>
+        <div class="cover__meta">
+          <div>المدينة الأولى<b>اللاذقية · <span class="en">606k</span> نسمة</b></div>
+          <div>المنفّذ<b>بوصلة — وكالة مصرية</b></div>
+          <div>الملكية<b>الكود ملك أصحاب الفكرة</b></div>
+          <div>تاريخ الإصدار<b class="en">2026-09-08</b></div>
+        </div>
+      </header>
+
+      <!-- CHAPTERS INJECTED HERE -->
+      <!--CHAPTERS-->
+
+    </div>
+  </main>
+</div>
+
+<button class="sidebtn" id="sidebtn" aria-label="فتح الفهرس" aria-expanded="false">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+</button>
+
+<script>
+(function(){
+  // scroll progress
+  var prog=document.getElementById('prog');
+  function onScroll(){
+    var h=document.documentElement;
+    var pct=(h.scrollTop)/(h.scrollHeight-h.clientHeight)*100;
+    prog.style.width=Math.min(100,Math.max(0,pct))+'%';
+  }
+  onScroll();
+  window.addEventListener('scroll',onScroll,{passive:true});
+
+  // mobile drawer
+  var side=document.getElementById('side'),btn=document.getElementById('sidebtn'),scrim=document.getElementById('scrim');
+  function toggle(open){
+    side.classList.toggle('is-open',open);
+    scrim.classList.toggle('is-on',open);
+    btn.setAttribute('aria-expanded',String(open));
+  }
+  btn.addEventListener('click',function(){toggle(!side.classList.contains('is-open'));});
+  scrim.addEventListener('click',function(){toggle(false);});
+
+  // active section in TOC
+  var links=[].slice.call(document.querySelectorAll('#toc a'));
+  var map={};
+  links.forEach(function(a){
+    var el=document.querySelector(a.getAttribute('href'));
+    if(el) map[a.getAttribute('href').slice(1)]=a;
+  });
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(en.isIntersecting){
+        links.forEach(function(l){l.classList.remove('is-on');});
+        var a=map[en.target.id];
+        if(a){
+          a.classList.add('is-on');
+          if(window.innerWidth>1000){
+            var r=a.getBoundingClientRect(), sr=side.getBoundingClientRect();
+            if(r.top<sr.top+60||r.bottom>sr.bottom-60) a.scrollIntoView({block:'center'});
+          }
+        }
+      }
+    });
+  },{rootMargin:'-15% 0px -70% 0px'});
+  document.querySelectorAll('.ch').forEach(function(c){io.observe(c);});
+
+  // close drawer on nav click (mobile)
+  links.forEach(function(a){a.addEventListener('click',function(){if(window.innerWidth<=1000)toggle(false);});});
+})();
+</script>
+</body>
+</html>
