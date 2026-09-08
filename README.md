@@ -7,9 +7,11 @@
 ![Status](https://img.shields.io/badge/status-strategy%20phase-1f6feb)
 ![License](https://img.shields.io/badge/license-proprietary-red)
 ![Docs](https://img.shields.io/badge/docs-Arabic--first-2ea44f)
-![Visibility](https://img.shields.io/badge/visibility-private-lightgrey)
+![Visibility](https://img.shields.io/badge/visibility-public-success)
+![Proposal](https://img.shields.io/badge/proposal-19%2F20%20chapters-2ea44f)
+[![Live](https://img.shields.io/badge/live-kariemseiam.github.io%2Fsy--delivery-1f6feb)](https://kariemseiam.github.io/sy-delivery/)
 
-**[The Bet](#-the-bet) · [The Model](#-the-model) · [Decisions](#-decisions) · [Competitive Intel](#-competitive-intel) · [Navigate the Brain](#-navigate-the-brain) · [Constraints](#-constraints) · [Structure](#-repo-structure)**
+**[The Deliverable](#-the-deliverable) · [The Bet](#-the-bet) · [The Model](#-the-model) · [Decisions](#-decisions) · [Competitive Intel](#-competitive-intel) · [Navigate the Brain](#-navigate-the-brain) · [Constraints](#-constraints) · [Verification](#-how-every-number-here-is-checked) · [Structure](#-repo-structure)**
 
 </div>
 
@@ -24,6 +26,26 @@ Executed by **Bosla** · started **2026-08-31** · client name and the folder na
 placeholders until the brand decision locks (`REGISTER.md` → E1) — deliberately deferred, not an
 oversight. Naming it now, before positioning is known, would be a name chosen with incomplete
 information.
+
+---
+
+## 📄 The deliverable
+
+**Live: [kariemseiam.github.io/sy-delivery](https://kariemseiam.github.io/sy-delivery/)** — the actual
+document that goes to the owners. Not a slide deck about the opportunity; a build-and-operate contract
+with sourced numbers, a payment schedule tied to real-world gates instead of dates, and every unverified
+figure flagged as such in the text, not buried in a footnote.
+
+| | |
+|---|---|
+| **Chapters written** | 19 of 20 — architecture, money/ledger, distribution, legal, risk register, sources |
+| **The one gap** | Ch.19, the contract itself — blocked on five business calls only Kariem can make (revenue split, support pricing, ownership terms, launch budget), not on more research |
+| **Build** | `python3 proposal/build.py` → `proposal/dist/index.html`, deployed automatically by [`.github/workflows/pages.yml`](.github/workflows/pages.yml) on every push that touches `proposal/**` |
+| **Design system** | [`proposal/system.css`](proposal/system.css) — its own Levantine-coast palette, separate from the earlier [`pitch/latakia-file.html`](pitch/latakia-file.html) deck; both exist, neither replaced the other |
+
+The document is honest about its own incompleteness on purpose — the unwritten chapter renders greyed
+out in its own table of contents rather than being silently skipped. A draft banner on a document is a
+credibility cost; a draft banner that lies about how much is left is a bigger one.
 
 ---
 
@@ -138,6 +160,7 @@ Aleppo or Damascus and a real timing window before better-funded rivals arrive.
 | [0012](brain/decisions/0012-city-partition.md) | City partitioning — zone as pricing unit | Draft |
 | [0013](brain/decisions/0013-launch-playbook.md) | Latakia launch playbook | Draft |
 | [0014](brain/decisions/0014-ownership-models.md) | 3 ownership models — resolves D1 | Draft, open |
+| [0015](brain/decisions/0015-identity-and-auth.md) | **Device is the identity** — no signup on the happy path, OTP only at money/device-transfer | 🔒 Locked |
 
 </details>
 
@@ -185,7 +208,8 @@ The threat circle below (pre-correction, from 9 competitors scanned for actual d
 | [`brain/teardown/`](brain/teardown/) | Competitor and reference teardowns |
 | [`brain/research/`](brain/research/) | Sourced market scans |
 | [`brain/OPEN.md`](brain/OPEN.md) | Client questions, research queues, running assumptions |
-| [`pitch/latakia-file.html`](pitch/latakia-file.html) | The pitch deck |
+| [`proposal/`](proposal/) | ⭐ The build-and-operate deal document — [live](https://kariemseiam.github.io/sy-delivery/), 19/20 chapters |
+| [`pitch/latakia-file.html`](pitch/latakia-file.html) | The earlier pitch deck — separate from `proposal/`, not superseded |
 
 ---
 
@@ -204,6 +228,22 @@ Full 12, each with its source and a testability note, in [`brain/constraints.md`
 
 ---
 
+## ✅ How every number here is checked
+
+Three failure modes killed projects like this before, and the repo is structured against each one
+specifically:
+
+| Failure mode | What actually happened elsewhere | The rule here |
+|---|---|---|
+| A number gets typed once, then quoted forever | The exchange rate was wrong by ~100x for a week before anyone re-checked it against the source | Every FX-dependent figure in this repo was re-derived the day the error was caught — see the lock log at the bottom of [`REGISTER.md`](brain/REGISTER.md), not silently edited |
+| A single low-credibility source becomes load-bearing | An implied take-rate from one non-journalistic blog quietly becomes the basis for a pricing model | Marked `unver.` / `غير مؤكَّد` in the text itself, everywhere it's used — see the BeeOrder take-rate caveat in [ch.4 of the proposal](https://kariemseiam.github.io/sy-delivery/#ch04) |
+| The coverage number stops meaning anything | "We're 80% done" repeated past the point it was true | Coverage is a formula over [`REGISTER.md`](brain/REGISTER.md)'s own table (locked + half-credit for draft), not a vibe — recompute it yourself, the math is in the file |
+
+**If a number in this repo has no visible source, that's a bug in the repo, not a fact to trust.**
+Open an issue or say so directly — this line exists so that claim is checkable, not just asserted.
+
+---
+
 ## 📁 Repo structure
 
 ```
@@ -217,8 +257,14 @@ brain/
   decisions/                  ← numbered ADRs
   teardown/                    ← competitor teardowns
   research/                     ← sourced market scans
+proposal/                        ← ⭐ the deal document — build.py assembles ch/*.html → dist/
+  ch/                              ← 19 of 20 chapters, ch19 blocked on business input
+  system.css                        ← its own design system
+  build.py                            ← run this after any chapter edit
 pitch/
-  latakia-file.html            ← pitch deck
+  latakia-file.html            ← earlier pitch deck, still standalone
+.github/workflows/
+  pages.yml                    ← builds + deploys proposal/dist/ on push
 .venom/                          ← session memory (resume state, learned patterns)
 ```
 
