@@ -1,0 +1,186 @@
+<!-- ============ 16 OPERATING COST ============ -->
+<section class="ch" id="ch16">
+  <div class="ch__num">16</div>
+  <h2 class="ch__title">التكلفة التشغيلية — كل بند بسعره ومصدره</h2>
+  <p class="ch__intro">
+    الفصل ده هو اللي أغلب المقترحات بتسيبه فاضي، وبعدين الأرقام بتظهر في الشهر التالت.
+    كل رقم هنا له <strong>مصدر وتاريخ فحص</strong>، واللي مش متأكدين منه مكتوب جنبه
+    <span class="unver">غير مؤكَّد</span>.
+  </p>
+
+  <h3>١ — التحقق من الهوية: البند اللي كان هيولّع الميزانية</h3>
+  <p>
+    ده أهم اكتشاف تشغيلي في البحث كله، ولازم تعرفوه بالتفصيل لأنه
+    <strong>بيكسر افتراض بديهي عند أي حد اشتغل في السوق المصري</strong>.
+  </p>
+
+  <div class="callout callout--danger">
+    <div class="callout__t">واتساب ممنوع لسوريا — من الطرفين</div>
+    <p>من توثيق <span class="en">Meta</span> الرسمي نفسه:</p>
+    <p style="font-size:15px;background:#fff;padding:12px 14px;border-radius:8px;direction:ltr;text-align:left">
+      <em>"Businesses in Cuba, Iran, North Korea, <strong>Syria</strong>… are <strong>not eligible to use</strong>
+      the WhatsApp Business Platform. WhatsApp Messenger and WhatsApp Business app users in Cuba, Iran,
+      North Korea, <strong>Syria</strong>… are <strong>not eligible to receive messages sent via</strong>
+      the WhatsApp Business Platform."</em>
+    </p>
+    <p>
+      <strong>الحظر من الطرفين، والطرف المستقبِل هو اللي بيقتل الفكرة.</strong>
+      إحنا ككيان مصري نقدر نفتح حساب واتساب أعمال عادي —
+      بس <span class="en">Meta</span> بتمنع التوصيل لمستخدمي واتساب <strong>في سوريا</strong>،
+      مهما كانت الشركة مسجّلة فين. الـ<span class="en">WABA</span> المصري
+      <strong>مش ثغرة، ده بالظبط السيناريو اللي السياسة بتسمّيه</strong>.
+    </p>
+    <p class="muted" style="font-size:14px">
+      المصدر: <span class="en">developers.facebook.com/documentation/business-messaging/whatsapp/support</span> ·
+      محدَّثة <span class="en">2026-05-21</span>، اتقرت <span class="en">2026-09-08</span> ·
+      مؤكَّدة كمان بكود خطأ <span class="en">Twilio 63058</span>
+    </p>
+  </div>
+
+  <h4>وباقي القنوات</h4>
+  <div class="tblwrap">
+    <table>
+      <thead><tr><th>القناة</th><th>سوريا؟</th><th class="n">السعر</th><th>ملاحظة</th></tr></thead>
+      <tbody>
+        <tr><td><b class="en">WhatsApp</b></td><td class="no">ممنوع من الطرفين</td><td class="n">—</td><td>سوريا مالهاش صف أصلاً في جدول أسعار Meta</td></tr>
+        <tr><td><b class="en">Twilio</b></td><td class="no">محظورة</td><td class="n">—</td><td>كود خطأ <span class="en">63058</span></td></tr>
+        <tr><td><b class="en">Infobip</b></td><td class="no">غايبة</td><td class="n">—</td><td>مش في حاسبة الأسعار العامة</td></tr>
+        <tr><td><b class="en">Sinch</b></td><td class="yes">نعم</td><td class="n">$0.33195</td><td>مؤرَّخ <span class="en">2026-09-07</span></td></tr>
+        <tr><td><b class="en">D7 Networks</b></td><td class="yes">نعم</td><td class="n">$0.37</td><td>الملاذ الأخير في الشلال</td></tr>
+        <tr style="background:var(--foam-2)"><td><b class="en">Telegram Gateway</b></td><td class="mid">غير مؤكَّد</td><td class="n">$0.01</td><td><strong>لكل كود موصَّل فعلاً</strong> + فحص مسبق مجاني + استرداد آلي</td></tr>
+        <tr><td>مكالمة / <span class="en">flash-call</span></td><td class="no">مرفوضة</td><td class="n">$0.5238/min</td><td><strong>أغلى من الـSMS نفسه</strong> (<span class="en">Plivo</span>)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4>الشلال اللي اخترناه</h4>
+  <div class="flow">
+    <div class="flow__step"><i>1</i><b>فحص مجاني</b><span><span class="en">checkSendAbility</span> — هل الرقم ده يستقبل تيليجرام أصلاً؟ بصفر تكلفة</span></div>
+    <div class="flow__step flow__step--on"><i>2</i><b>تيليجرام</b><span><span class="en">$0.01</span> لكل كود موصَّل. استرداد آلي لو مفشل</span></div>
+    <div class="flow__step"><i>3</i><b><span class="en">D7 SMS</span></b><span><span class="en">$0.37</span> · محاولة إعادة واحدة مسقوفة بعد ٩٠ ثانية</span></div>
+  </div>
+
+  <div class="tblwrap">
+    <table>
+      <thead><tr><th>السيناريو</th><th class="n">لكل تحقق ناجح</th><th class="n">٥ آلاف/شهر</th><th class="n">٥٠ ألف/شهر</th></tr></thead>
+      <tbody>
+        <tr><td>SMS بس</td><td class="n">$0.435</td><td class="n">$2,175</td><td class="n">$21,750</td></tr>
+        <tr><td>الشلال (٦٠٪ وصول تيليجرام)</td><td class="n"><b>$0.176</b></td><td class="n">$824</td><td class="n">$8,240</td></tr>
+        <tr style="background:var(--foam-2)"><td>الشلال + نداء ربط تيليجرام (٨٠٪)</td><td class="n"><b>$0.10</b></td><td class="n">$482</td><td class="n">$4,820</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout callout--ok">
+    <div class="callout__t">بس دي أرقام الحالة القصوى — وإحنا مش فيها</div>
+    <p>
+      الجدول ده بيفترض إننا بنتحقق من <strong>كل مستخدم</strong>.
+      إحنا مش بنعمل كده — <strong>بنتحقق عند نقل الجهاز بس</strong> (موبايل جديد، إعادة تثبيت)،
+      وده حدث نادر: تقدير مبدئي <strong>~٥٪ من المستخدمين شهرياً</strong>.
+    </p>
+    <p>
+      يعني التكلفة الفعلية <strong>جزء صغير من الأرقام دي</strong> —
+      وده بالظبط قيمة قرار "الجهاز هو الهوية":
+      <span class="hl">كل ما التحقق يبقى أغلى وأقل موثوقية، كل ما تقليل عدد مراته يبقى أثمن</span>.
+    </p>
+  </div>
+
+  <div class="callout callout--warn">
+    <div class="callout__t">فرض حامل واحد — لازم يتختبر يوم واحد</div>
+    <p>
+      <strong>دعم <span class="en">Telegram Gateway</span> لسوريا <span class="unver">غير مؤكَّد</span>.</strong>
+      تيليجرام مش ناشرة قايمة دول مستثناة، فمفيش نفي ولا إثبات.
+      لو طلع مش شغّال، التكلفة بتقفز <strong>٢.٥×</strong>.
+    </p>
+    <p>
+      ✅ <strong>الاختبار مجاني وبياخد دقايق</strong> (<span class="en">checkSendAbility</span> مالهوش تكلفة).
+      → أعلى أولوية تقنية في المشروع، قبل أي كود.
+    </p>
+  </div>
+
+  <h3>٢ — الاستضافة</h3>
+  <div class="callout callout--danger">
+    <div class="callout__t"><span class="en">Contabo</span> بتحظر سوريا بالنص — والبند التاني هو الخطر</div>
+    <p style="font-size:15px;background:#fff;padding:12px 14px;border-radius:8px;direction:ltr;text-align:left">
+      <em>"The Provider reserves the right not to conclude contracts with Customers from the following
+      countries: North Korea, Russia, <strong>Syria</strong>, Sudan, Iran, Cuba… The Customer undertakes
+      <strong>not to distribute the Provider's services to third parties from the above-mentioned
+      countries</strong>."</em>
+    </p>
+    <p>
+      البند الأول عن <strong>مين بيشتري</strong> — ده كنا هنعدّيه ككيان مصري.
+      البند التاني عن <strong>مين بنخدمه</strong> — <strong>وده اللي بيستبعدهم نهائياً</strong>.
+      الشرط ٥(٣) بيدّيهم حق الفسخ للسبب ده.
+    </p>
+    <p class="muted" style="font-size:14px">
+      المصدر: <span class="en">contabo.com/en/legal/terms-and-conditions/</span> — البند ٣(٥)، شروط ديسمبر ٢٠٢٥
+    </p>
+  </div>
+  <p>
+    <span class="en">Hetzner</span> عندها بند تصدير أمريكي <strong>غير مباشر</strong> بس (§١٩)،
+    و<span class="en">OVH</span> طلعت أفضل سعر/أداء مؤكَّد (<span class="en">b3-16 = $88.18/شهر</span>).
+    <strong>المنطقة: فرانكفورت</strong> — قبرص وإسطنبول أقرب جغرافياً لسوريا،
+    بس مفيش مزوّد من اللي فحصناهم بيخدمهم.
+  </p>
+
+  <h3>٣ — الخرائط: الستاك الهجين بيوفّر ٩٤٪</h3>
+  <div class="tblwrap">
+    <table>
+      <thead><tr><th>الستاك</th><th class="n">٥ آلاف طلب/شهر</th><th class="n">١٢٠ ألف طلب/شهر</th></tr></thead>
+      <tbody>
+        <tr><td>جوجل بالكامل (الساذج)</td><td class="n">$207.07</td><td class="n">$7,814.70</td></tr>
+        <tr style="background:var(--foam-2)"><td><strong>هجين (المختار)</strong></td><td class="n"><b>~$12</b></td><td class="n"><b>~$725</b></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    الفكرة: <strong>جوجل للبحث بالمعالم و<span class="en">autocomplete</span> بس</strong> —
+    لأن دي الحاجة الوحيدة اللي الاستضافة الذاتية متقدرش تعوّضها،
+    وهي <strong>بديل العنوان الفعلي</strong> في مدينة فيها ٩ أرقام منازل.
+    والباقي (توجيه، مصفوفة مسافات، بلاطات، ترميز عكسي) مستضاف ذاتياً على
+    <span class="en">Valhalla + Nominatim</span>.
+  </p>
+  <p>
+    استخراج سوريا من <span class="en">Geofabrik</span> حجمه <strong><span class="en">77 MB</span> بس</strong>،
+    فسيرفر <span class="en">16GB/8vCPU</span> بـ<span class="en">~$60/شهر</span> بيشغّل الستاك كله.
+    الاسترداد مقابل جوجل: <strong>٣-٤ أسابيع</strong> عند حجم ١٢٠ ألف طلب.
+  </p>
+
+  <div class="callout callout--warn">
+    <div class="callout__t">لغمين في تسعير جوجل لازم تعرفوهم</div>
+    <p>
+      <strong>١.</strong> رصيد الـ<span class="en">$200</span> الشهري المجاني
+      <strong>اتلغى في ١ مارس ٢٠٢٥</strong> واتبدل بحدود مجانية لكل
+      <span class="en">SKU</span> على حدة. تطبيق توصيل بيلمس ٨ <span class="en">SKUs</span> →
+      بياخد ٨ حصص منفصلة، فعند ٥ آلاف طلب بيقع <strong>شبه مجاني بالكامل</strong>.
+    </p>
+    <p>
+      <strong>٢.</strong> تحميل الخرايط في الـ<span class="en">SDK</span> المحمول
+      <strong>مجاني بلا حدود</strong> لو اتبدأ من غير <span class="en">Map ID</span> —
+      واستخدام <span class="en">Map ID</span> بينقلك بصمت لـ<span class="en">Dynamic Maps</span>
+      بـ<span class="en">$7/1000</span>. الفرق: <strong><span class="en">$742/شهر</span></strong> عند ١٢٠ ألف طلب.
+    </p>
+  </div>
+
+  <h3>٤ — باقي الاشتراكات</h3>
+  <div class="tblwrap">
+    <table>
+      <thead><tr><th>البند</th><th class="n">MVP</th><th class="n">نمو</th><th>ملاحظة</th></tr></thead>
+      <tbody>
+        <tr><td>استضافة (حوسبة + قاعدة بيانات + تخزين + نسخ)</td><td class="n">$93</td><td class="n">$648</td><td>فرانكفورت</td></tr>
+        <tr><td>خرايط (هجين)</td><td class="n">$12</td><td class="n">$725</td><td>+ <span class="en">$60</span> سيرفر الاستضافة الذاتية</td></tr>
+        <tr><td>تحقق الهوية</td><td class="n">~$40</td><td class="n">~$240</td><td>عند ٥٪ نقل جهاز شهرياً</td></tr>
+        <tr><td>توزيع <span class="en">APK</span> (<span class="en">Cloudflare R2</span>)</td><td class="n">$0</td><td class="n">$0</td><td><strong>خروج البيانات مجاني</strong> — ~<span class="en">26TB</span>/سنة بصفر تكلفة</td></tr>
+        <tr><td>إشعارات (<span class="en">FCM</span>) + <span class="en">Crashlytics</span></td><td class="n">$0</td><td class="n">$0</td><td>مجاني عند حجمنا</td></tr>
+        <tr><td>مراقبة أخطاء + تحليلات + إيميل + <span class="en">CI</span></td><td class="n">$42</td><td class="n">$105</td><td></td></tr>
+        <tr><td>حسابات النشر</td><td class="n">$25</td><td class="n">$25</td><td>جوجل بلاي مرة واحدة · آبل <span class="en">$99</span>/سنة لو اتفعّل</td></tr>
+        <tr style="background:var(--sand-tint);font-weight:700"><td><strong>الإجمالي الشهري</strong></td><td class="n"><b>~$247</b></td><td class="n"><b>~$1,778</b></td><td>بالدولار، شامل الاستضافة الذاتية</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="tbl__cap">
+    <strong>MVP</strong> = مدينة واحدة، ~٢٠ تاجر، بضع مئات طلب يومياً ·
+    <strong>نمو</strong> = ١٢٠ ألف طلب شهرياً (نفس حجم <span class="en">BeeOrder</span> الحالي).
+    الأرقام دي <strong>تكلفة بنية تحتية بس</strong> — مش شاملة رواتب ولا تسويق ولا عمولات دفع.
+  </p>
+</section>
