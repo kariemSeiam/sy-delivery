@@ -6,7 +6,7 @@ BASE = pathlib.Path(__file__).parent
 CH = BASE / "ch"
 
 # chapter files in document order
-ORDER = ["01-05.html", "03-04.html", "05.html", "16-cost.html"]
+ORDER = ["01-05.html", "03-04.html", "05.html", "06-demo.html", "16-cost.html"]
 
 # canonical TOC: (id, title, written?)
 TOC = [
@@ -15,7 +15,7 @@ TOC = [
     ("ch03", "الفكرة: إيه اللي بنبيعه فعلاً", True),
     ("ch04", "السوق: مش فاضي، ومتسابق", True),
     ("ch05", "الأرض السورية: اللي بيكسر الافتراضات", True),
-    ("ch06", "المستخدم ورحلته", False),
+    ("ch06", "الشاشات — تشريح بقراره", True),
     ("ch07", "الأركتكتشر: مضيف الأصداف", False),
     ("ch08", "العمود الفقري للتصنيف", False),
     ("ch09", "الأسطح: إيه اللي بيتبني", False),

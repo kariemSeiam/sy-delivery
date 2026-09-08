@@ -1,0 +1,257 @@
+<!-- ============ 06 DEMO SCREENS ============ -->
+<section class="ch" id="ch06">
+  <div class="ch__num">06</div>
+  <h2 class="ch__title">الشاشات — مش موك-اب، ده تشريح بقراره</h2>
+  <p class="ch__intro">
+    كل شاشة هنا <strong>مرسومة بالكود</strong> مش صورة، وكل عنصر فيها جنبه
+    <strong>القيد اللي فرضه</strong>. لو عنصر مالوش سبب مكتوب، يبقى مالوش سبب —
+    وبيتشال.
+  </p>
+
+  <h3>الشاشة الرئيسية — تلات أفكار محدش في السوق بيعملها</h3>
+
+  <div class="screens">
+    <div class="screen-item">
+      <div class="phone"><div class="phone__screen">
+        <div class="ap__top">
+          <span class="ap__ico"></span>
+          <span class="ap__loc">اللاذقية · الصليبة <span>▾</span></span>
+          <span class="ap__ico"></span>
+        </div>
+        <div class="ap__banner">
+          <i>ضمن نطاقك</i>
+          <b>مطعم الشرفة — خصم ٢٠٪</b>
+          <span>بيوصّل لمنطقتك · لحد ١١ مساءً</span>
+        </div>
+        <div class="ap__cats">
+          <span class="on">مطاعم</span><span>سوبرماركت</span><span>صيدلية</span><span>حلويات</span>
+        </div>
+        <div class="ap__filters">
+          <span>مفتوح دلوقتي</span><span>يقبل المحفظة</span><span>توصيلنا</span><span>خصومات</span>
+        </div>
+        <div class="ap__card">
+          <div class="ap__cover"><em>مفتوح</em></div>
+          <div class="ap__body">
+            <div class="ap__row"><b>مطعم الشرفة</b><span class="ap__rate">4.3 · 128</span></div>
+            <div class="ap__badges">
+              <span class="fee">🛵 ٥,٠٠٠ ل.س</span><span>الحد الأدنى ١٠ ألف</span><span>٣٠-٤٥ د</span>
+            </div>
+          </div>
+        </div>
+        <div class="ap__card">
+          <div class="ap__cover" style="background:linear-gradient(120deg,#B8C4A8,#93A47F)"><em>مقفول دلوقتي</em></div>
+          <div class="ap__body">
+            <div class="ap__row"><b>فروج الساحل</b><span class="ap__rate">4.6 · 302</span></div>
+            <div class="ap__badges">
+              <span class="fee">🛵 ٤,٠٠٠ ل.س</span><span>بيفتح ٤ العصر</span>
+            </div>
+          </div>
+        </div>
+        <div class="ap__tabs"><span class="on">الرئيسية</span><span>البحث</span><span>طلباتي</span><span>حسابي</span></div>
+      </div></div>
+      <div class="screen-item__cap">
+        <b>الرئيسية</b>
+        كل بلوك فيها <strong>استعلام</strong> على العمود الفقري للتصنيف، مش قايمة مكتوبة بالإيد.
+      </div>
+    </div>
+
+    <div>
+      <div class="annot">
+        <div><i>١</i><span><strong>شريحة المكان في القلب، مش في الإعدادات.</strong> كل حاجة تحتها بتعتمد عليها — أي متاجر تظهر، أي رسوم، أي بانرات. لو المكان غلط، الشاشة كلها غلط.</span></div>
+        <div><i>٢</i><span><strong>البانر مقيَّد بنطاق جغرافي</strong> ⭐ التاجر بيرسم نصف قطر حوالين متجره، والبانر <strong>مبيظهرش</strong> لحد برّه النطاق. إعلان لواحد مش هيقدر يطلب = ضجيج + إحباط + فلوس ضايعة على التاجر. محدش في السوق بيعمل ده.</span></div>
+        <div><i>٣</i><span><strong>الفئات مستخرجة، مش ثابتة.</strong> الفئة بتظهر لو فيه متاجر شغّالة تحتها <em>في نطاقك إنت</em>. فئة فاضية = فئة مخفية.</span></div>
+        <div><i>٤</i><span><strong>الفلاتر بالقدرة، مش بالفئة.</strong> «يقبل المحفظة» · «توصيلنا» · «مفتوح دلوقتي». دي حالة تشغيلية وبتيجي مجاناً من العمود الفقري.</span></div>
+        <div><i>٥</i><span><strong>رسوم التوصيل والحد الأدنى ظاهرين قبل الدخول</strong> — قيد <span class="en">C1</span>. ودي أهم نقطة في الشاشة كلها، السبب في الشاشة اللي بعدها.</span></div>
+        <div><i>٦</i><span><strong>التقييم برقم وعدد</strong> (<span class="en">4.3 · 128</span>) مش شارة نصّية — قيد <span class="en">C10</span>. و<strong>المقفول بيفضل ظاهر</strong> بسبب واضح، مايتشالش من القايمة.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout callout--danger">
+    <div class="callout__t">لحظة الحقيقة اتكسرت لنصين — وده أهم قرار تصميمي في المنتج</div>
+    <p>
+      <strong>عند المنافس:</strong> تبني سلة كاملة → توصل للشيك-أوت → تشوف رسوم توصيل
+      بتساوي سعر الأكل → <strong>إحباط + خروج + تقييم سلبي</strong>.
+      ودي حرفياً الشكوى المكتوبة في تقييمات <span class="en">BeeOrder</span>.
+    </p>
+    <p>
+      <strong>عندنا:</strong> الرسوم على كارت المتجر <em>قبل</em> الدخول.
+      فلما توصل للحساب النهائي، <span class="hl">مفيش رقم جديد</span>.
+      الحساب <strong>بيأكّد، مش بيفاجئ</strong>.
+    </p>
+  </div>
+
+  <h3>العنوان والحساب — الشاشتين اللي بيتقرر فيهم كل حاجة</h3>
+
+  <div class="screens">
+    <div class="screen-item">
+      <div class="phone"><div class="phone__screen">
+        <div class="ap__top"><span class="ap__ico"></span><span class="ap__loc">وين نوصّلك؟</span><span class="ap__ico"></span></div>
+        <div class="ap__map">
+          <div class="ap__pin"></div>
+          <div class="ap__pinlbl">اسحب الدبّوس لمكانك</div>
+        </div>
+        <div style="padding:9px 0 3px"></div>
+        <div class="ap__field req">
+          <label>أقرب معلَم ★ إجباري</label>
+          <b>جنب صيدلية الأمين، فوق فرن الشام</b>
+        </div>
+        <div class="ap__field">
+          <label>وصف بكلامك — المندوب هو اللي بيقراه</label>
+          <b>البناية الصفرا، الطابق ٣، الجرس التاني</b>
+        </div>
+        <div class="ap__field req">
+          <label>رقم بديل ★ إجباري</label>
+          <b style="direction:ltr;text-align:right">09xx xxx xxx</b>
+        </div>
+        <div class="ap__field">
+          <label>اسم العنوان</label>
+          <b>البيت</b>
+        </div>
+        <div class="ap__cta">تأكيد العنوان</div>
+      </div></div>
+      <div class="screen-item__cap">
+        <b>العنوان — أربع حقول لأن الشارع مش كفاية</b>
+        <span class="tag tag--clay">٩ أرقام منازل في المدينة كلها</span>
+      </div>
+    </div>
+
+    <div class="screen-item">
+      <div class="phone"><div class="phone__screen">
+        <div class="ap__top"><span class="ap__ico"></span><span class="ap__loc">الحساب النهائي</span><span class="ap__ico"></span></div>
+        <div style="padding:10px 0 4px"></div>
+        <div class="ap__bill">
+          <div class="ap__bl"><span>شاورما دجاج × ٢</span><span>18,000</span></div>
+          <div class="ap__bl"><span>بطاطا وسط</span><span>6,000</span></div>
+          <div class="ap__bl"><span>مشروبات × ٢</span><span>4,000</span></div>
+          <div class="ap__bl"><span>التوصيل <em style="font-style:normal;color:var(--muted);font-size:9px">— نفس اللي شفته</em></span><span>5,000</span></div>
+          <div class="ap__bl tot"><span>الإجمالي</span><span>33,000 ل.س</span></div>
+          <div class="ap__usd">≈ $270.49 · سعر الصرف 122.00</div>
+        </div>
+        <div class="ap__nochange">✓ مفيش أي رقم جديد ظهر في الشاشة دي</div>
+        <div class="ap__field" style="margin-top:10px">
+          <label>طريقة الدفع</label>
+          <b>نقداً عند الاستلام <span style="font-size:9px;background:var(--foam);color:var(--sea-deep);padding:2px 7px;border-radius:99px;margin-inline-start:4px">افتراضي</span></b>
+        </div>
+        <div class="ap__cta">أكّد الطلب</div>
+        <div style="text-align:center;font-size:9px;color:var(--muted);margin-top:8px">من غير تسجيل · الجهاز هو هويتك</div>
+      </div></div>
+      <div class="screen-item__cap">
+        <b>الحساب — التأكيد مش المفاجأة</b>
+        <span class="tag tag--ok">مفيش تسجيل لحد هنا</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="card card--sand">
+      <h4>ليه المعلَم والرقم البديل <strong>إجباريين</strong></h4>
+      <p>
+        قِسنا بيانات اللاذقية بنفسنا: <strong><span class="en">48,040</span> مبنى</strong>،
+        بس <strong><span class="en">184</span> شارع مسمّى بس</strong> من <span class="en">5,101</span> (٣.٦٪)،
+        و<strong><span class="en">9</span> أرقام منازل في المدينة كلها</strong>.
+      </p>
+      <p>
+        فالمعلَم <strong>مش حقل زيادة — هو العنوان الحقيقي</strong>.
+        والرقم البديل اعتراف بإن الكهرباء بتقطع والتليفون بيموت وسط التوصيلة.
+      </p>
+    </div>
+    <div class="card card--tint">
+      <h4>ليه الدولار <em>عرض</em> بس</h4>
+      <p>
+        كل مبلغ بيتخزّن <strong>بالليرة</strong> (توافقاً مع المادة ٥١)،
+        ومعاه <strong>لقطة سعر الصرف وقت الحركة</strong>.
+        الدولار بيتحسب للعرض بس.
+      </p>
+      <p>
+        كده لو الدولار اهتز، مفيش تسعير مزدوج متضارب —
+        والتاجر بيسعّر بعملة واحدة دايماً.
+      </p>
+    </div>
+  </div>
+
+  <h3>التتبّع — وهنا بنكسب أو نخسر الطلب التاني</h3>
+  <p>
+    الحالات الناجحة سهلة، وكل منافس بيعملها.
+    <strong>الفشل هو المنتج</strong> — والمرجع اللي فككناه كان عنده
+    <span class="en">٥</span> حالات <em>كلها ناجحة</em>، وصفر حالات فشل.
+  </p>
+
+  <div class="screens">
+    <div class="screen-item">
+      <div class="phone"><div class="phone__screen">
+        <div class="ap__top"><span class="ap__ico"></span><span class="ap__loc">طلبك في الطريق</span><span class="ap__ico"></span></div>
+        <div class="ap__courier">
+          <span class="ap__cav"></span>
+          <div><b>أحمد ح.</b><small>دراجة · لوحة ١٢٣٤٥</small></div>
+          <span class="ap__verified">✓ الصورة محدَّثة</span>
+        </div>
+        <div class="ap__track">
+          <div class="ap__tstep done"><i></i><div><b>المتجر أكّد</b><small>٦:٠٢ م</small></div></div>
+          <div class="ap__tstep done"><i></i><div><b>بيتجهّز</b><small>٦:٠٥ م</small></div></div>
+          <div class="ap__tstep now"><i></i><div><b>مع المندوب</b><small>٦:٢٤ م · على بعد ١.٢ كم</small></div></div>
+          <div class="ap__tstep"><i></i><div><b>التسليم</b><small>متوقّع ٦:٤٠ – ٦:٥٥ م</small></div></div>
+        </div>
+        <div style="margin:0 12px;background:var(--foam-2);border-radius:10px;padding:8px 10px;font-size:9.5px;color:var(--sea-deep);line-height:1.55">
+          <b style="font-size:10.5px;display:block;margin-bottom:2px">الوقت نطاق محسوب</b>
+          من المسافة الفعلية وضغط المتجر — مش رقم مكتوب بالإيد
+        </div>
+        <div class="ap__tabs"><span>الرئيسية</span><span>البحث</span><span class="on">طلباتي</span><span>حسابي</span></div>
+      </div></div>
+      <div class="screen-item__cap">
+        <b>الحالة الطبيعية</b>
+        صورة المندوب = المندوب اللي هيوصل فعلاً — قيد <span class="en">C3</span>.
+      </div>
+    </div>
+
+    <div class="screen-item">
+      <div class="phone"><div class="phone__screen">
+        <div class="ap__top"><span class="ap__ico"></span><span class="ap__loc">في حاجة حصلت</span><span class="ap__ico"></span></div>
+        <div class="ap__fail">
+          <b>صنف خلص من المتجر</b>
+          <span>«بطاطا وسط» مش متوفرة دلوقتي. المتجر بيقترح «بطاطا كبير» بنفس السعر.</span>
+          <div class="acts"><em class="pri">اقبل البديل</em><em>احذف الصنف</em></div>
+        </div>
+        <div class="ap__fail" style="background:#FDF6E9;border-color:#F0DDB8">
+          <b style="color:#8A5A12">المندوب هيتأخر ١٥ دقيقة</b>
+          <span style="color:#6E4A15">زحمة على الكورنيش. الوقت الجديد ٧:١٠ – ٧:٢٥ م.</span>
+          <div class="acts"><em style="color:#8A5A12;border-color:#F0DDB8">تمام</em><em style="color:#8A5A12;border-color:#F0DDB8">كلّمني</em></div>
+        </div>
+        <div class="ap__track">
+          <div class="ap__tstep done"><i></i><div><b>المتجر أكّد</b><small>٦:٠٢ م</small></div></div>
+          <div class="ap__tstep fail"><i></i><div><b>تعديل على الطلب</b><small>٦:١٤ م · بانتظار موافقتك</small></div></div>
+        </div>
+        <div class="ap__offline">⚡ إنت أوفلاين — الرد اتحفظ وهيتبعت أول ما النت يرجع</div>
+        <div class="ap__tabs"><span>الرئيسية</span><span>البحث</span><span class="on">طلباتي</span><span>حسابي</span></div>
+      </div></div>
+      <div class="screen-item__cap">
+        <b>الفشل — وده اللي بيميّزنا</b>
+        <span class="tag tag--clay">المرجع عنده صفر شاشات فشل</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <div class="callout__t">تلات قواعد في شاشة الفشل دي</div>
+    <p>
+      <strong>١ — البديل بيتعرض عليك، مش بيتاخد من ورا ظهرك.</strong>
+      المتجر مايقررش لوحده يغيّر طلبك.
+    </p>
+    <p>
+      <strong>٢ — التأخير إحنا اللي بنقوله، قبل ما تسأل.</strong>
+      قيد <span class="en">C2</span>: الطلب اللي وقف ولا صاحبه عارف ليه — بق.
+    </p>
+    <p>
+      <strong>٣ — الأوفلاين بيقول الحقيقة.</strong> التطبيق مابيدّعيش نجاح ماحصلش.
+      «اتحفظ وهيتبعت» ≠ «تم». في بلد <span class="en">٣٥.٨٪</span> نت، الفرق ده هو الثقة نفسها.
+    </p>
+  </div>
+
+  <div class="callout callout--sand">
+    <div class="callout__t">اختبار الرحلة كلها</div>
+    <p style="font-size:17.5px">
+      <strong>في أي نقطة يقدر المستخدم يتفاجئ برقم، أو بشخص، أو بتأخير مقالوش عنه؟</strong>
+    </p>
+    <p>كل نقطة زي دي = <strong>باج</strong>، حتى لو الكود شغّال صح.</p>
+  </div>
+</section>
