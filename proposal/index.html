@@ -17,6 +17,24 @@
 <div class="progress" aria-hidden="true"><i id="prog"></i></div>
 <div class="scrim" id="scrim" aria-hidden="true"></div>
 
+<!-- mobile: always-on "where am I" strip, fed live by scroll position -->
+<div class="topbar" id="topbar" aria-hidden="true">
+  <span class="topbar__act" id="tbAct"></span>
+  <span class="topbar__ch" id="tbCh"></span>
+</div>
+
+<!-- mobile: FAB opens a peek at the current section, not the full 20-chapter index -->
+<div class="peek" id="peek" role="dialog" aria-modal="false" aria-label="القسم الحالي">
+  <div class="peek__handle"></div>
+  <p class="peek__act" id="pkAct"></p>
+  <h3 class="peek__ch" id="pkCh"></h3>
+  <div class="peek__nav">
+    <button type="button" id="pkPrev" class="peek__navbtn" aria-label="القسم السابق">‹</button>
+    <button type="button" id="pkFull" class="peek__full">الفهرس الكامل</button>
+    <button type="button" id="pkNext" class="peek__navbtn" aria-label="القسم التالي">›</button>
+  </div>
+</div>
+
 <div class="shell">
 
   <!-- ============ SIDEBAR ============ -->
@@ -64,12 +82,26 @@
           إنتوا عندكم الفكرة. الوثيقة دي مش بتحاول تقنعكم بيها — بتقولكم إزاي تتبني،
           وبكام، وفي قد إيه، وإيه اللي هيكسرها لو حد كذب عليكم في رقم.
         </p>
-        <div class="cover__meta">
-          <div>المدينة الأولى<b>اللاذقية · <span class="en">606k</span> نسمة</b></div>
-          <div>المنفّذ<b>بوصلة — وكالة مصرية</b></div>
-          <div>الملكية<b>الكود ملك أصحاب الفكرة</b></div>
-          <div>تاريخ الإصدار<b class="en">2026-09-08</b></div>
+        <div class="cover__acts">
+          <a class="cover__act" href="#act1">
+            <span class="cover__act-num">I</span>
+            <b>السوق</b>
+            <span>مش فاضي، متسابق، وفيه ثغرة ثقة محدش قافلها لسه</span>
+          </a>
+          <a class="cover__act" href="#act2">
+            <span class="cover__act-num">II</span>
+            <b>الحل</b>
+            <span>مضيف أصداف بيتصمّم على الفشل، مش على العرض</span>
+          </a>
+          <a class="cover__act" href="#act3">
+            <span class="cover__act-num">III</span>
+            <b>الاتفاق</b>
+            <span>بوابات، مش شهور — كل مرحلة بحدث حقيقي</span>
+          </a>
         </div>
+        <p class="cover__fine">
+          اللاذقية · <span class="en">606k</span> نسمة · المنفّذ بوصلة · الكود ملك أصحاب الفكرة · <span class="en">2026-09-08</span>
+        </p>
       </header>
 
       <!-- CHAPTERS INJECTED HERE -->
@@ -79,8 +111,8 @@
   </main>
 </div>
 
-<button class="sidebtn" id="sidebtn" aria-label="فتح الفهرس" aria-expanded="false">
-  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+<button class="sidebtn" id="sidebtn" aria-label="القسم الحالي" aria-expanded="false">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3"/></svg>
 </button>
 
 <script>
@@ -95,54 +127,96 @@
   onScroll();
   window.addEventListener('scroll',onScroll,{passive:true});
 
-  // mobile drawer
   var side=document.getElementById('side'),btn=document.getElementById('sidebtn'),scrim=document.getElementById('scrim');
-  function toggle(open){
-    side.classList.toggle('is-open',open);
-    scrim.classList.toggle('is-on',open);
-    btn.setAttribute('aria-expanded',String(open));
-    btn.setAttribute('aria-label',open?'إغلاق الفهرس':'فتح الفهرس');
-    document.body.classList.toggle('no-scroll',open);
-    btn.innerHTML=open
-      ? '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>'
-      : '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>';
+  var peek=document.getElementById('peek');
+  var topbar=document.getElementById('topbar'),tbAct=document.getElementById('tbAct'),tbCh=document.getElementById('tbCh');
+  var pkAct=document.getElementById('pkAct'),pkCh=document.getElementById('pkCh');
+  var pkPrev=document.getElementById('pkPrev'),pkNext=document.getElementById('pkNext'),pkFull=document.getElementById('pkFull');
+
+  function syncScrim(){
+    scrim.classList.toggle('is-on', side.classList.contains('is-open')||peek.classList.contains('is-open'));
+    document.body.classList.toggle('no-scroll', side.classList.contains('is-open')||peek.classList.contains('is-open'));
   }
-  btn.addEventListener('click',function(){toggle(!side.classList.contains('is-open'));});
-  scrim.addEventListener('click',function(){toggle(false);});
+
+  // full index drawer
+  function toggleSide(open){
+    side.classList.toggle('is-open',open);
+    if(open) peek.classList.remove('is-open');
+    syncScrim();
+  }
+  // current-section peek sheet
+  function togglePeek(open){
+    peek.classList.toggle('is-open',open);
+    btn.setAttribute('aria-expanded',String(open));
+    if(open) side.classList.remove('is-open');
+    syncScrim();
+  }
+  btn.addEventListener('click',function(){togglePeek(!peek.classList.contains('is-open'));});
+  pkFull.addEventListener('click',function(){togglePeek(false);toggleSide(true);});
+  scrim.addEventListener('click',function(){toggleSide(false);togglePeek(false);});
   document.addEventListener('keydown',function(e){
-    if(e.key==='Escape'&&side.classList.contains('is-open'))toggle(false);
+    if(e.key==='Escape'){toggleSide(false);togglePeek(false);}
   });
-  // reset state if resized back to desktop
   window.addEventListener('resize',function(){
-    if(window.innerWidth>1000&&side.classList.contains('is-open'))toggle(false);
+    if(window.innerWidth>1000){toggleSide(false);togglePeek(false);}
   });
 
-  // active section in TOC
+  // ---- one waypoint list drives TOC highlight + topbar + peek + prev/next ----
   var links=[].slice.call(document.querySelectorAll('#toc a'));
   var map={};
-  links.forEach(function(a){
-    var el=document.querySelector(a.getAttribute('href'));
-    if(el) map[a.getAttribute('href').slice(1)]=a;
-  });
+  links.forEach(function(a){ map[a.getAttribute('href').slice(1)]=a; });
+  links.forEach(function(a){a.addEventListener('click',function(){if(window.innerWidth<=1000)toggleSide(false);});});
+
+  var waypoints=[].slice.call(document.querySelectorAll('.doc .ch, .doc .actbreak'));
+  var current=0;
+
+  function titleOf(el){
+    if(el.dataset.title) return el.dataset.title;
+    var t=el.querySelector('.ch__title');
+    return t?t.textContent.trim():'';
+  }
+  function renderCurrent(){
+    var el=waypoints[current]; if(!el) return;
+    var act=el.dataset.actLabel||'', num=el.dataset.actNum||'';
+    var eyebrow=(!act||el.dataset.act==='preface')?(act||'مقدّمة'):('الجزء '+num+' · '+act);
+    var title=titleOf(el);
+    tbAct.textContent=eyebrow; tbCh.textContent=title;
+    pkAct.textContent=eyebrow; pkCh.textContent=title;
+    pkPrev.disabled=current<=0;
+    pkNext.disabled=current>=waypoints.length-1;
+  }
+  function goTo(i){
+    if(i<0||i>=waypoints.length) return;
+    waypoints[i].scrollIntoView({block:'start',behavior:'smooth'});
+  }
+  pkPrev.addEventListener('click',function(){goTo(current-1);});
+  pkNext.addEventListener('click',function(){goTo(current+1);});
+  renderCurrent();
+
   var io=new IntersectionObserver(function(entries){
     entries.forEach(function(en){
-      if(en.isIntersecting){
-        links.forEach(function(l){l.classList.remove('is-on');});
-        var a=map[en.target.id];
-        if(a){
-          a.classList.add('is-on');
-          if(window.innerWidth>1000){
-            var r=a.getBoundingClientRect(), sr=side.getBoundingClientRect();
-            if(r.top<sr.top+60||r.bottom>sr.bottom-60) a.scrollIntoView({block:'center'});
-          }
+      if(!en.isIntersecting) return;
+      current=waypoints.indexOf(en.target);
+      topbar.classList.add('is-on');
+
+      links.forEach(function(l){l.classList.remove('is-on');});
+      var a=map[en.target.id];
+      if(a){
+        a.classList.add('is-on');
+        if(window.innerWidth>1000){
+          var r=a.getBoundingClientRect(), sr=side.getBoundingClientRect();
+          if(r.top<sr.top+60||r.bottom>sr.bottom-60) a.scrollIntoView({block:'center'});
         }
       }
+      var actId=en.target.dataset.act;
+      if(actId){
+        var det=document.querySelector('.toc-act[data-act="'+actId+'"]');
+        if(det && !det.open) det.open=true;
+      }
+      renderCurrent();
     });
   },{rootMargin:'-15% 0px -70% 0px'});
-  document.querySelectorAll('.ch').forEach(function(c){io.observe(c);});
-
-  // close drawer on nav click (mobile)
-  links.forEach(function(a){a.addEventListener('click',function(){if(window.innerWidth<=1000)toggle(false);});});
+  waypoints.forEach(function(c){io.observe(c);});
 })();
 </script>
 </body>

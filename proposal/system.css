@@ -103,6 +103,23 @@ td.n,th.n{text-align:right}
 .side nav a.is-on i{color:var(--sand)}
 .side__foot{margin-top:var(--s8);padding-top:var(--s5);border-top:1px solid rgba(255,255,255,.14);font-size:12.5px;color:rgba(255,255,255,.45);line-height:1.7}
 
+/* act accordion — closed by default so the whole 20-chapter spine doesn't
+   dump on first touch; the current act opens itself as you scroll into it */
+.toc-group{display:grid;gap:1px;margin-bottom:var(--s4)}
+.toc-act{margin-bottom:var(--s2)}
+.toc-act summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:var(--s3);
+  padding:var(--s3) var(--s3);border-radius:8px;font-family:var(--display);font-weight:800;
+  font-size:13.5px;letter-spacing:.02em;color:rgba(255,255,255,.6);
+  transition:background .15s,color .15s}
+.toc-act summary::-webkit-details-marker{display:none}
+.toc-act summary::after{content:"";width:7px;height:7px;margin-inline-start:auto;
+  border-inline-end:2px solid currentColor;border-block-end:2px solid currentColor;
+  transform:rotate(45deg);transition:transform .2s;opacity:.55}
+.toc-act[open] summary::after{transform:rotate(-135deg)}
+.toc-act summary:hover{background:rgba(255,255,255,.07);color:#fff}
+.toc-act__num{font-family:var(--mono);font-size:11px;color:var(--sand);opacity:.85}
+.toc-act__body{display:grid;gap:1px;padding-inline-start:var(--s4);margin-top:2px}
+
 .main{min-width:0}
 .doc{max-width:var(--measure);margin-inline:auto;padding:var(--s10) var(--gut) var(--s11)}
 
@@ -111,6 +128,38 @@ td.n,th.n{text-align:right}
   width:54px;height:54px;border-radius:50%;background:var(--sea-ink);color:#fff;
   box-shadow:0 10px 30px -8px rgba(0,0,0,.5);align-items:center;justify-content:center}
 .scrim{display:none;position:fixed;inset:0;background:rgba(14,34,40,.55);z-index:55;backdrop-filter:blur(2px)}
+
+/* mobile "where am I" strip — always know where you are as you scroll */
+.topbar{display:none;position:fixed;top:0;inset-inline:0;z-index:58;
+  align-items:center;gap:var(--s3);padding:12px var(--s5);
+  background:rgba(5,42,50,.94);backdrop-filter:blur(10px);color:#fff;
+  transform:translateY(-100%);transition:transform .22s ease;
+  border-bottom:1px solid rgba(255,255,255,.09)}
+.topbar.is-on{transform:translateY(0)}
+.topbar__act{font-family:var(--mono);font-size:11px;color:var(--sand);
+  letter-spacing:.06em;flex:none;white-space:nowrap}
+.topbar__ch{font-size:14px;font-weight:600;overflow:hidden;text-overflow:ellipsis;
+  white-space:nowrap;flex:1;min-width:0}
+
+/* FAB → peek sheet: tap for the current section, not the whole 20-chapter doc */
+.peek{display:none;position:fixed;inset-inline:0;bottom:0;z-index:59;background:var(--white);
+  border-radius:20px 20px 0 0;box-shadow:0 -18px 40px -14px rgba(0,0,0,.35);
+  padding:var(--s3) var(--s5) calc(var(--s6) + env(safe-area-inset-bottom));
+  transform:translateY(110%);transition:transform .26s cubic-bezier(.2,.8,.3,1)}
+.peek.is-open{transform:translateY(0)}
+.peek__handle{width:36px;height:4px;border-radius:99px;background:var(--line);margin:0 auto var(--s4)}
+.peek__act{font-family:var(--mono);font-size:12px;color:var(--sand-deep);
+  letter-spacing:.06em;margin:0 0 4px}
+.peek__ch{font-family:var(--display);font-weight:800;font-size:19px;margin:0 0 var(--s4);
+  color:var(--ink);line-height:1.35}
+.peek__nav{display:flex;align-items:center;gap:var(--s3)}
+.peek__navbtn{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--ink);
+  flex:none;background:var(--paper)}
+.peek__navbtn:disabled{opacity:.28}
+.peek__full{flex:1;height:42px;border-radius:var(--r-pill);background:var(--sea-ink);
+  color:#fff;font-size:14px;font-weight:700}
+
 @media (max-width:1000px){
   .shell{grid-template-columns:1fr}
   /* drawer sits on the inline-start edge (right, in RTL) and is pushed
@@ -121,9 +170,21 @@ td.n,th.n{text-align:right}
     visibility:hidden}
   .side.is-open{transform:translateX(0);visibility:visible}
   .sidebtn{display:flex}
+  .topbar{display:flex}
+  .peek{display:block}
   .scrim.is-on{display:block}
   .doc{padding-top:var(--s8)}
   body.no-scroll{overflow:hidden}
+
+  /* the hero is a first impression, not a screen the reader has to scroll
+     through — the top bar + peek sheet carry orientation from here on */
+  .cover{padding-block:var(--s7) var(--s8)}
+  .cover__lead{margin-bottom:var(--s6)}
+  .cover__acts{display:flex;overflow-x:auto;scroll-snap-type:x proximity;
+    margin-inline:calc(var(--gut) * -1);padding-inline:var(--gut);
+    -webkit-overflow-scrolling:touch}
+  .cover__act{flex:0 0 78%;scroll-snap-align:start}
+  .cover__act + .cover__act{margin-inline-start:var(--s3)}
 }
 
 /* scroll progress */
@@ -138,9 +199,42 @@ td.n,th.n{text-align:right}
 .cover__eyebrow::before{content:"";width:30px;height:2px;background:var(--sand-deep);border-radius:2px}
 .cover h1{margin-bottom:var(--s5)}
 .cover h1 em{font-style:normal;color:var(--sea)}
-.cover__lead{font-size:clamp(18px,2vw,22px);color:var(--ink-2);max-width:38em;margin-bottom:var(--s7)}
-.cover__meta{display:flex;flex-wrap:wrap;gap:var(--s3) var(--s7);padding-top:var(--s6);border-top:1px solid var(--line);font-size:14.5px;color:var(--muted)}
-.cover__meta b{display:block;color:var(--ink);font-weight:600;font-size:15.5px;margin-top:2px}
+.cover__lead{font-size:clamp(18px,2vw,22px);color:var(--ink-2);max-width:38em;margin-bottom:var(--s8)}
+
+/* the three-act teaser — first touch shows the shape, not the whole document */
+.cover__acts{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s4);margin-bottom:var(--s7)}
+.cover__act{display:flex;flex-direction:column;gap:6px;padding:var(--s5);
+  border:1px solid var(--line);border-radius:var(--r-ui);background:var(--white);color:var(--ink);
+  transition:border-color .15s,transform .15s,box-shadow .15s}
+.cover__act:hover{border-color:var(--sand-deep);transform:translateY(-2px);
+  box-shadow:0 10px 24px -12px rgba(14,34,40,.25);text-decoration:none}
+.cover__act-num{font-family:var(--mono);font-size:12px;color:var(--sand-deep);letter-spacing:.08em}
+.cover__act b{font-family:var(--display);font-size:18px;font-weight:800;color:var(--ink)}
+.cover__act span{font-size:13.5px;color:var(--muted);line-height:1.6}
+.cover__fine{font-size:13.5px;color:var(--muted);padding-top:var(--s6);border-top:1px solid var(--line)}
+@media (max-width:640px){.cover__acts{grid-template-columns:1fr}}
+
+/* ============================================================
+   ACT DIVIDERS — market / solution / deal punctuation between chapters
+   ============================================================ */
+.actbreak{margin-block:var(--s10) var(--s9);margin-inline:calc(var(--gut) * -1);
+  padding:var(--s11) var(--gut);border-radius:var(--r-card);text-align:center;color:#fff;
+  display:flex;flex-direction:column;align-items:center;gap:var(--s4)}
+.actbreak__eyebrow{font-family:var(--mono);font-size:13px;letter-spacing:.12em;opacity:.6;margin:0}
+.actbreak__tag{font-family:var(--display);font-weight:800;font-size:clamp(32px,5.4vw,54px);
+  line-height:1.15;margin:0;color:#fff}
+.actbreak__line{font-size:clamp(16px,1.8vw,19px);max-width:32em;opacity:.85;margin:0}
+.actbreak--market{background:linear-gradient(160deg,var(--sea-ink),var(--sea-deep))}
+.actbreak--market .actbreak__tag{color:var(--foam)}
+.actbreak--solution{background:linear-gradient(160deg,var(--sand-deep),#7A4F1E)}
+.actbreak--deal{background:linear-gradient(160deg,var(--ink),var(--sea-ink))}
+.actbreak--deal .actbreak__tag{color:var(--sand)}
+@media (max-width:640px){.actbreak{margin-inline:calc(var(--gut) * -1);border-radius:0}}
+@media print{
+  .actbreak{page-break-before:always;color:#000!important;background:none!important;
+    border:2px solid #000;margin-inline:0}
+  .actbreak__tag,.actbreak--market .actbreak__tag,.actbreak--deal .actbreak__tag{color:#000!important}
+}
 
 /* ============================================================
    CHAPTER
