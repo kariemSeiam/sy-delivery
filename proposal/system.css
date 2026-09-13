@@ -455,6 +455,24 @@ html[dir="rtl"] .tl__item:not(:last-child)::before{inset-inline-start:auto;inset
 .price__card--hi li::before{color:var(--sand)}
 
 /* ============================================================
+   CLOSING — the ask, not a footnote
+   ============================================================ */
+.close{margin-top:var(--s9);padding:var(--s9) var(--s7);border-radius:var(--r-card);
+  background:linear-gradient(160deg,var(--sea-ink),var(--sea-deep));color:#fff;text-align:center}
+.close__eyebrow{font-family:var(--mono);font-size:12.5px;letter-spacing:.14em;
+  color:var(--sand);margin:0 0 var(--s4)}
+.close__h{font-family:var(--display);font-weight:800;color:#fff;
+  font-size:clamp(28px,4.2vw,42px);line-height:1.2;margin:0 0 var(--s4)}
+.close__lead{font-size:clamp(16px,1.8vw,19px);color:rgba(255,255,255,.86);
+  max-width:30em;margin:0 auto var(--s5);line-height:1.8}
+.close__lead strong{color:#fff}
+.close__fine{font-size:13.5px;color:rgba(255,255,255,.5);margin:0;
+  padding-top:var(--s5);border-top:1px solid rgba(255,255,255,.14)}
+@media print{.close{background:none!important;color:#000!important;border:2px solid #000}
+  .close__h,.close__lead,.close__lead strong{color:#000!important}
+  .close__eyebrow,.close__fine{color:#333!important}}
+
+/* ============================================================
    SOURCE / CITATION
    ============================================================ */
 .src{font-size:12.5px;color:var(--muted);line-height:1.65;margin-top:var(--s3);padding-inline-start:var(--s4);border-inline-start:2px solid var(--line)}
@@ -476,7 +494,7 @@ html[dir="rtl"] .tl__item:not(:last-child)::before{inset-inline-start:auto;inset
    PRINT
    ============================================================ */
 @media print{
-  .side,.sidebtn,.scrim,.progress{display:none!important}
+  .side,.navbar,.scrim,.progress{display:none!important}
   .shell{grid-template-columns:1fr}
   body{background:#fff;font-size:11pt}
   .doc{max-width:none;padding:0}
