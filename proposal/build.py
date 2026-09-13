@@ -140,12 +140,10 @@ def build():
         links_html = "\n".join(links)
 
         nav_parts.append(
-            f'''<details class="toc-act" data-act="{act['id']}"{' open' if act['id']=='act1' else ''}>
-      <summary><span class="toc-act__num">{act['num']}</span><span>{act['label']}</span></summary>
-      <div class="toc-act__body">
+            f'''<div class="toc-act" data-act="{act['id']}">
+      <p class="toc-act__head"><span class="toc-act__num">{act['num']}</span><span>{act['label']}</span></p>
 {links_html}
-      </div>
-    </details>'''
+    </div>'''
         )
 
     body = "\n\n".join(body_parts)

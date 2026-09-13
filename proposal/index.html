@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>اللاذقية — من الفكرة للتشغيل | مقترح بوصلة</title>
-<meta name="description" content="مقترح بناء وتشغيل منصة توصيل هايبر-لوكال في اللاذقية، سوريا. من الفكرة للسوق للأركتكتشر للتعاقد.">
+<meta name="description" content="مقترح بناء وتشغيل منصة توصيل محلية في اللاذقية، سوريا — السوق، الحل، والاتفاق.">
 <meta name="theme-color" content="#052A32">
 <meta name="robots" content="noindex,nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,54 +15,35 @@
 <body>
 
 <div class="progress" aria-hidden="true"><i id="prog"></i></div>
+
+<!-- ============ MOBILE NAV — one surface: the bar IS the menu ============ -->
 <div class="scrim" id="scrim" aria-hidden="true"></div>
 
-<!-- mobile: always-on "where am I" strip, fed live by scroll position -->
-<div class="topbar" id="topbar" aria-hidden="true">
-  <span class="topbar__act" id="tbAct"></span>
-  <span class="topbar__ch" id="tbCh"></span>
-</div>
+<header class="navbar" id="navbar">
+  <button type="button" class="navbar__btn" id="navBtn" aria-expanded="false" aria-controls="navSheet">
+    <span class="navbar__where">
+      <span class="navbar__act" id="tbAct"></span>
+      <span class="navbar__ch" id="tbCh"></span>
+    </span>
+    <span class="navbar__caret" aria-hidden="true"></span>
+  </button>
 
-<!-- mobile: FAB opens a peek at the current section, not the full 20-chapter index -->
-<div class="peek" id="peek" role="dialog" aria-modal="false" aria-label="القسم الحالي">
-  <div class="peek__handle"></div>
-  <p class="peek__act" id="pkAct"></p>
-  <h3 class="peek__ch" id="pkCh"></h3>
-  <div class="peek__nav">
-    <button type="button" id="pkPrev" class="peek__navbtn" aria-label="القسم السابق">‹</button>
-    <button type="button" id="pkFull" class="peek__full">الفهرس الكامل</button>
-    <button type="button" id="pkNext" class="peek__navbtn" aria-label="القسم التالي">›</button>
+  <div class="navsheet" id="navSheet" aria-label="فهرس المستند">
+    <div class="navsheet__inner" id="navSheetNav"></div>
+    <div class="navsheet__steps">
+      <button type="button" id="pkPrev" class="navsheet__step">‹ السابق</button>
+      <button type="button" id="pkNext" class="navsheet__step">التالي ›</button>
+    </div>
   </div>
-</div>
+</header>
 
 <div class="shell">
 
-  <!-- ============ SIDEBAR ============ -->
+  <!-- ============ SIDEBAR (desktop) ============ -->
   <aside class="side" id="side">
     <div class="side__brand">اللاذقية<br>من الفكرة للتشغيل</div>
     <p class="side__sub">مقترح بناء وتشغيل · بوصلة · سبتمبر ٢٠٢٦</p>
-    <nav id="toc" aria-label="فهرس المستند">
-      <a href="#ch01"><i>01</i><span>الملخّص التنفيذي</span></a>
-      <a href="#ch02"><i>02</i><span>مين إحنا، وإيه اللي بنيناه</span></a>
-      <a href="#ch03"><i>03</i><span>الفكرة: إيه اللي بنبيعه فعلاً</span></a>
-      <a href="#ch04"><i>04</i><span>السوق: مش فاضي، ومتسابق</span></a>
-      <a href="#ch05"><i>05</i><span>الأرض السورية: اللي بيكسر الافتراضات</span></a>
-      <a href="#ch06"><i>06</i><span>المستخدم ورحلته</span></a>
-      <a href="#ch07"><i>07</i><span>الأركتكتشر: مضيف الأصداف</span></a>
-      <a href="#ch08"><i>08</i><span>العمود الفقري للتصنيف</span></a>
-      <a href="#ch09"><i>09</i><span>الأسطح: إيه اللي بيتبني</span></a>
-      <a href="#ch10"><i>10</i><span>الفشل هو المنتج</span></a>
-      <a href="#ch11"><i>11</i><span>الفلوس: الليدجر والعملة</span></a>
-      <a href="#ch12"><i>12</i><span>التقنية والأمان</span></a>
-      <a href="#ch13"><i>13</i><span>التوزيع: إزاي التطبيق يوصل</span></a>
-      <a href="#ch14"><i>14</i><span>الإطلاق: أول ٢٠ تاجر</span></a>
-      <a href="#ch15"><i>15</i><span>المراحل والبوابات</span></a>
-      <a href="#ch16"><i>16</i><span>التكلفة التشغيلية</span></a>
-      <a href="#ch17"><i>17</i><span>القانون والكيان</span></a>
-      <a href="#ch18"><i>18</i><span>المخاطر بصراحة</span></a>
-      <a href="#ch19"><i>19</i><span>التعاقد</span></a>
-      <a href="#ch20"><i>20</i><span>الملاحق والمصادر</span></a>
-    </nav>
+    <nav id="toc" aria-label="فهرس المستند"></nav>
     <div class="side__foot">
       وثيقة سرّية · مُعدّة لأصحاب الفكرة<br>
       كل رقم فيها له مصدر ومؤرَّخ<br>
@@ -77,26 +58,32 @@
       <!-- ============ COVER ============ -->
       <header class="cover">
         <p class="cover__eyebrow">مقترح بناء وتشغيل · سرّي</p>
-        <h1>اللاذقية.<br>من الفكرة، للأركتكتشر، <em>للتشغيل</em>.</h1>
+        <h1>اللاذقية.<br>من الفكرة <em>للتشغيل</em>.</h1>
         <p class="cover__lead">
-          إنتوا عندكم الفكرة. الوثيقة دي مش بتحاول تقنعكم بيها — بتقولكم إزاي تتبني،
-          وبكام، وفي قد إيه، وإيه اللي هيكسرها لو حد كذب عليكم في رقم.
+          إنتوا عندكم الفكرة. الوثيقة دي مش بتحاول تقنعكم بيها —
+          بتقولكم <strong>إزاي تتبني، وبكام، وفي قد إيه، وإيه اللي ممكن يكسرها</strong>.
         </p>
+        <div class="cover__meta">
+          <span><b>٧</b> فصول</span>
+          <span><b>٦٤</b> قرار موثَّق</span>
+          <span><b>١٧+</b> منافس مفحوص</span>
+          <span><b>٢٥</b> دقيقة قراءة</span>
+        </div>
         <div class="cover__acts">
           <a class="cover__act" href="#act1">
             <span class="cover__act-num">I</span>
             <b>السوق</b>
-            <span>مش فاضي، متسابق، وفيه ثغرة ثقة محدش قافلها لسه</span>
+            <span>مش فاضي ومتسابق — وفيه ثغرة ثقة محدش قافلها لسه</span>
           </a>
           <a class="cover__act" href="#act2">
             <span class="cover__act-num">II</span>
             <b>الحل</b>
-            <span>مضيف أصداف بيتصمّم على الفشل، مش على العرض</span>
+            <span>أساس واحد بيلبس وشوش مختلفة، ومتصمّم على الفشل</span>
           </a>
           <a class="cover__act" href="#act3">
             <span class="cover__act-num">III</span>
             <b>الاتفاق</b>
-            <span>بوابات، مش شهور — كل مرحلة بحدث حقيقي</span>
+            <span>سعر واحد، دفعتين — والأكبر بعد ما تشوفوه شغّال</span>
           </a>
         </div>
         <p class="cover__fine">
@@ -111,13 +98,8 @@
   </main>
 </div>
 
-<button class="sidebtn" id="sidebtn" aria-label="القسم الحالي" aria-expanded="false">
-  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3"/></svg>
-</button>
-
 <script>
 (function(){
-  // scroll progress
   var prog=document.getElementById('prog');
   function onScroll(){
     var h=document.documentElement;
@@ -127,45 +109,36 @@
   onScroll();
   window.addEventListener('scroll',onScroll,{passive:true});
 
-  var side=document.getElementById('side'),btn=document.getElementById('sidebtn'),scrim=document.getElementById('scrim');
-  var peek=document.getElementById('peek');
-  var topbar=document.getElementById('topbar'),tbAct=document.getElementById('tbAct'),tbCh=document.getElementById('tbCh');
-  var pkAct=document.getElementById('pkAct'),pkCh=document.getElementById('pkCh');
-  var pkPrev=document.getElementById('pkPrev'),pkNext=document.getElementById('pkNext'),pkFull=document.getElementById('pkFull');
+  var toc=document.getElementById('toc');
+  var sheetNav=document.getElementById('navSheetNav');
+  var navbar=document.getElementById('navbar');
+  var navBtn=document.getElementById('navBtn');
+  var sheet=document.getElementById('navSheet');
+  var scrim=document.getElementById('scrim');
+  var tbAct=document.getElementById('tbAct'),tbCh=document.getElementById('tbCh');
+  var pkPrev=document.getElementById('pkPrev'),pkNext=document.getElementById('pkNext');
 
-  function syncScrim(){
-    scrim.classList.toggle('is-on', side.classList.contains('is-open')||peek.classList.contains('is-open'));
-    document.body.classList.toggle('no-scroll', side.classList.contains('is-open')||peek.classList.contains('is-open'));
-  }
+  // the mobile sheet reuses the exact same index markup as the sidebar
+  sheetNav.innerHTML=toc.innerHTML;
 
-  // full index drawer
-  function toggleSide(open){
-    side.classList.toggle('is-open',open);
-    if(open) peek.classList.remove('is-open');
-    syncScrim();
+  function openNav(open){
+    navbar.classList.toggle('is-open',open);
+    navBtn.setAttribute('aria-expanded',String(open));
+    scrim.classList.toggle('is-on',open);
+    document.body.classList.toggle('no-scroll',open);
   }
-  // current-section peek sheet
-  function togglePeek(open){
-    peek.classList.toggle('is-open',open);
-    btn.setAttribute('aria-expanded',String(open));
-    if(open) side.classList.remove('is-open');
-    syncScrim();
-  }
-  btn.addEventListener('click',function(){togglePeek(!peek.classList.contains('is-open'));});
-  pkFull.addEventListener('click',function(){togglePeek(false);toggleSide(true);});
-  scrim.addEventListener('click',function(){toggleSide(false);togglePeek(false);});
-  document.addEventListener('keydown',function(e){
-    if(e.key==='Escape'){toggleSide(false);togglePeek(false);}
-  });
-  window.addEventListener('resize',function(){
-    if(window.innerWidth>1000){toggleSide(false);togglePeek(false);}
-  });
+  navBtn.addEventListener('click',function(){openNav(!navbar.classList.contains('is-open'));});
+  scrim.addEventListener('click',function(){openNav(false);});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')openNav(false);});
+  window.addEventListener('resize',function(){if(window.innerWidth>1000)openNav(false);});
 
-  // ---- one waypoint list drives TOC highlight + topbar + peek + prev/next ----
-  var links=[].slice.call(document.querySelectorAll('#toc a'));
+  var links=[].slice.call(document.querySelectorAll('#toc a, #navSheetNav a'));
   var map={};
-  links.forEach(function(a){ map[a.getAttribute('href').slice(1)]=a; });
-  links.forEach(function(a){a.addEventListener('click',function(){if(window.innerWidth<=1000)toggleSide(false);});});
+  links.forEach(function(a){
+    var id=a.getAttribute('href').slice(1);
+    (map[id]=map[id]||[]).push(a);
+    a.addEventListener('click',function(){openNav(false);});
+  });
 
   var waypoints=[].slice.call(document.querySelectorAll('.doc .ch, .doc .actbreak'));
   var current=0;
@@ -178,15 +151,14 @@
   function renderCurrent(){
     var el=waypoints[current]; if(!el) return;
     var act=el.dataset.actLabel||'', num=el.dataset.actNum||'';
-    var eyebrow=(!act||el.dataset.act==='preface')?(act||'مقدّمة'):('الجزء '+num+' · '+act);
-    var title=titleOf(el);
-    tbAct.textContent=eyebrow; tbCh.textContent=title;
-    pkAct.textContent=eyebrow; pkCh.textContent=title;
+    tbAct.textContent=(!act||el.dataset.act==='preface')?(act||'مقدّمة'):('الجزء '+num+' · '+act);
+    tbCh.textContent=titleOf(el);
     pkPrev.disabled=current<=0;
     pkNext.disabled=current>=waypoints.length-1;
   }
   function goTo(i){
     if(i<0||i>=waypoints.length) return;
+    openNav(false);
     waypoints[i].scrollIntoView({block:'start',behavior:'smooth'});
   }
   pkPrev.addEventListener('click',function(){goTo(current-1);});
@@ -197,25 +169,20 @@
     entries.forEach(function(en){
       if(!en.isIntersecting) return;
       current=waypoints.indexOf(en.target);
-      topbar.classList.add('is-on');
-
+      navbar.classList.add('is-on');
       links.forEach(function(l){l.classList.remove('is-on');});
-      var a=map[en.target.id];
-      if(a){
+      (map[en.target.id]||[]).forEach(function(a){
         a.classList.add('is-on');
         if(window.innerWidth>1000){
+          var side=document.getElementById('side');
+          if(!side.contains(a)) return;
           var r=a.getBoundingClientRect(), sr=side.getBoundingClientRect();
           if(r.top<sr.top+60||r.bottom>sr.bottom-60) a.scrollIntoView({block:'center'});
         }
-      }
-      var actId=en.target.dataset.act;
-      if(actId){
-        var det=document.querySelector('.toc-act[data-act="'+actId+'"]');
-        if(det && !det.open) det.open=true;
-      }
+      });
       renderCurrent();
     });
-  },{rootMargin:'-15% 0px -70% 0px'});
+  },{rootMargin:'-20% 0px -68% 0px'});
   waypoints.forEach(function(c){io.observe(c);});
 })();
 </script>
