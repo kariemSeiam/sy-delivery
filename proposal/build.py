@@ -66,7 +66,7 @@ ACTS = [
             ("ch16", "16-cost.html", "التكلفة التشغيلية", True),
             ("ch17", "17.html", "القانون والكيان", True),
             ("ch18", "18.html", "المخاطر بصراحة", True),
-            ("ch19", None, "التعاقد", False),
+            ("ch19", "19.html", "التعاقد", True),
             ("ch20", "20.html", "الملاحق والمصادر", True),
         ],
     },
@@ -170,19 +170,6 @@ def build():
         f'<nav id="toc" aria-label="فهرس المستند">\n    {nav_html}\n    </nav>',
         shell,
         flags=re.S,
-    )
-
-    # style for not-yet-written entries + accordion groups
-    shell = shell.replace(
-        "</style>",
-        """
-.side nav .soon{display:grid;grid-template-columns:26px 1fr;gap:var(--s3);
-  align-items:baseline;padding:var(--s2) var(--s3);font-size:14.5px;
-  line-height:1.5;color:rgba(255,255,255,.3);cursor:default}
-.side nav .soon i{font-style:normal;font-family:var(--mono);font-size:11.5px;
-  color:rgba(255,255,255,.18)}
-.side nav .soon span::after{content:" ·";opacity:.5}
-</style>""",
     )
 
     shell = shell.replace("<!--CHAPTERS-->", body)
