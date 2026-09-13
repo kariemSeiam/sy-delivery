@@ -162,6 +162,9 @@ def build():
     out = BASE / "dist" / "index.html"
     out.parent.mkdir(exist_ok=True)
     out.write_text(shell, encoding="utf-8")
+
+    # custom domain for GitHub Pages — must ship inside the artifact
+    (out.parent / "CNAME").write_text("syria.kariem.dev\n", encoding="utf-8")
     print(f"built {out}  ({out.stat().st_size:,} bytes)")
     print(f"chapters: {written_n}/{total_n} written · 3 acts + preface")
     return out
