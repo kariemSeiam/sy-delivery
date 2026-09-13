@@ -18,8 +18,7 @@ ACTS = [
         "num": "٠",
         "label": "مقدّمة",
         "chapters": [
-            ("ch01", "01-02.html", "الملخّص التنفيذي", True),
-            ("ch02", None, "مين إحنا، وإيه اللي بنيناه", True),
+            ("ch01", "01.html", "الملخّص التنفيذي", True),
         ],
     },
     {
@@ -30,9 +29,8 @@ ACTS = [
         "line": "مش فاضي، ومتسابق — بس فيه ثغرة ثقة محدش قافلها لسه.",
         "mood": "market",
         "chapters": [
-            ("ch03", "03-04.html", "الفكرة: إيه اللي بنبيعه فعلاً", True),
-            ("ch04", None, "السوق: مش فاضي، ومتسابق", True),
-            ("ch05", "05.html", "الأرض السورية: اللي بيكسر الافتراضات", True),
+            ("ch02", "02.html", "السوق: مش فاضي، ومتسابق", True),
+            ("ch03", "03.html", "الأرض السورية: اللي بيكسر الافتراضات", True),
         ],
     },
     {
@@ -43,15 +41,8 @@ ACTS = [
         "line": "مش تطبيق. مضيف أصداف بيتصمّم على الفشل، مش على العرض.",
         "mood": "solution",
         "chapters": [
-            ("ch06", "06-demo.html", "الشاشات — تشريح بقراره", True),
-            ("ch07", "07-08.html", "الأركتكتشر: مضيف الأصداف", True),
-            ("ch08", None, "العمود الفقري للتصنيف", True),
-            ("ch09", "09.html", "الأسطح: إيه اللي بيتبني", True),
-            ("ch10", "10.html", "الفشل هو المنتج", True),
-            ("ch11", "11.html", "الهوية والدخول", True),
-            ("ch12", "12.html", "الفلوس: الليدجر والعملة", True),
-            ("ch13", "13.html", "التوزيع: إزاي التطبيق يوصل", True),
-            ("ch14", "14.html", "الإطلاق: أول ٢٠ تاجر", True),
+            ("ch04", "04.html", "الشاشات — تشريح بقراره", True),
+            ("ch05", "05.html", "الأركتكتشر: مضيف الأصداف", True),
         ],
     },
     {
@@ -62,12 +53,8 @@ ACTS = [
         "line": "مش شهري. بوابات — كل مرحلة بيفتحها حدث حقيقي، مش تاريخ.",
         "mood": "deal",
         "chapters": [
-            ("ch15", "15.html", "المراحل والبوابات", True),
-            ("ch16", "16-cost.html", "التكلفة التشغيلية", True),
-            ("ch17", "17.html", "القانون والكيان", True),
-            ("ch18", "18.html", "المخاطر بصراحة", True),
-            ("ch19", "19.html", "التعاقد", True),
-            ("ch20", "20.html", "الملاحق والمصادر", True),
+            ("ch06", "06.html", "الإطلاق والمراحل والمخاطر", True),
+            ("ch07", "07.html", "التعاقد", True),
         ],
     },
 ]
@@ -93,9 +80,8 @@ def nav_link(cid, title, act_id, written):
 
 def read_chapter_file(fname, act):
     """Read a chapter file and tag every <section id="chNN"> inside it with
-    the act it belongs to — a single combined file (e.g. 03-04.html) only
-    ever holds chapters from one act, so one tag pass covers all of them.
-    Used by the mobile top bar / peek sheet to know "where am I" live."""
+    the act it belongs to — used by the mobile top bar / peek sheet to know
+    "where am I" live."""
     content = (CH / fname).read_text(encoding="utf-8").strip()
     return re.sub(
         r'id="(ch\d+)"',
