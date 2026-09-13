@@ -345,6 +345,10 @@ td small{display:block;font-size:12.5px;color:var(--muted);line-height:1.5;margi
 .flow__step b{display:block;font-size:15px;font-weight:700;margin-bottom:var(--s1);color:var(--ink)}
 .flow__step span{font-size:13px;color:var(--muted);line-height:1.55;display:block}
 .flow__step i{position:absolute;top:var(--s3);inset-inline-end:var(--s3);font-family:var(--mono);font-size:11px;color:var(--line);font-style:normal}
+.flow__step i.en{position:static;display:block;font-size:15px;font-weight:700;
+  color:var(--sand-deep);letter-spacing:-.01em;margin-bottom:var(--s2);
+  direction:ltr;unicode-bidi:isolate}
+.flow__step--on i.en{color:var(--sand)}
 .flow__step--on{background:var(--sea-ink);border-color:var(--sea-ink)}
 .flow__step--on b{color:#fff}
 .flow__step--on span{color:rgba(255,255,255,.7)}
