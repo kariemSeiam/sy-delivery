@@ -1,7 +1,7 @@
 # 0011 — أشكال الكاتالوج الأربعة: جدول واحد، لا أربعة
 
 > **الحالة:** مسودة قوية · **يحلّ:** D3 — **"الفخ المعماري رقم واحد"** المكرَّر ٣ مرات في المخ من غير ما يتكتب
-> **الأدلة:** [[../teardown/sonic-mart-eg]] (بالوزن، بدون كاتالوج) + [[../teardown/talabatey-iq]] (متغيّرات، تعدّد بائعين)
+> **الأدلة:** [sonic-mart-eg.md](../teardown/sonic-mart-eg.md) (بالوزن، بدون كاتالوج) + [talabatey-iq.md](../teardown/talabatey-iq.md) (متغيّرات، تعدّد بائعين)
 
 ---
 
@@ -22,7 +22,7 @@
 
 ## ٢. الحل: جدول واحد بعمق متغيّر (Polymorphic Item)
 
-```
+```text
 Item {
   id, merchant_id, shell_id            ← أي صدفة بيتبع (0004)
   name, description, images
@@ -34,7 +34,7 @@ Item {
   variants: [{name, options[]}]   ← لون/مقاس، أي شكل يحتاجها
   requires_quote: boolean   ← بلا كاتالوج: true → لا سعر معروض، ينتقل لمسار عرض سعر
   
-  spine_dimensions: {...}   ← [[0008-category-spine]] — مكان، لون، قدرة، وقت، ثقة
+  spine_dimensions: {...}   ← [0008-category-spine.md](0008-category-spine.md) — مكان، لون، قدرة، وقت، ثقة
 }
 
 ItemOffer {                 ← تعدّد البائعين (متوفر لدى)
@@ -47,12 +47,14 @@ ItemOffer {                 ← تعدّد البائعين (متوفر لدى)
 ## ٣. الأثر على السلة والليدجر
 
 كل سطر سلة بيحمل `catalog_shape` وقت الإضافة. عند الحساب:
-- منيو/SKU: `price × quantity`
-- بالوزن: `unit_price × actual_weight` — الوزن الفعلي **يُقفل عند التحضير**، مش عند الطلب (نفس منطق [[0002-order-lifecycle]] §٤)
-- بلا كاتالوج: `estimated_price` وقت الطلب → `final_price` بعد الشراء، بسقف انحراف مسموح (±١٥٪ من [[0002-order-lifecycle]] §٣) قبل ما يحتاج موافقة
 
-كل تغيير سعر بعد الطلب = حركة ليدجر جديدة، مش تعديل حقل ([[../constraints]] C7).
+- منيو/SKU: `price × quantity`
+- بالوزن: `unit_price × actual_weight` — الوزن الفعلي **يُقفل عند التحضير**، مش عند الطلب (نفس منطق [0002-order-lifecycle.md](0002-order-lifecycle.md) §٤)
+- بلا كاتالوج: `estimated_price` وقت الطلب → `final_price` بعد الشراء، بسقف انحراف مسموح (±١٥٪ من [0002-order-lifecycle.md](0002-order-lifecycle.md) §٣) قبل ما يحتاج موافقة
+
+كل تغيير سعر بعد الطلب = حركة ليدجر جديدة، مش تعديل حقل ([constraints.md](../constraints.md) C7).
 
 ## المفتوح
+
 - عمق `spine_dimensions`: يتخزّن كـ JSON مرن ولا أعمدة معيارية لكل بُعد؟ (JSON أسرع للتطوير، أعمدة أسرع للاستعلام — قرار D5-مرتبط)
 - حد أقصى لعدد المتغيّرات لكل صنف قبل ما تحتاج جدول منفصل؟

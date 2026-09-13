@@ -2,7 +2,7 @@
 
 # 🧭 Latakia Super-App — Strategy Brain
 
-### A shell-host architecture for a hyperlocal delivery super-app in Latakia, Syria — built against 8 competitors' documented failures, not a blank page
+A shell-host architecture for a hyperlocal delivery super-app in Latakia, Syria — built against 8 competitors' documented failures, not a blank page.
 
 ![Status](https://img.shields.io/badge/status-strategy%20phase-1f6feb)
 ![License](https://img.shields.io/badge/license-proprietary-red)
@@ -23,7 +23,7 @@ This is not the product. It's the brain that makes the product buildable without
 developer, an AI agent, or us in two months — having to re-derive the reasoning from scratch.
 
 Executed by **Bosla** · started **2026-08-31** · client name and the folder name (`sy-delivery`) are
-placeholders until the brand decision locks (`REGISTER.md` → E1) — deliberately deferred, not an
+placeholders until the brand decision locks ([REGISTER.md](brain/REGISTER.md) → E1) — deliberately deferred, not an
 oversight. Naming it now, before positioning is known, would be a name chosen with incomplete
 information.
 
@@ -31,6 +31,7 @@ information.
 
 ## 📄 The deliverable
 
+<!-- markdownlint-disable-next-line MD044 -->
 **Live: [kariemseiam.github.io/sy-delivery](https://kariemseiam.github.io/sy-delivery/)** — the actual
 document that goes to the owners. Not a slide deck about the opportunity; a build-and-operate contract
 with sourced numbers, a payment schedule tied to real-world gates instead of dates, and every unverified
@@ -81,19 +82,16 @@ ledger layer, wearing a different product on top depending on city, vertical, an
 Proven live, not theorized: Talabatey Iraq ships exactly this pattern across 3 countries
 ([teardown](brain/teardown/talabatey-iq.md)).
 
-```
-                         ┌───────────────────────────┐
-                         │            HOST              │
-                         │  identity · session · geo     │
-                         │  address · cart · payment       │
-                         │            · ledger               │
-                         └──────────────┬─────────────────┘
-                                        │ loads a shell by: city + vertical + merchant config
-              ┌─────────────────────────┼─────────────────────────┐
-              ▼                         ▼                         ▼
-      DELIVERY SHELL              MARKETPLACE SHELL           ERRAND SHELL ("hatly")
-      restaurants / meals          SKU · weight · stock         no catalog at all
-      3 tabs, instant              stock filters, multi-cart     free text → quote → fulfil
+```mermaid
+flowchart TB
+    HOST["<b>HOST</b><br/>identity · session · geo<br/>address · cart · payment · ledger"]
+    HOST -->|"loads a shell by: city + vertical + merchant config"| DELIVERY
+    HOST --> MARKETPLACE
+    HOST --> ERRAND
+
+    DELIVERY["<b>DELIVERY SHELL</b><br/>restaurants / meals<br/>3 tabs, instant"]
+    MARKETPLACE["<b>MARKETPLACE SHELL</b><br/>SKU · weight · stock<br/>stock filters, multi-cart"]
+    ERRAND["<b>ERRAND SHELL</b> ('hatly')<br/>no catalog at all<br/>free text → quote → fulfil"]
 ```
 
 A 4th shell (fashion/electronics commerce) was in the original model — **cancelled 2026-09-02**,
@@ -246,7 +244,7 @@ Open an issue or say so directly — this line exists so that claim is checkable
 
 ## 📁 Repo structure
 
-```
+```text
 brain/
   INDEX.md            ← entry point
   REGISTER.md          ← 65-decision register + lock log
@@ -273,6 +271,6 @@ pitch/
 <div align="center">
 
 **Proprietary and confidential.** Strategy and market research prepared by **Bosla** — not licensed for
-reproduction or use outside its intended engagement. See [`LICENSE`](LICENSE).
+reproduction or use outside its intended engagement. See [LICENSE](LICENSE).
 
 </div>

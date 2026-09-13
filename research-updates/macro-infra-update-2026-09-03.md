@@ -66,16 +66,16 @@ Research window: findings current as of September 3, 2026. Each section states w
 | 6 | LEAP 2026 Syria pavilion | Confirmed — first-time Syria pavilion at LEAP Riyadh (Aug 31-Sep 3), MoCIT-led, 7 startups, Silk Link telecom investment referenced; no concrete new deliverables/regulation announced |
 
 ## Sources
-- https://tradingeconomics.com/syria/currency (accessed Sept 3, 2026)
-- https://www.exchange-rates.org/exchange-rate-history/usd-syp-2026
-- https://midforex.com/forex/syp-to-usd-forecast
-- https://unblocksyria.com/en/services/google-play-console
-- https://www.amnesty.org/en/latest/news/2026/07/syria-suspend-use-of-assad-era-cybercrime-law-pending-reform
-- https://enterpriseam.com/menaplus/2026/07/17/alabbar-plans-usd-20-bn-syria-developments-in-latakia-and-damascus-with-syrian-majority-ownership/
-- https://www.imtilak.sy/en/articles/touristic-real-estate-syria
-- https://monocle.com/affairs/syria-reopens-for-tourism-post-assad
-- https://www.spa.gov.sa/en/N2664489
-- https://sabq.org/en/article/the-syrian-communications-and-information-technology-sector-participates-in-leap-2026
-- https://saudiarabianewsgazette.com/syrian-communications-and-information-technology-sector-makes-debut-at-leap-2026/
-- https://jarayid.com/en/saudi-arabia/1590479/syrian-tech-sector-at-leap-2026
 
+- <https://tradingeconomics.com/syria/currency> (accessed Sept 3, 2026)
+- <https://www.exchange-rates.org/exchange-rate-history/usd-syp-2026>
+- <https://midforex.com/forex/syp-to-usd-forecast>
+- <https://unblocksyria.com/en/services/google-play-console>
+- <https://www.amnesty.org/en/latest/news/2026/07/syria-suspend-use-of-assad-era-cybercrime-law-pending-reform>
+- <https://enterpriseam.com/menaplus/2026/07/17/alabbar-plans-usd-20-bn-syria-developments-in-latakia-and-damascus-with-syrian-majority-ownership/>
+- <https://www.imtilak.sy/en/articles/touristic-real-estate-syria>
+- <https://monocle.com/affairs/syria-reopens-for-tourism-post-assad>
+- <https://www.spa.gov.sa/en/N2664489>
+- <https://sabq.org/en/article/the-syrian-communications-and-information-technology-sector-participates-in-leap-2026>
+- <https://saudiarabianewsgazette.com/syrian-communications-and-information-technology-sector-makes-debut-at-leap-2026/>
+- <https://jarayid.com/en/saudi-arabia/1590479/syrian-tech-sector-at-leap-2026>

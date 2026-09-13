@@ -44,6 +44,7 @@ AND absent from Apple Media Services. **Egyptian ownership does not fix this.** 
 about the publisher — it's about the destination.
 
 **Consequences:**
+
 - Android = **self-hosted APK from day one.** Not a fallback. The primary channel.
 - iOS = effectively blocked. Browsing works on mobile data (MTN/Syriatel LTE) since Feb 2026, downloads blocked on fixed-line.
 - **The web app stops being surface #5 and becomes the second real surface.** PWA is not a nice-to-have.
