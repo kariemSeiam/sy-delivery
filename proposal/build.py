@@ -182,20 +182,10 @@ def build():
 .side nav .soon i{font-style:normal;font-family:var(--mono);font-size:11.5px;
   color:rgba(255,255,255,.18)}
 .side nav .soon span::after{content:" ·";opacity:.5}
-.draft{background:var(--sand-tint);border:1px solid #F0E0C4;border-radius:var(--r-ui);
-  padding:var(--s5) var(--s6);margin:var(--s7) 0 0;font-size:15.5px;color:var(--sand-deep)}
-.draft b{display:block;font-family:var(--display);font-weight:800;margin-bottom:var(--s2)}
 </style>""",
     )
 
-    notice = f"""
-      <div class="draft">
-        <b>مسودة قيد الكتابة — {written_n} من {total_n} فصول</b>
-        الفصول المكتوبة كاملة ومراجَعة. الباقي (الرمادي في الفهرس) لسه بيتكتب.
-        كل رقم في المكتوب له مصدر وتاريخ فحص، واللي مش مؤكَّد مكتوب جنبه بالنص.
-      </div>"""
-
-    shell = shell.replace("<!--CHAPTERS-->", notice + "\n\n" + body)
+    shell = shell.replace("<!--CHAPTERS-->", body)
 
     out = BASE / "dist" / "index.html"
     out.parent.mkdir(exist_ok=True)
