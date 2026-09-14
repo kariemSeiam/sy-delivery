@@ -99,13 +99,25 @@
 <script>
 (function(){
   var prog=document.getElementById('prog');
+  var navbarEl=document.getElementById('navbar');
+  var lastY=window.scrollY, ticking=false, REVEAL_AT=560;
+
   function onScroll(){
-    var h=document.documentElement;
-    var pct=(h.scrollTop)/(h.scrollHeight-h.clientHeight)*100;
-    prog.style.width=Math.min(100,Math.max(0,pct))+'%';
+    var h=document.documentElement, y=h.scrollTop;
+    prog.style.width=Math.min(100,Math.max(0,(y)/(h.scrollHeight-h.clientHeight)*100))+'%';
+
+    // the bar belongs to the reader's intent: going down is reading, going up is looking for a way out
+    if(!navbarEl.classList.contains('is-open')){
+      var d=y-lastY;
+      if(y<REVEAL_AT)            navbarEl.classList.remove('is-on');
+      else if(d>4)               navbarEl.classList.remove('is-on');
+      else if(d<-4)              navbarEl.classList.add('is-on');
+    }
+    lastY=y; ticking=false;
   }
+  function queue(){ if(!ticking){ ticking=true; requestAnimationFrame(onScroll); } }
   onScroll();
-  window.addEventListener('scroll',onScroll,{passive:true});
+  window.addEventListener('scroll',queue,{passive:true});
 
   var toc=document.getElementById('toc');
   var sheetNav=document.getElementById('navSheetNav');
@@ -120,10 +132,12 @@
   sheetNav.innerHTML=toc.innerHTML;
 
   function openNav(open){
+    if(open) navbar.classList.add('is-on');
     navbar.classList.toggle('is-open',open);
     navBtn.setAttribute('aria-expanded',String(open));
     scrim.classList.toggle('is-on',open);
     document.body.classList.toggle('no-scroll',open);
+    if(!open) lastY=window.scrollY; // jumping via the index must not read as scrolling up
   }
   navBtn.addEventListener('click',function(){openNav(!navbar.classList.contains('is-open'));});
   scrim.addEventListener('click',function(){openNav(false);});
@@ -167,7 +181,6 @@
     entries.forEach(function(en){
       if(!en.isIntersecting) return;
       current=waypoints.indexOf(en.target);
-      navbar.classList.add('is-on');
       links.forEach(function(l){l.classList.remove('is-on');});
       (map[en.target.id]||[]).forEach(function(a){
         a.classList.add('is-on');
