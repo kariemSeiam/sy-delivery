@@ -2,7 +2,7 @@
 """Assemble proposal chapters into a single self-contained HTML file.
 
 Structure: a short preface (the whole pitch, compressed), then three acts —
-السوق / الحل / الاتفاق (market / solution / deal) — each opened by a full
+السوق / الحل / الإطلاق (market / solution / launch) — each opened by a full
 divider that states its one line before the chapters prove it.
 """
 import re, pathlib
@@ -49,13 +49,12 @@ ACTS = [
     {
         "id": "act3",
         "num": "III",
-        "label": "الاتفاق",
-        "tag": "الاتفاق.",
-        "line": "سعر واحد، دفعتين، والأكبر بعد ما تشوفوا المنتج شغّال.",
+        "label": "الإطلاق",
+        "tag": "الإطلاق.",
+        "line": "مين بييجي الأول، وإيه اللي ممكن يعطّلنا — بصراحة.",
         "mood": "deal",
         "chapters": [
             ("ch07", "07.html", "الإطلاق والمخاطر", True),
-            ("ch08", "08.html", "التعاقد", True),
         ],
     },
 ]
