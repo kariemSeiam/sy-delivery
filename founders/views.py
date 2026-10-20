@@ -219,13 +219,11 @@ def build(groups, ASK, stations_n, CLOCK, BEFORE):
         for it in its:
             tn += 1; cid = f"c-todo-{tn}"
             todo += (f'<div class="row item{" unk" if it["unk"] else ""}" id="{cid}" data-g="{gi}"><button type="button">'
-                     f'<span class="ck" role="checkbox" aria-checked="false" aria-label="تم">✓</span>'
                      f'<span class="rt">{esc(it["title"])}<span class="m">{esc(it["meta"])}</span></span><span class="chev">‹</span></button>'
                      f'<div class="more"><p>{it["more"]}</p>{src_chips("، ".join(list(it["src"])))}</div></div>')
             index.append(("todo", cid, it["title"], it["meta"], "open" if it["unk"] else "ok"))
     todo_page = ('<h1 class="hq">ما الذي يلزم تجهيزه؟</h1>'
-                 '<p class="sub">ضع علامة على ما انتهى. تُحفظ على هذا الجهاز فقط.</p>'
-                 '<div class="prog"><span id="cnt"></span><div><i id="fill"></i></div></div>' + todo)
+                 '<p class="sub">ما يطلبه كل مسار من أوراق ووثائق. اضغط على أي بند لمصدره وتفاصيله.</p>' + todo)
 
     # ============ PICTURE ============
     def tile(nn, sm, t, src): return f'<div class="tile"><span class="n">{esc(nn)}<small>{esc(sm)}</small></span><p>{esc(t)}</p><bdi>{esc(src)}</bdi></div>'
@@ -274,7 +272,7 @@ main{padding:12px 16px 120px}
 .row>button{all:unset;cursor:pointer;display:grid;align-items:center;gap:12px;width:100%;padding:11px 14px;box-sizing:border-box}
 .row.ref>button{grid-template-columns:1fr auto 16px}
 .row.body>button{grid-template-columns:78px 1fr 16px}
-.row.item>button{grid-template-columns:24px 1fr 16px}
+.row.item>button{grid-template-columns:1fr 16px}
 .rt{font-size:15px;font-weight:600;line-height:1.5}
 .rt .m{display:block;font-size:12.5px;font-weight:400;color:var(--mute);margin-top:1px}
 .rf-fig{font-size:15px;font-weight:800;color:var(--acc);white-space:nowrap}
@@ -319,12 +317,6 @@ main{padding:12px 16px 120px}
 .nextblk li{counter-increment:s;display:grid;grid-template-columns:26px 1fr;gap:8px;padding:5px 0}
 .nextblk li::before{content:counter(s,arabic-indic);width:24px;height:24px;border-radius:50%;background:#ffffff26;display:grid;place-items:center;font-weight:800;font-size:13px}
 .nextblk a{display:block;margin-top:8px;text-align:center;background:#fff;color:var(--acc);border-radius:8px;padding:8px;font-weight:700;text-decoration:none;font-size:14px}
-.prog{position:sticky;top:-12px;z-index:1;background:var(--paper);padding:8px 0 6px;font-size:13px;color:var(--mute)}
-.prog div{height:6px;background:#e4ddcd;border-radius:3px;margin-top:5px;overflow:hidden}
-.prog i{display:block;height:100%;width:0;background:var(--acc);transition:width .25s}
-.ck{width:22px;height:22px;border:2px solid #9aa39c;border-radius:6px;display:grid;place-items:center;color:transparent;font-size:15px;line-height:1;background:#fff}
-.item.done .ck{background:var(--acc);border-color:var(--acc);color:#fff}
-.item.done .rt{color:var(--mute);text-decoration:line-through;text-decoration-color:#b9b2a2}
 .item.unk .m{color:var(--amber)}
 .ug{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:10px}
 .ug header h3{font-size:15px}.ug header small{display:block;font-size:12.5px;color:var(--amber);margin:1px 0 4px}
@@ -348,7 +340,7 @@ main{padding:12px 16px 120px}
  .panel{display:block!important;page-break-before:always}
  .panel:first-child{page-break-before:auto}
  .more{display:block!important}
- .nav-dock,.nav-panel,.rtools,.pager,.ck,.chev,.ust,.copyg{display:none!important}
+ .nav-dock,.nav-panel,.rtools,.pager,.chev,.ust,.copyg{display:none!important}
  .top{position:static}
 }
 """
@@ -360,27 +352,8 @@ JS = r"""
  var fa=function(n){return n.toLocaleString('ar-EG')};
  document.addEventListener('click',function(ev){
   var b=ev.target.closest('.row>button');if(!b)return;
-  if(ev.target.closest('.ck')){return}
   b.parentElement.classList.toggle('open');
  });
- /* checklist */
- var items=[].slice.call(document.querySelectorAll('.item'));
- function paintTodo(){
-  var d=items.filter(function(x){return x.classList.contains('done')}).length;
-  var c=document.getElementById('cnt'),f=document.getElementById('fill');
-  if(c)c.textContent=fa(d)+' من '+fa(items.length)+' جاهز';
-  if(f)f.style.width=(100*d/Math.max(items.length,1))+'%';
- }
- items.forEach(function(x){
-  var id=x.id,ck=x.querySelector('.ck');
-  if(S.t&&S.t[id]){x.classList.add('done');ck.setAttribute('aria-checked','true')}
-  ck.addEventListener('click',function(ev){
-   ev.stopPropagation();x.classList.toggle('done');
-   var on=x.classList.contains('done');ck.setAttribute('aria-checked',on);
-   S.t=S.t||{};S.t[id]=on;save();paintTodo();
-  });
- });
- paintTodo();
  /* unknown questions: 0 not sent, 1 sent, 2 answered */
  var NAMES=['لم يُرسل','أُرسل','وصل الرد'];
  var uq=[].slice.call(document.querySelectorAll('.uq'));
