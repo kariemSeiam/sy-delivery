@@ -334,7 +334,18 @@ main{padding:12px 16px 120px}
 .rchip.on{border-color:var(--amber);color:var(--amber);background:var(--amberbg)}
 .rnone{font-size:14px;color:var(--mute);padding:12px;text-align:center}
 .nav-dock{width:44px;height:44px}
-.pager{margin-top:20px}
+.top .kicker{display:flex;align-items:center;gap:8px}
+.kicker .kn{font-weight:700;color:var(--acc)}
+.kicker .kp{border:1px solid var(--line);border-radius:99px;padding:0 9px;background:var(--card);color:var(--mute);font-size:11.5px;white-space:nowrap}
+.pager{display:grid!important;grid-template-columns:1fr 1fr;grid-auto-flow:row;gap:10px;margin:22px 0 4px}
+.pager a{grid-row:1;min-height:56px;padding:10px 12px;gap:10px}
+.pager a.prev{grid-column:1}.pager a.next{grid-column:2}
+.pager a.next{flex-direction:row-reverse;text-align:end}
+.pager .pg-ar{flex:none;width:30px;height:30px;border-radius:50%;background:#e8f1ea;color:var(--acc);display:grid;place-items:center;font-size:17px;font-weight:800;line-height:1}
+.pager .pg-tx{display:flex;flex-direction:column;min-width:0}
+.pager .pg-k{font-size:11.5px;color:var(--mute);line-height:1.3}
+.pager .pg-t{font-size:15px;font-weight:700;line-height:1.35}
+.foot{margin-top:14px;padding-bottom:6px}
 @media print{
  .app,main{height:auto!important;overflow:visible!important}
  .panel{display:block!important;page-break-before:always}

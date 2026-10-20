@@ -364,10 +364,10 @@ for k, (i, t, body, nn) in enumerate(tabs):
         if not target: return ""
         b = PAGEMETA[target][0]
         arrow = "السابق" if kind == "prev" else "التالي"
-        return (f'<a class="{kind}" href="#{target}" data-page="{target}"><span class="nav-item-bearing" style="--bearing:{b}deg" aria-hidden="true">'
-                f'<svg viewBox="0 0 16 16" width="22" height="22"><circle cx="8" cy="8" r="6.4"/><path d="M8 2.6 L9.7 8 L6.3 8 Z"/></svg></span>'
-                f'<span><span class="pg-k">{arrow}</span><br><span class="pg-t">{esc(TABLABEL[target])}</span></span></a>')
-    pager = f'<nav class="pager" aria-label="التنقل بين الصفحات">{pg(next_i, "next") or ""}{pg(prev_i, "prev") or ""}</nav>'
+        glyph = "→" if kind == "prev" else "←"   # RTL: previous lies to the right
+        return (f'<a class="{kind}" href="#{target}" data-page="{target}"><span class="pg-ar" aria-hidden="true">{glyph}</span>'
+                f'<span class="pg-tx"><span class="pg-k">{arrow}</span><span class="pg-t">{esc(TABLABEL[target])}</span></span></a>')
+    pager = f'<nav class="pager" aria-label="التنقل بين الصفحات">{pg(prev_i, "prev") or ""}{pg(next_i, "next") or ""}</nav>'
     panels += (f'<section class="panel" id="{i}" aria-label="{esc(t)}">{body}{pager}'
                f'<div class="foot">المرجع: <a href="{PDF}">نظام الترخيص النمطي لتقديم خدمة توصيل الطلبات عبر المنصات الإلكترونية</a>، '
                f'الهيئة الناظمة للاتصالات والبريد، ٣٤ صفحة، ٢٠٢٣. الأرقام موثقة بمادتها وصفحتها.</div></section>')
@@ -416,7 +416,7 @@ function go(id){
   if(!P.some(p=>p.id===id))id='picture';
   P.forEach(p=>p.classList.toggle('on',p.id===id));
   M.scrollTop=0; history.replaceState(null,'','#'+id);
-  const i=P.findIndex(p=>p.id===id); K.innerHTML='<bdi>'+NAMES[id]+'</bdi> · <bdi>'+(i+1).toLocaleString('ar-EG')+'/'+P.length.toLocaleString('ar-EG')+'</bdi>';
+  const i=P.findIndex(p=>p.id===id); K.innerHTML='<span class="kn">'+NAMES[id]+'</span><span class="kp">صفحة '+(i+1).toLocaleString('ar-EG')+' من '+P.length.toLocaleString('ar-EG')+'</span>';
   if(window.__navSync)window.__navSync(id);else window.__navPending=id;
 }
 window.__go=go;
