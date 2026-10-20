@@ -230,8 +230,18 @@ P5 = f'''
 '''
 if 'class="card open"' in P5: sys.exit("BUILD FAILED: unverified cards do not belong on the road")
 
-tabs = [("map", "الخريطة", P1, "١"), ("company", "الشركة", P2, "٢"), ("licence", "الترخيص", P3, "٣"),
-        ("platform", "المنصة", P4, "٤"), ("ops", "التشغيل", POPS, "٥"), ("road", "الطريق", P5, "٦")]
+SOURCE_TABS = [("company", P2), ("licence", P3), ("platform", P4), ("ops", POPS)]   # facts, written once
+import views
+_g = []
+for _tid, _html in SOURCE_TABS:
+    _by = {}
+    for _c in views.parse_cards(_html):
+        _by.setdefault(_c["group"] or {"company": "الشركة", "licence": "الترخيص", "platform": "المنصة", "ops": "التشغيل"}[_tid], []).append(_c)
+    _g += list(_by.items())
+_pages, _vindex, _refn = views.build(_g, ASK, 0, CLOCK, BEFORE)
+tabs = [("picture", "الصورة", _pages["picture"], "١"), ("todo", "المطلوب", _pages["todo"], "٢"),
+        ("bodies", "الجهات", _pages["bodies"], "٣"), ("unknown", "المجهول", _pages["unknown"], "٤"),
+        ("ref", "المرجع", _pages["ref"], "٥")]
 
 CSS = """
 :root{--paper:#f3efe6;--card:#fbf9f4;--text:#17202a;--mute:#5d6670;--line:#d9d2c3;--acc:#14532d;--amber:#8a5a00;--amberbg:#fbf1dc}
@@ -314,17 +324,16 @@ NAVJS = (HERE / "nav" / "nav.js").read_text(encoding="utf-8")
 
 # one bearing per page, evenly round the dial; the hint says what the page answers
 PAGEMETA = {
-    "map": (0, "الطريق من الفكرة إلى أول طلب"),
-    "company": (60, "من يحمل الترخيص وكيف تُؤسَّس"),
-    "licence": (120, "شروط الهيئة والرسوم والمدد"),
-    "platform": (180, "ما الذي يُبنى وأين يُستضاف"),
-    "ops": (240, "التزامات التشغيل اليومي"),
-    "road": (300, "المهل من سريان الترخيص حتى التجديد"),
+    "picture": (0, "أين نحن وما الذي يُطلب منكم"),
+    "todo": (72, "ما يلزم تجهيزه، بندًا بندًا"),
+    "bodies": (144, "من يقرر ماذا، وما تطلبه كل جهة"),
+    "unknown": (216, "ما لم يُحسم ومن يجيب عنه"),
+    "ref": (288, "كل البنود بمادتها وصفحتها"),
 }
 TABLABEL = {i: t for i, t, _b, _n in tabs}
 plain = lambda s: re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", s)).strip()
 
-index = []          # every addressable item: (tab, id, title, line, kind)
+index = list(_vindex)   # every addressable item: (tab, id, title, line, kind)
 def annotate(tab, body):
     n = [0]
     def card_sub(m):
@@ -379,7 +388,7 @@ item_rows = "".join(
 navdata = json.dumps({i: {"bearing": PAGEMETA[i][0], "label": t} for i, t, _b, _n in tabs}, ensure_ascii=False)
 
 SEARCH_SVG = '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="16.5" y1="16.5" x2="21" y2="21"></line></svg>'
-DOCK = (f'<div class="nav-dock"><span class="nav-dock-hint" aria-hidden="true"><span class="nav-dock-place">الخريطة</span></span>'
+DOCK = (f'<div class="nav-dock"><span class="nav-dock-hint" aria-hidden="true"><span class="nav-dock-place">الصورة</span></span>'
         f'<button type="button" class="nav-compass" data-navigator-open aria-haspopup="dialog" aria-expanded="false" '
         f'aria-keyshortcuts="Meta+K Control+K" aria-label="فتح التنقل" style="--bearing:0deg;--ring-c:{__import__("nav.compass",fromlist=["x"]).RING_C}">{dial_svg()}</button></div>')
 PANEL = (f'<dialog class="nav-panel" data-navigator-panel aria-label="التنقل" tabindex="-1"><div class="nav-panel-inner" tabindex="-1">'
@@ -393,7 +402,7 @@ PANEL = (f'<dialog class="nav-panel" data-navigator-panel aria-label="التنق
 NOJS = ('<noscript><style>.panel{display:block!important}.nav-dock{display:none}</style><nav class="nav-nojs" aria-label="الصفحات">'
         + "".join(f'<a href="#{i}">{esc(t)}</a>' for i, t, _b, _n in tabs) + '</nav></noscript>')
 
-CSS += NAVCSS + """
+CSS += views.CSS + NAVCSS + """
 .app{position:relative}
 main{padding-bottom:104px}
 .flash{animation:flash 1.6s var(--ease-out-expo)}
@@ -404,21 +413,21 @@ main{padding-bottom:104px}
 JS = """
 const P=[...document.querySelectorAll('.panel')],M=document.querySelector('main'),K=document.querySelector('.kicker'),NAMES=%s;
 function go(id){
-  if(!P.some(p=>p.id===id))id='map';
+  if(!P.some(p=>p.id===id))id='picture';
   P.forEach(p=>p.classList.toggle('on',p.id===id));
   M.scrollTop=0; history.replaceState(null,'','#'+id);
-  const i=P.findIndex(p=>p.id===id); K.innerHTML='وثيقة مرجعية للمؤسسين<span class="pos">· '+NAMES[id]+' · '+(i+1).toLocaleString('ar-EG')+' من '+P.length.toLocaleString('ar-EG')+'</span>';
+  const i=P.findIndex(p=>p.id===id); K.innerHTML='<bdi>'+NAMES[id]+'</bdi> · <bdi>'+(i+1).toLocaleString('ar-EG')+'/'+P.length.toLocaleString('ar-EG')+'</bdi>';
   if(window.__navSync)window.__navSync(id);else window.__navPending=id;
 }
 window.__go=go;
-go(location.hash.slice(1)||'map');
+go(location.hash.slice(1)||'picture');
 """ % json.dumps({i: t for i, t, _b, _n in tabs}, ensure_ascii=False)
 
 PAGE = f'''<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>منصة توصيل الطلبات: الأساس القانوني والتقني</title><script>document.documentElement.classList.add('js')</script><style>{CSS}</style></head>
-<body>{NOJS}<div class="app"><header class="top"><div class="kicker">وثيقة مرجعية للمؤسسين</div><h1>منصة توصيل الطلبات</h1><div class="sub">الأساس القانوني والتقني، دمشق وريف دمشق</div></header>
-<main>{panels}</main>{DOCK}{PANEL}</div><script type="application/json" id="nav-data">{navdata}</script><script>{JS}</script><script>{NAVJS}</script></body></html>'''
+<body>{NOJS}<div class="app"><header class="top"><h1>منصة توصيل الطلبات</h1><div class="kicker">وثيقة مرجعية للمؤسسين</div></header>
+<main>{panels}</main>{DOCK}{PANEL}</div><script type="application/json" id="nav-data">{navdata}</script><script>{JS}</script><script>{NAVJS}</script><script>{views.JS}</script></body></html>'''
 
 # --- hard checks on the final visible text ---
 text = re.sub(r"<style.*?</style>|<script.*?</script>|<[^>]+>", " ", PAGE, flags=re.S)
