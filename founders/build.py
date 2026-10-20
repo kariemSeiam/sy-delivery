@@ -89,46 +89,66 @@ P4 = '<p class="lead">شروط الهيئة تحدد شكل المنصة قبل 
     card("العمل عند ضعف الاتصال", "التطبيق يُصمَّم ليعمل ويُزامن لاحقاً عند انقطاع الشبكة أو الكهرباء.", DESIGN),
 ])
 
-# ---------- panel 5: road + unconfirmed ----------
-steps = [
-    ("١", "تأسيس الشركة أو قيدها", "مع إضافة غاية توصيل الطلبات إلى السجل التجاري."),
-    ("٢", "تقديم طلب الترخيص", "بالاستمارة المعتمدة والوثائق وأجر دراسة الطلب."),
-    ("٣", "بناء المنصة بالتوازي", "على الشروط الفنية في الملحق ١."),
-    ("٤", "اعتماد النسخة", "قبل إتاحتها للعموم."),
-    ("٥", "الإطلاق التجاري", "خلال ستة أشهر من سريان الترخيص."),
+# ---------- panel 5: the road, spined on the licence's own clocks ----------
+# Sequence only. Every dated item is a clock the licence itself fixes (article + page);
+# everything before the licence takes effect has no clock and is shown as a step, not a date.
+def before(n, t, l, k, s):
+    return (f'<li><span class="dot">{n}</span><div class="st"><h3>{esc(t)}</h3><p>{esc(l)}</p>'
+            f'<div class="meta"><span class="chip {k}">{CHIP[k]}</span><span class="src">{esc(s)}</span></div></div></li>')
+BEFORE = [
+    ("١", "تأسيس الشركة أو قيدها", "مع إضافة غاية توصيل الطلبات إلى السجل التجاري.", OK, "م١ · ص٥"),
+    ("٢", "تقديم طلب الترخيص", "بالاستمارة المعتمدة والوثائق وأجر دراسة الطلب.", OK, "م٢ (٦) · ص٥"),
+    ("٣", "بناء المنصة بالتوازي", "على الشروط الفنية في الملحق ١، وكل نسخة تُعتمد قبل إتاحتها.", OK, "الملحق ١ · ص٣٢"),
 ]
-road = "".join(f'<li><span class="dot">{n}</span><div class="st"><h3>{esc(t)}</h3><p>{esc(l)}</p></div></li>' for n, t, l in steps)
+for *_x, k, s_ in BEFORE:
+    if k == OK and not s_: sys.exit("BUILD FAILED: road step without source")
 
-openq = [
-    ("مدة قرار الهيئة", "وردت في مصدر ثانوي بـ٤٥ يوماً. لم نجدها في نص الوثيقة.", "الهيئة"),
-    ("وحدة الرسوم", "ليرة قديمة أم جديدة. الوثيقة مؤرخة ٢٠٢٣.", "الهيئة"),
-    ("تأسيس الشركة", "المدة ورأس المال والمطلوب من المؤسسين الأجانب. المصادر ثانوية.", "محامٍ سوري"),
-    ("إدارة المنصة من خارج سوريا", "هل تُعدّ تعاقداً من الباطن بحسب المادة ٩؟", "محامٍ سوري"),
-    ("اعتمادية الهيئة الوطنية لخدمات الشبكة", "المتطلبات والمدة والتكلفة لم تُعَد قراءتها من المصدر.", "الهيئة الوطنية"),
-    ("رسوم الدفع الإلكتروني", "نُقل عن موقع سيريتل كاش أن الدفع عبر تطبيقات التجارة مجاني، وعن شام كاش سقفاً للسحب النقدي ٠٫٣٪. لم يُعَد التحقق.", "مزود المحفظة"),
-    ("توفر التطبيقات في المتاجر", "سوريا غير مدرجة في جدول بلدان التوزيع لدى غوغل بحسب فحص أُجري في سبتمبر. لم يُعَد الفحص، وعليه قامت قاعدة التوزيع بملف التثبيت وتطبيق الويب.", "إعادة الفحص"),
-    ("تصريح تجوال الدراجات في دمشق", "لم نجد آليته ولا مدته ولا تكلفته.", "الجهة المحلية"),
+CLOCK = [  # (month, title, line, source, goal)
+    (0, "سريان الترخيص", "من هذا التاريخ تُحسب كل المهل التالية. المدة سنة واحدة، غير حصرية.", "م٦ (أ) · ص١٨", False),
+    (5, "آخر موعد لإبلاغ الهيئة بالإطلاق", "الإبلاغ قبل الإطلاق بشهر على الأقل، فإن أُطلق في آخر موعد كان الإبلاغ في الشهر الخامس.", "م٦ (ب، ج) · ص١٨", False),
+    (6, "آخر موعد للإطلاق التجاري", "بعده يُلغى الترخيص. أول طلب حقيقي يجب أن يسبق هذا الموعد.", "م٦ (ب) · ص١٨", True),
+    (9, "آخر موعد لطلب التجديد", "يُقدَّم قبل ثلاثة أشهر على الأقل من انتهاء المدة.", "م٧ · ص١٩", False),
+    (12, "انتهاء المدة", "يبدأ العام الثاني بحصة للهيئة قدرها ٥٪ من الإيراد الخاضع، بعد عام أول بلا حصة.", "م٦ (أ) · ص١٨، الملحق ٢ · ص٣٤", False),
 ]
-openh = "".join(
-    f'<article class="card open"><h3>{esc(t)}</h3><p>{esc(l)}</p><div class="meta"><span class="chip open">غير مثبت</span><span class="src">المرجع: {esc(w)}</span></div></article>'
-    for t, l, w in openq)
+_m = [c[0] for c in CLOCK]
+if _m != sorted(_m) or len(set(_m)) != len(_m): sys.exit("BUILD FAILED: road clock not in strict month order")
+if any(not c[3] for c in CLOCK): sys.exit("BUILD FAILED: road clock item without source")
+if sum(1 for c in CLOCK if c[4]) != 1: sys.exit("BUILD FAILED: road must have exactly one destination")
+AR = "٠١٢٣٤٥٦٧٨٩"
+ar = lambda n: "".join(AR[int(d)] for d in str(n))
+def clock_li(m, t, l, s, goal):
+    return (f'<li class="{"goal" if goal else ""}"><span class="mo"><b>{ar(m)}</b><i>شهر</i></span><div class="st"><h3>{esc(t)}</h3><p>{esc(l)}</p>'
+            f'<div class="meta"><span class="chip ok">{CHIP[OK]}</span><span class="src">{esc(s)}</span></div></div></li>')
+
+ASK = [  # (who answers, [questions]); every group must name who answers
+    ("الهيئة الناظمة", ["المدة التي تستغرقها الهيئة في البت بالطلب.", "وحدة الرسوم: ليرة قديمة أم جديدة."]),
+    ("محامٍ سوري", ["متطلبات تأسيس الشركة ومدتها.", "هل إدارة المنصة من خارج سوريا تُعدّ تعاقداً من الباطن بحسب المادة ٩."]),
+]
+if any(not w or not q for w, q in ASK): sys.exit("BUILD FAILED: open item without a named answerer")
+askh = "".join(f'<div class="askg"><h3>{esc(w)}</h3>' + "".join(f"<div class=\"q\">{esc(x)}</div>" for x in q) + "</div>" for w, q in ASK)
 
 P5 = f'''
-<p class="lead">ترتيب الخطوات كما يفرضه الترخيص. لا توجد هنا مدد مقدّرة، لأن المدد غير المثبتة مفصولة تحت.</p>
-<ol class="route">{road}</ol>
-<h2 class="sec">لم يثبت بعد</h2>
-<p class="lead">هذه البنود لا تُبنى عليها قرارات إلى أن تُؤكَّد من مصدرها.</p>
-{openh}
+<div class="dest"><small>الوجهة</small><b>الإطلاق التجاري</b><span>آخر موعد له الشهر السادس من سريان الترخيص.</span></div>
+<h2 class="sec first">قبل سريان الترخيص</h2>
+<p class="lead">لا مهلة محددة في الوثيقة لهذه المرحلة. الترتيب هو المهم.</p>
+<ol class="route">{"".join(before(*x) for x in BEFORE)}</ol>
+<h2 class="sec">بعد سريان الترخيص</h2>
+<p class="lead">كل رقم هنا مهلة تفرضها الوثيقة نفسها.</p>
+<ol class="clock">{"".join(clock_li(*c) for c in CLOCK)}</ol>
+<div class="note">أي تغيير في الشركاء أو نسبهم يحتاج موافقة الهيئة قبل التنفيذ، في أي مرحلة من هذا الطريق. م٨ · ص١٩</div>
+<h2 class="sec">يُؤكَّد قبل التقديم</h2>
+{askh}
 '''
+if 'class="card open"' in P5: sys.exit("BUILD FAILED: unverified cards do not belong on the road")
 
 tabs = [("map", "الخريطة", P1, "١"), ("company", "الشركة", P2, "٢"), ("licence", "الترخيص", P3, "٣"),
         ("platform", "المنصة", P4, "٤"), ("road", "الطريق", P5, "٥")]
 
 CSS = """
-:root{--paper:#f3efe6;--card:#fbf9f4;--ink:#17202a;--mute:#5d6670;--line:#d9d2c3;--acc:#14532d;--amber:#8a5a00;--amberbg:#fbf1dc}
+:root{--paper:#f3efe6;--card:#fbf9f4;--text:#17202a;--mute:#5d6670;--line:#d9d2c3;--acc:#14532d;--amber:#8a5a00;--amberbg:#fbf1dc}
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%}
-body{background:var(--paper);color:var(--ink);font-family:"IBM Plex Sans Arabic","Cairo","Almarai","Noto Naskh Arabic",Tahoma,system-ui,sans-serif;line-height:1.75;-webkit-font-smoothing:antialiased}
+body{background:var(--paper);color:var(--text);font-family:"IBM Plex Sans Arabic","Cairo","Almarai","Noto Naskh Arabic",Tahoma,system-ui,sans-serif;line-height:1.75;-webkit-font-smoothing:antialiased}
 .app{max-width:720px;margin:0 auto;height:100dvh;display:flex;flex-direction:column;border-inline:1px solid var(--line);background:var(--paper)}
 .top{padding:18px 20px 14px;border-bottom:1px solid var(--line)}
 .kicker{font-size:12px;color:var(--acc);letter-spacing:.04em;font-weight:700}
@@ -146,7 +166,7 @@ main{flex:1;overflow-y:auto;overflow-x:hidden;padding:18px 18px 28px}
 .meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
 .chip{font-size:11.5px;padding:1px 9px;border-radius:99px;border:1px solid;font-weight:700}
 .chip.ok{color:var(--acc);border-color:var(--acc)}
-.chip.design{color:var(--ink);border-color:var(--mute)}
+.chip.design{color:var(--text);border-color:var(--mute)}
 .chip.open{color:var(--amber);border-color:var(--amber)}
 .chip.meas{color:#1e3a8a;border-color:#1e3a8a}
 .card.meas{border-inline-start:3px solid #1e3a8a}
@@ -167,6 +187,21 @@ main{flex:1;overflow-y:auto;overflow-x:hidden;padding:18px 18px 28px}
 .tabs button b{width:22px;height:22px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;font-size:11px}
 .tabs button[aria-selected=true]{color:var(--acc);font-weight:700}
 .tabs button[aria-selected=true] b{background:var(--acc);color:#fff;border-color:var(--acc)}
+.sec.first{border-top:0;margin-top:14px;padding-top:0}
+.dest{background:var(--text);color:#f3efe6;border-radius:14px;padding:15px 16px 14px}
+.dest small{font-size:12px;opacity:.7;letter-spacing:.04em}
+.dest b{display:block;font-size:21px;line-height:1.4}
+.dest span{font-size:14px;opacity:.88}
+.clock{list-style:none;position:relative;margin:6px 0 14px}
+.clock::before{content:"";position:absolute;inset-block:12px;inset-inline-start:24px;width:2px;background:var(--line)}
+.clock li{position:relative;display:flex;gap:12px;margin-bottom:11px;align-items:flex-start}
+.mo{flex:none;width:50px;border-radius:12px;background:var(--card);border:2px solid var(--acc);text-align:center;padding:3px 0 4px;z-index:1;line-height:1.1}
+.mo b{display:block;font-size:22px;color:var(--acc)}.mo i{font-style:normal;font-size:11px;color:var(--mute)}
+.clock li.goal .mo{background:var(--acc)}.clock li.goal .mo b,.clock li.goal .mo i{color:#fff}
+.clock li.goal .st{border:2px solid var(--acc)}
+.note{margin:4px 0 6px}
+.askg{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:11px 14px;margin-bottom:10px}
+.askg h3{font-size:14.5px;color:var(--acc);margin-bottom:2px}.askg .q{font-size:14px;padding:2px 0}
 .foot{margin-top:18px;font-size:12px;color:var(--mute);border-top:1px solid var(--line);padding-top:10px}
 .foot a{color:var(--acc)}
 """
@@ -194,7 +229,7 @@ PAGEMETA = {
     "company": (72, "من يحمل الترخيص ويتحمل المسؤولية"),
     "licence": (144, "شروط الهيئة والرسوم والمدد"),
     "platform": (216, "ما الذي يُبنى وأين يُستضاف"),
-    "road": (288, "الخطوات التالية وما لم يثبت"),
+    "road": (288, "المهل من سريان الترخيص حتى التجديد"),
 }
 TABLABEL = {i: t for i, t, _b, _n in tabs}
 plain = lambda s: re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", s)).strip()
@@ -219,6 +254,7 @@ def annotate(tab, body):
     body = re.sub(r"<li>(.*?)</li>", st_sub, body, flags=re.S)
     return body
 
+if len(tabs) > 6: sys.exit("BUILD FAILED: more than 6 pages (standard: 4-6)")
 order = [i for i, *_ in tabs]
 panels = ""
 for k, (i, t, body, nn) in enumerate(tabs):
