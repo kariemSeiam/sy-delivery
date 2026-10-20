@@ -6,3 +6,5 @@ build/
 .env.*
 *.log
 proposal/dist/
+__pycache__/
+*.pyc
