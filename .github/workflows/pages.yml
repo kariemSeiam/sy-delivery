@@ -1,10 +1,11 @@
-name: Deploy proposal to GitHub Pages
+name: Deploy founders reference to GitHub Pages
 
 on:
   push:
     branches: [main]
     paths:
       - "proposal/**"
+      - "founders/**"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
 
@@ -22,12 +23,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Build proposal
-        run: python3 proposal/build.py
+      - name: Build founders reference (root) and legacy proposal (/proposal/)
+        run: |
+          python3 founders/build.py
+          python3 proposal/build.py
+          mkdir -p site/proposal
+          cp founders/dist/index.html site/index.html
+          cp proposal/dist/index.html site/proposal/index.html
+          echo "syria.kariem.dev" > site/CNAME
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: proposal/dist
+          path: site
 
   deploy:
     needs: build

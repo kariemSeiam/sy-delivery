@@ -1,0 +1,189 @@
+#!/usr/bin/env python3
+"""Founders reference site v2 (verified-only). One self-contained RTL HTML -> dist/index.html
+Law: every 'ok' (verified) item MUST carry a source (article + page). The build fails otherwise.
+Source of truth: SYTRA model licence for order-delivery platforms, 34 pp, 2023 (read as page images 2026-10-20).
+No builder fee, no equity, no 'partnership', no personal titles anywhere in this file.
+"""
+import html, re, sys, pathlib
+
+PDF = "https://sytpra.gov.sy/public/uploads/files/%D8%AE%D8%AF%D9%85%D8%A7%D8%AA%20%D8%A7%D9%84%D8%A7%D8%AA%D8%B5%D8%A7%D9%84%D8%A7%D8%AA/%D8%A7%D9%84%D8%AA%D8%B1%D8%A7%D8%AE%D9%8A%D8%B5%20%D8%A7%D9%84%D9%86%D9%85%D8%B7%D9%8A%D8%A9%20%D8%A7%D8%AA%D8%B5%D8%A7%D9%84%D8%A7%D8%AA/7.pdf"
+
+OK, DESIGN, OPEN = "ok", "design", "open"
+CHIP = {OK: "من الوثيقة", DESIGN: "تصميم مقترح", OPEN: "غير مثبت"}
+
+def esc(s): return html.escape(s, quote=False)
+def num(s): return f'<bdi dir="ltr">{esc(s)}</bdi>'
+
+def card(title, line, kind, src="", fig=None):
+    if kind == OK and not src:
+        sys.exit(f"BUILD FAILED: verified card without source -> {title}")
+    figh = f'<div class="fig">{fig}</div>' if fig else ""
+    srch = f'<span class="src">{esc(src)}</span>' if src else ""
+    return (f'<article class="card {kind}">{figh}<h3>{esc(title)}</h3><p>{line}</p>'
+            f'<div class="meta"><span class="chip {kind}">{CHIP[kind]}</span>{srch}</div></article>')
+
+# ---------- panel 1: the map ----------
+stations = [
+    ("١", "شركة تشغيلية في سوريا", "هي صاحبة الترخيص والمسؤولة قانونياً. شركة قيد التأسيس تُقبل.", OK, "م١ · ص٥"),
+    ("٢", "ترخيص الهيئة الناظمة", "ترخيص نمطي غير حصري لمدة سنة، يتجدد.", OK, "م٥، م٦ · ص١٨"),
+    ("٣", "المنصة", "محرك واحد وخمس واجهات، مستضافة داخل سوريا.", DESIGN, ""),
+    ("٤", "اعتماد النسخة", "كل نسخة وكل تحديث بموافقة مسبقة قبل النشر.", OK, "الملحق ١ · ص٣٢"),
+    ("٥", "إطلاق تجاري", "خلال ستة أشهر من سريان الترخيص، وإلا يُلغى.", OK, "م٦ (ب) · ص١٨"),
+]
+def station(n, t, l, k, s):
+    if k == OK and not s: sys.exit("BUILD FAILED: station without source " + t)
+    sp = f'<span class="src">{esc(s)}</span>' if s else ""
+    return (f'<li><span class="dot">{n}</span><div class="st"><h3>{esc(t)}</h3><p>{esc(l)}</p>'
+            f'<div class="meta"><span class="chip {k}">{CHIP[k]}</span>{sp}</div></div></li>')
+route = "".join(station(*s) for s in stations)
+
+P1 = f'''
+<p class="lead">الطريق من الفكرة إلى أول طلب يمر بخمس محطات. المحطات المعلّمة «من الوثيقة» موثقة بمادتها وصفحتها في نظام الترخيص النمطي.</p>
+<ol class="route">{route}</ol>
+<div class="note"><b>منطقة العمل:</b> دمشق وريف دمشق. حي الإطلاق الأول يحدده المؤسسون.</div>
+'''
+
+# ---------- panel 2: company ----------
+P2 = '<p class="lead">الترخيص لا يُمنح لشخص ولا لمنصة. يُمنح لشركة بعينها، وهي التي تتحمل المسؤولية كاملة.</p>' + "".join([
+    card("شكل الشركة", "شركة محدودة المسؤولية أو مساهمة مغفلة، مؤسسة في سوريا. القبول ممكن بشركة قيد التأسيس بشرط تزويد الهيئة بالسجل التجاري قبل منح الترخيص.", OK, "م١ (١) · ص٥"),
+    card("غاية الشركة", "يجب أن تتضمن غاية الشركة تقديم خدمة توصيل الطلبات عبر المنصات الإلكترونية، أو أن تتعهد بإضافتها إلى سجلها التجاري.", OK, "م١ (١) · ص٥"),
+    card("سجل نظيف", "ألا يكون لطالب الترخيص ترخيص سابق أُلغي قبل أقل من سنتين، وألا يكون قد أُشهر إفلاسه.", OK, "م١ (٢، ٣) · ص٥"),
+    card("المخوّلون بالتوقيع", "تُقدَّم أسماؤهم ونماذج توقيعهم، مع صورة هوية كل شخص طبيعي وارد اسمه في السجل التجاري وعنوانه وأرقام التواصل معه.", OK, "م٢ (٣، ٤) · ص٥"),
+    card("تغيير الشركاء", "أي تغيير في أسماء الشركاء أو في نسب مساهمتهم يحتاج موافقة الهيئة المسبقة. وكذلك التنازل عن الترخيص أو الاندماج.", OK, "م٨ (أ، ب، هـ) · ص١٩"),
+    card("التعاقد من الباطن", "لا يجوز إلا بعد موافقة الهيئة، وتبقى الشركة المرخّص لها مسؤولة مسؤولية كاملة.", OK, "م٩ (أ) · ص١٩"),
+])
+
+# ---------- panel 3: licence ----------
+def bars():
+    rows = [("السنة ١", 0), ("السنة ٢", 5), ("السنة ٣", 10), ("السنة ٤ وما بعد", 15)]
+    cols = "".join(f'<div class="bar"><span class="h" style="height:{max(4, p*5)}px"></span>'
+                   f'<b>{p}٪</b><i>{y}</i></div>' for y, p in rows)
+    return f'<div class="bars">{cols}</div>'
+
+P3 = '<p class="lead">ترخيص واحد من الهيئة الناظمة للاتصالات والبريد، بشروط محددة ومدفوعات معروفة مسبقاً.</p>' + "".join([
+    card("نوع الترخيص", "نمطي وغير حصري: لا يمنع الهيئة من ترخيص غيرك، ولا يعطيك احتكاراً. وللهيئة أن تضيف لاحقاً أجوراً أو شروطاً.", OK, "م٥ (أ، ب) · ص١٨"),
+    card("المدة والتجديد", "سنة من تاريخ السريان، قابلة للتجديد. يُقدَّم طلب التجديد قبل ثلاثة أشهر على الأقل من انتهاء المدة.", OK, "م٦ (أ) · ص١٨، م٧ · ص١٩"),
+    card("مهلة الإطلاق", "الإطلاق التجاري خلال ستة أشهر من سريان الترخيص وإلا أُلغي، وتُبلَّغ الهيئة قبل الإطلاق بشهر على الأقل.", OK, "م٦ (ب، ج) · ص١٨", fig="٦ أشهر"),
+    card("الرسوم المنصوص عليها", f'بدل ترخيص ابتدائي {num("500,000")} ل.س، وأجر سنوي {num("500,000")} ل.س، وأجر دراسة الطلب {num("100,000")} ل.س. الوثيقة مؤرخة {num("2023")}، أي قبل حذف الصفرين من الليرة، فوحدة هذه الأرقام تحتاج تأكيداً من الهيئة.', OK, "الملحق ٢ · ص٣٤، م٢ (٦) · ص٥"),
+    f'''<article class="card ok"><h3>حصة الهيئة من الإيراد</h3><p>تُسدَّد من الإيرادات الخاضعة لتقاسم الإيراد، طوال مدة الترخيص.</p>{bars()}<div class="meta"><span class="chip ok">من الوثيقة</span><span class="src">الملحق ٢ · ص٣٤</span></div></article>''',
+])
+
+# ---------- panel 4: platform ----------
+P4 = '<p class="lead">شروط الهيئة تحدد شكل المنصة قبل أي قرار تقني. هذه الشروط كما وردت، ثم ما يترتب عليها في التصميم.</p>' + "".join([
+    card("الاستضافة", "داخل الجمهورية العربية السورية، في مراكز استضافة تابعة للمرخّص له أو لجهات عامة قادرة على تقديمها.", OK, "الملحق ١ · ص٣٢"),
+    card("التحديثات", "أي تحديث لنسخة المنصة يحتاج موافقة مسبقة قبل إتاحته للعموم.", OK, "الملحق ١ · ص٣٢"),
+    card("حساب المستخدم", "رقم خلوي سوري حصراً، مع تحقق عبر رسالة نصية SMS.", OK, "الملحق ١ · ص٣٢"),
+    card("رقم الطلب", "رقم تعريفي فريد لكل طلب يولّده النظام، ويصل إلى الزبون برسالة نصية.", OK, "الملحق ١ · ص٣٢"),
+    card("صلاحيات التطبيق", "ثلاثة مصادر فقط على جهاز المستخدم: الموقع الجغرافي، الهاتف لإجراء مكالمة، ووحدة التخزين.", OK, "الملحق ١ · ص٣٢"),
+    card("الخصوصية", "عرض سياسة الخصوصية وشروط الاستخدام بالعربية والإنجليزية عند أول تسجيل، وعند كل تحديث، وموافقة المستخدم شرط للاستخدام.", OK, "الملحق ١ · ص٣٢"),
+    card("اطلاع الهيئة", "نفاذ دائم إلى قواعد البيانات للمخوّلين لدى الهيئة، بصلاحية القراءة فقط.", OK, "م١٠ (ب) · ص٢٠"),
+    card("حفظ البيانات", "الاحتفاظ بكل بيانات المشتركين والمندوبين والبيانات المالية مدة تعادل مدة الترخيص على الأقل.", OK, "م١٠ (هـ) · ص٢٠"),
+    '<h2 class="sec">ما يترتب على ذلك في التصميم</h2>',
+    card("بنية المنصة", "محرك واحد تقوم عليه خمس واجهات: تطبيق الزبون، موقع الزبون، تطبيق المندوب، لوحة التاجر، لوحة التشغيل.", DESIGN),
+    card("التغيير من السيرفر", "لأن كل تحديث بموافقة مسبقة، تُدار الأسعار والعروض والنصوص من إعدادات على الخادم لا بإصدار جديد.", DESIGN),
+    card("سجل لا يُحذف", "كل طلب وكل حركة مالية تُسجَّل كحدث ثابت، تلبية لشرط الحفظ واطلاع الهيئة.", DESIGN),
+    card("العمل عند ضعف الاتصال", "التطبيق يُصمَّم ليعمل ويُزامن لاحقاً عند انقطاع الشبكة أو الكهرباء.", DESIGN),
+])
+
+# ---------- panel 5: road + unconfirmed ----------
+steps = [
+    ("١", "تأسيس الشركة أو قيدها", "مع إضافة غاية توصيل الطلبات إلى السجل التجاري."),
+    ("٢", "تقديم طلب الترخيص", "بالاستمارة المعتمدة والوثائق وأجر دراسة الطلب."),
+    ("٣", "بناء المنصة بالتوازي", "على الشروط الفنية في الملحق ١."),
+    ("٤", "اعتماد النسخة", "قبل إتاحتها للعموم."),
+    ("٥", "الإطلاق التجاري", "خلال ستة أشهر من سريان الترخيص."),
+]
+road = "".join(f'<li><span class="dot">{n}</span><div class="st"><h3>{esc(t)}</h3><p>{esc(l)}</p></div></li>' for n, t, l in steps)
+
+openq = [
+    ("مدة قرار الهيئة", "وردت في مصدر ثانوي بـ٤٥ يوماً. لم نجدها في نص الوثيقة.", "الهيئة"),
+    ("وحدة الرسوم", "ليرة قديمة أم جديدة. الوثيقة مؤرخة ٢٠٢٣.", "الهيئة"),
+    ("تأسيس الشركة", "المدة ورأس المال والمطلوب من المؤسسين الأجانب. المصادر ثانوية.", "محامٍ سوري"),
+    ("إدارة المنصة من خارج سوريا", "هل تُعدّ تعاقداً من الباطن بحسب المادة ٩؟", "محامٍ سوري"),
+    ("اعتمادية الهيئة الوطنية لخدمات الشبكة", "المتطلبات والمدة والتكلفة لم تُعَد قراءتها من المصدر.", "الهيئة الوطنية"),
+    ("تصريح تجوال الدراجات في دمشق", "لم نجد آليته ولا مدته ولا تكلفته.", "الجهة المحلية"),
+]
+openh = "".join(
+    f'<article class="card open"><h3>{esc(t)}</h3><p>{esc(l)}</p><div class="meta"><span class="chip open">غير مثبت</span><span class="src">المرجع: {esc(w)}</span></div></article>'
+    for t, l, w in openq)
+
+P5 = f'''
+<p class="lead">ترتيب الخطوات كما يفرضه الترخيص. لا توجد هنا مدد مقدّرة، لأن المدد غير المثبتة مفصولة تحت.</p>
+<ol class="route">{road}</ol>
+<h2 class="sec">لم يثبت بعد</h2>
+<p class="lead">هذه البنود لا تُبنى عليها قرارات إلى أن تُؤكَّد من مصدرها.</p>
+{openh}
+'''
+
+tabs = [("map", "الخريطة", P1, "١"), ("company", "الشركة", P2, "٢"), ("licence", "الترخيص", P3, "٣"),
+        ("platform", "المنصة", P4, "٤"), ("road", "الطريق", P5, "٥")]
+
+CSS = """
+:root{--paper:#f3efe6;--card:#fbf9f4;--ink:#17202a;--mute:#5d6670;--line:#d9d2c3;--acc:#14532d;--amber:#8a5a00;--amberbg:#fbf1dc}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{background:var(--paper);color:var(--ink);font-family:"IBM Plex Sans Arabic","Cairo","Almarai","Noto Naskh Arabic",Tahoma,system-ui,sans-serif;line-height:1.75;-webkit-font-smoothing:antialiased}
+.app{max-width:720px;margin:0 auto;height:100dvh;display:flex;flex-direction:column;border-inline:1px solid var(--line);background:var(--paper)}
+.top{padding:18px 20px 14px;border-bottom:1px solid var(--line)}
+.kicker{font-size:12px;color:var(--acc);letter-spacing:.04em;font-weight:700}
+h1{font-size:22px;line-height:1.35;margin-top:2px}
+.sub{font-size:13px;color:var(--mute)}
+main{flex:1;overflow-y:auto;overflow-x:hidden;padding:18px 18px 28px}
+.panel{display:none}.panel.on{display:block}
+.lead{font-size:14.5px;color:var(--mute);margin-bottom:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 15px;margin-bottom:11px}
+.card h3,.st h3{font-size:15.5px;line-height:1.45;margin-bottom:3px}
+.card p,.st p{font-size:14px;color:#2b3641}
+.card.open{background:var(--amberbg);border-color:#e6d3a3}
+.card.design{border-style:dashed}
+.fig{font-size:30px;font-weight:800;color:var(--acc);line-height:1.1;margin-bottom:4px}
+.meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
+.chip{font-size:11.5px;padding:1px 9px;border-radius:99px;border:1px solid;font-weight:700}
+.chip.ok{color:var(--acc);border-color:var(--acc)}
+.chip.design{color:var(--ink);border-color:var(--mute)}
+.chip.open{color:var(--amber);border-color:var(--amber)}
+.src{font-size:12px;color:var(--mute)}
+.route{list-style:none;position:relative;margin:4px 0 14px}
+.route::before{content:"";position:absolute;inset-block:12px;inset-inline-start:15px;width:2px;background:var(--line)}
+.route li{position:relative;display:flex;gap:14px;margin-bottom:12px}
+.dot{flex:none;width:32px;height:32px;border-radius:50%;background:var(--acc);color:#fff;display:grid;place-items:center;font-weight:800;font-size:14px;z-index:1}
+.st{flex:1;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:11px 14px}
+.note{border-inline-start:3px solid var(--acc);padding:6px 12px;font-size:14px;background:var(--card)}
+.sec{font-size:16px;margin:20px 0 8px;padding-top:12px;border-top:1px solid var(--line)}
+.bars{display:flex;gap:10px;align-items:flex-end;margin:12px 0 2px;height:104px}
+.bar{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:2px}
+.bar .h{width:100%;background:var(--acc);border-radius:5px 5px 0 0;display:block}
+.bar b{font-size:15px}.bar i{font-style:normal;font-size:11px;color:var(--mute);text-align:center;line-height:1.3}
+.tabs{display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid var(--line);background:var(--card)}
+.tabs button{all:unset;cursor:pointer;text-align:center;padding:9px 2px 10px;font-size:12.5px;color:var(--mute);display:flex;flex-direction:column;align-items:center;gap:2px}
+.tabs button b{width:22px;height:22px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;font-size:11px}
+.tabs button[aria-selected=true]{color:var(--acc);font-weight:700}
+.tabs button[aria-selected=true] b{background:var(--acc);color:#fff;border-color:var(--acc)}
+.foot{margin-top:18px;font-size:12px;color:var(--mute);border-top:1px solid var(--line);padding-top:10px}
+.foot a{color:var(--acc)}
+"""
+
+JS = """
+const T=[...document.querySelectorAll('.tabs button')],P=[...document.querySelectorAll('.panel')],M=document.querySelector('main');
+function go(id){T.forEach(b=>b.setAttribute('aria-selected',b.dataset.t===id));P.forEach(p=>p.classList.toggle('on',p.id===id));M.scrollTop=0;history.replaceState(null,'','#'+id)}
+T.forEach(b=>b.onclick=()=>go(b.dataset.t));
+go(P.some(p=>p.id===location.hash.slice(1))?location.hash.slice(1):'map');
+"""
+
+panels = "".join(f'<section class="panel" id="{i}">{body}<div class="foot">المرجع: <a href="{PDF}">نظام الترخيص النمطي لتقديم خدمة توصيل الطلبات عبر المنصات الإلكترونية</a>، الهيئة الناظمة للاتصالات والبريد، ٣٤ صفحة، ٢٠٢٣. الأرقام موثقة بمادتها وصفحتها.</div></section>' for i, _t, body, _n in tabs)
+tabbar = "".join(f'<button role="tab" data-t="{i}" aria-selected="false"><b>{n}</b>{t}</button>' for i, t, _b, n in tabs)
+
+PAGE = f'''<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>منصة توصيل الطلبات: الأساس القانوني والتقني</title><style>{CSS}</style></head>
+<body><div class="app"><header class="top"><div class="kicker">وثيقة مرجعية للمؤسسين</div><h1>منصة توصيل الطلبات</h1><div class="sub">الأساس القانوني والتقني، دمشق وريف دمشق</div></header>
+<main>{panels}</main><nav class="tabs" role="tablist">{tabbar}</nav></div><script>{JS}</script></body></html>'''
+
+# --- hard checks on the final visible text ---
+text = re.sub(r"<style.*?</style>|<script.*?</script>|<[^>]+>", " ", PAGE, flags=re.S)
+banned = ["شراكة", "بدري", "Bosla", "بوصلة", "MVP", "$", "دولار", "8,000", "8k"]
+bad = [b for b in banned if b in text] + (["الأب"] if re.search(r"(?<![\u0621-\u064A])الأب(?![\u0621-\u064A])", text) else [])
+if bad: sys.exit("BUILD FAILED: banned token(s): " + ", ".join(bad))
+out = pathlib.Path(__file__).parent / "dist"; out.mkdir(exist_ok=True)
+(out / "index.html").write_text(PAGE, encoding="utf-8")
+print("ok bytes", len(PAGE), "tabs", len(tabs))
