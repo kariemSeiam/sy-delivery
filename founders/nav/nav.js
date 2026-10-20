@@ -58,7 +58,8 @@
     var list = items();
     if (!list.length) { active = -1; return; }
     active = (i + list.length) % list.length;
-    list.forEach(function (e, k) { e.toggleAttribute('data-active', k === active); });
+    panel.querySelectorAll('[data-active]').forEach(function (e) { e.removeAttribute('data-active'); });
+    list[active].setAttribute('data-active', '');
     list[active].scrollIntoView({ block: 'nearest' });
   }
   function applyFilter() {
@@ -66,7 +67,18 @@
     panel.querySelectorAll('[data-nav-item]').forEach(function (e) { e.hidden = q && e.dataset.label.indexOf(q) < 0; });
     panel.querySelectorAll('.nav-group').forEach(function (g) { g.hidden = !g.querySelector('[data-nav-item]:not([hidden])'); });
     empty.hidden = items().length > 0;
-    setActive(items().length ? 0 : -1);
+    /* A title match outranks a match buried in a description: the first item whose own
+       title equals, then starts with, then contains the query gets the cursor. */
+    var list = items(), pick = 0;
+    if (q) {
+      var title = function (e) { return e.querySelector('.nav-item-label').textContent.trim().toLowerCase(); };
+      var tiers = [function (t) { return t === q; }, function (t) { return t.indexOf(q) === 0; }, function (t) { return t.indexOf(q) >= 0; }];
+      for (var k = 0; k < tiers.length; k++) {
+        var hit = list.findIndex(function (e) { return tiers[k](title(e)); });
+        if (hit >= 0) { pick = hit; break; }
+      }
+    }
+    setActive(list.length ? pick : -1);
   }
   function open(focusSearch) {
     var d = btn.getBoundingClientRect(), p = app.getBoundingClientRect();
