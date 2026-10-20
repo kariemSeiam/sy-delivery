@@ -60,6 +60,10 @@ def src_chips(src):
     return '<div class="src">' + "".join(f"<bdi>{esc(x)}</bdi>" for x in split_src(src)) + "</div>"
 
 
+SHARE = ('<button type="button" class="share" data-share="__ID__"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+         '<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg><span>نسخ رابط هذا البند</span></button>')
+
+
 def mark(kind):
     return {"open": '<em class="mk open">غير مثبت</em>', "design": '<em class="mk design">تصميم مقترح</em>',
             "meas": '<em class="mk meas">قياس</em>'}.get(kind, "")
@@ -69,7 +73,7 @@ def row(cid, title, body_html, kind="ok", fig="", extra_cls=""):
     f = f'<span class="rf-fig">{esc(fig)}</span>' if fig else ""
     return (f'<div class="row ref {kind} {extra_cls}" id="{cid}"><button type="button">'
             f'<span class="rt">{esc(title)}{mark(kind)}</span>{f}<span class="chev">‹</span></button>'
-            f'<div class="more">{body_html}</div></div>')
+            f'<div class="more">{body_html}{SHARE.replace("__ID__", cid)}</div></div>')
 
 
 def short(s, n):
@@ -109,8 +113,9 @@ def build(groups, ASK, stations_n, CLOCK, BEFORE):
         '<h1 class="hq">المرجع الكامل</h1>'
         f'<p class="sub">{ar(ref_count)} بنداً، كل بند بمادته وصفحته. اضغط ليُفتح.</p>'
         '<div class="rtools"><input class="rfilter" type="search" placeholder="ابحث في البنود" aria-label="بحث في المرجع" autocomplete="off">'
-        '<button type="button" class="rchip" data-only="open">غير المثبت فقط</button>'
+        '<button type="button" class="rchip" data-only="open" aria-pressed="false">غير المثبت فقط</button>'
         '<button type="button" class="rchip" id="rprint">طباعة</button></div>'
+        '<p class="rcount" id="rcount" aria-live="polite"></p>'
         '<p class="rnone" hidden>لا يوجد بند بهذا الاسم.</p>'
         + ref +
         '<p class="legend">البند غير المعلَّم مأخوذ من نص رسمي. «غير مثبت» لم نقرأ نصه. «تصميم مقترح» قرار منا لا نص.</p>')
@@ -150,7 +155,7 @@ def build(groups, ASK, stations_n, CLOCK, BEFORE):
                 f'<span class="rt">{esc(name)}<span class="m">{esc(role)}</span></span><span class="chev">‹</span></button>'
                 f'<div class="more">{facts}</div></div>')
         index.append(("bodies", cid, name, role, "ok"))
-    bodies_page = ('<h1 class="hq">من يقرر ماذا؟</h1><p class="sub">خمس جهات. كل جهة وما تقرره وما تطلبه وما لم يُحسم عندها.</p>' + bod)
+    bodies_page = ('<h1 class="hq">من يقرر ماذا؟</h1><p class="sub">خمس جهات. اضغط على أي جهة لما تقرره وما تطلبه وما لم يُحسم عندها.</p>' + bod)
 
     # ============ UNKNOWN ============
     decides = {
@@ -173,7 +178,7 @@ def build(groups, ASK, stations_n, CLOCK, BEFORE):
         unk += (f'<section class="ug" data-who="{esc(w)}"><header><h3>{esc(w)}</h3><small>{esc(dk)}</small></header>{items}'
                 f'<button type="button" class="copyg">انسخ أسئلة هذه الجهة</button></section>')
     unknown_page = ('<h1 class="hq">ما الذي لم يُحسم؟</h1>'
-                    f'<p class="sub">{ar(qn)} سؤالاً على خمس جهات. اضغط على الحالة لتتبع ما أُرسل وما ورد ردّه.</p>'
+                    f'<p class="sub">{ar(qn)} سؤالاً على خمس جهات. السؤال الأول عند الهيئة الناظمة يحدد أي مسار ينطبق، فهو أول ما يُسأل. اضغط على الحالة لتتبع ما أُرسل وما ورد ردّه.</p>'
                     '<div class="ubar"><span id="ucnt"></span></div>' + unk)
 
     # ============ TODO ============
@@ -223,10 +228,14 @@ def build(groups, ASK, stations_n, CLOCK, BEFORE):
                      f'<div class="more"><p>{it["more"]}</p>{src_chips("، ".join(list(it["src"])))}</div></div>')
             index.append(("todo", cid, it["title"], it["meta"], "open" if it["unk"] else "ok"))
     todo_page = ('<h1 class="hq">ما الذي يلزم تجهيزه؟</h1>'
-                 '<p class="sub">ما يطلبه كل مسار من أوراق ووثائق. اضغط على أي بند لمصدره وتفاصيله.</p>' + todo)
+                 '<p class="sub">ثلاثة ملفات، لكل ملف أوراقه. ملف الشركة يسبق اعتمادية NAITS لأنها تطلب سجلاً تجارياً حديثاً. اضغط على أي بند لمصدره وتفاصيله.</p>' + todo)
 
     # ============ PICTURE ============
-    def tile(nn, sm, t, src): return f'<div class="tile"><span class="n">{esc(nn)}<small>{esc(sm)}</small></span><p>{esc(t)}</p><bdi>{esc(src)}</bdi></div>'
+    def tile(nn, sm, t, src):
+        # source as separate chips: 'نظام الهيئة' | 'م٤ · ص٦' so mixed digits never reorder
+        parts = [x.strip() for x in src.replace("نظام الهيئة ", "نظام الهيئة|").replace("قانون الشركات ", "قانون الشركات|").split("|")]
+        chips = "".join(f"<bdi>{esc(x)}</bdi>" for x in parts if x)
+        return f'<div class="tile"><span class="n">{esc(nn)}<small>{esc(sm)}</small></span><p>{esc(t)}</p><div class="tsrc">{chips}</div></div>'
     first_unknown = [(ASK[0][1][0], ASK[0][0]), (ASK[0][1][1], ASK[0][0]), (ASK[3][1][0], ASK[3][0])]
     head_unknown = [("أي ترخيص يحكم: قرار الوزارة ٤ أم نظام الهيئة؟", "يُسأل: وزارة الاتصالات والهيئة الناظمة"),
                     ("رسوم الهيئة بعد القرار ٢٦٤", "النص لم نقرأه · يُسأل: الهيئة الناظمة"),
@@ -234,13 +243,19 @@ def build(groups, ASK, stations_n, CLOCK, BEFORE):
     picture = (
         '<h1 class="hq">أين نحن، وما الذي يُطلب منكم؟</h1>'
         '<p class="sub">هذه الصفحة تكفي لمن لا يقرأ غيرها.</p>'
-        '<div class="strip"><div class="stp now"><i>١</i><b>تأسيس الشركة</b></div><div class="stp"><i>٢</i>الترخيص والاعتمادية</div><div class="stp"><i>٣</i>الإطلاق</div></div>'
-        '<div class="grp">ما نعرفه من النصوص الرسمية</div><div class="tiles">'
+        '<div class="strip" role="list"><div class="stp now" role="listitem"><i>١</i><b>تأسيس الشركة</b><small>نحن هنا</small></div><div class="stp" role="listitem"><i>٢</i>الترخيص والاعتمادية<small>بعد التأسيس</small></div><div class="stp" role="listitem"><i>٣</i>الإطلاق<small>بعد الترخيص</small></div></div>'
+        '<div class="stage"><div class="grp"><span class="sn">١</span>تأسيس الشركة<small>قانون الشركات ٢٩/٢٠١١</small></div><div class="tiles">'
+        + tile("٧", "أيام", "لقرار الوزير بالتصديق على نظام الشركة", "م٦٢ · ص١٨")
+        + tile("٦٠", "يوماً", "للإيداع والشهر بعد قرار التصديق", "م٦٢ · ص١٨")
+        + '</div></div>'
+        '<div class="stage"><div class="grp"><span class="sn">٢</span>الترخيص والاعتمادية<small>نظام الهيئة الناظمة · NAITS</small></div><div class="tiles">'
         + tile("٤٥", "يوماً", "مهلة الهيئة للبتّ في الطلب بعد اكتمال الوثائق", "نظام الهيئة م٤ · ص٦")
-        + tile("٦", "أشهر", "للإطلاق التجاري بعد سريان الترخيص وإلا أُلغي", "نظام الهيئة م٦ · ص١٨")
         + tile("٣٢٬٠٠٠", "ل.س جديدة", "مجموع أجور الاعتماد العادي في NAITS، حسابنا من البنود", "naits.gov.sy")
-        + tile("٧", "أيام", "لقرار الوزير بالتصديق على نظام الشركة", "قانون الشركات م٦٢ · ص١٨")
-        + '</div>'
+        + '</div></div>'
+        '<div class="stage"><div class="grp"><span class="sn">٣</span>الإطلاق<small>بعد سريان الترخيص</small></div><div class="tiles">'
+        + tile("٦", "أشهر", "للإطلاق التجاري بعد سريان الترخيص وإلا أُلغي", "نظام الهيئة م٦ · ص١٨")
+        + '<div class="tile quiet"><span class="n">؟</span><p>أول حي إطلاق وأول مطاعم: يحددها المؤسسون</p><bdi>قرار لم يُتخذ</bdi></div>'
+        + '</div></div>'
         '<div class="open-sec"><h2>ما لم يُحسم بعد</h2><ul>'
         + "".join(f"<li>{esc(a)}<span>{esc(b)}</span></li>" for a, b in head_unknown)
         + '</ul><a class="more-link" href="#unknown" data-page="unknown">كل الأسئلة ←</a></div>'
@@ -280,15 +295,15 @@ main{padding:12px 16px 120px}
 .n small{display:block;font-size:11.5px;font-weight:600;color:var(--mute);margin-top:2px}
 .chev{color:var(--mute);font-size:18px;transition:transform .2s;text-align:center}
 .row.open .chev{transform:rotate(-90deg)}
-.more{display:none;padding:2px 14px 12px;border-top:1px dashed var(--line);font-size:14px;color:#2b3640}
+.more{display:none;padding:2px 14px 12px;border-top:1px dashed var(--line);font-size:14px;color:#27303c}
 .row.open .more{display:block}
 .more p{margin-top:8px}
 .row .src,.tile+.src{display:flex;flex-wrap:wrap;gap:4px 6px;margin-top:8px;font-size:12px;color:var(--mute);background:none;border:0;padding:0}
-.src bdi{background:#efe9db;border-radius:6px;padding:0 8px}
+.src bdi{background:#e8dfca;border-radius:6px;padding:0 8px}
 .mk{font-style:normal;font-size:11px;font-weight:700;border-radius:99px;padding:0 8px;margin-inline-start:8px;border:1px solid;vertical-align:1px}
 .mk.open{color:var(--amber);border-color:var(--amber);background:var(--amberbg)}
 .mk.design{color:var(--mute);border-color:var(--mute);border-style:dashed}
-.mk.meas{color:#1e3a8a;border-color:#1e3a8a}
+.mk.meas{color:#2e6a58;border-color:#2e6a58}
 .row.ref.open-k{}
 .fact{margin-top:10px;padding-top:8px;border-top:1px dashed var(--line)}
 .fact:first-child{border-top:0}
@@ -297,19 +312,19 @@ main{padding:12px 16px 120px}
 .strip{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:6px 0 14px}
 .strip .stp{border:1px solid var(--line);background:var(--card);border-radius:10px;padding:8px 6px;text-align:center;font-size:13px;line-height:1.4}
 .strip .stp i{display:block;font-style:normal;font-weight:800;font-size:16px;color:var(--mute)}
-.strip .stp.now{border-color:var(--acc);background:#e8f1ea}.strip .stp.now i,.strip .stp.now b{color:var(--acc)}
+.strip .stp.now{border-color:var(--acc);background:#e3e8f1}.strip .stp.now i,.strip .stp.now b{color:var(--acc)}
 .tiles{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .tile{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
 .tile .n{text-align:start;font-size:28px}
 .tile .n small{display:inline;margin-inline-start:6px}
 .tile p{font-size:13.5px;line-height:1.5;margin-top:2px}
-.tile bdi{display:inline-block;margin-top:6px;background:#efe9db;border-radius:6px;padding:0 8px;font-size:11.5px;color:var(--mute)}
-.open-sec{margin-top:16px;border:1px solid #e1c98e;background:var(--amberbg);border-radius:12px;padding:12px 14px}
+.tile bdi{display:inline-block;margin-top:6px;background:#e8dfca;border-radius:6px;padding:0 8px;font-size:11.5px;color:var(--mute)}
+.open-sec{margin-top:16px;border:1px solid #e0bd98;background:var(--amberbg);border-radius:12px;padding:12px 14px}
 .open-sec h2{font-size:14px;color:var(--amber);margin-bottom:4px}
 .open-sec ul{list-style:none}
-.open-sec li{font-size:14px;padding:8px 0;border-top:1px dashed #e1c98e}
+.open-sec li{font-size:14px;padding:8px 0;border-top:1px dashed #e0bd98}
 .open-sec li:first-child{border-top:0}
-.open-sec li span{display:block;font-size:12.5px;line-height:1.6;color:#6b4600;margin-top:3px}
+.open-sec li span{display:block;font-size:12.5px;line-height:1.6;color:#6a3410;margin-top:3px}
 .more-link{display:block;margin-top:6px;font-size:13px;color:var(--amber);font-weight:700;text-decoration:none}
 .nextblk{margin-top:14px;background:var(--acc);color:#fff;border-radius:12px;padding:12px 14px}
 .nextblk b{display:block;font-size:13px;opacity:.85;margin-bottom:4px}
@@ -341,7 +356,7 @@ main{padding:12px 16px 120px}
 .pager a{grid-row:1;min-height:56px;padding:10px 12px;gap:10px}
 .pager a.prev{grid-column:1}.pager a.next{grid-column:2}
 .pager a.next{flex-direction:row-reverse;text-align:end}
-.pager .pg-ar{flex:none;width:30px;height:30px;border-radius:50%;background:#e8f1ea;color:var(--acc);display:grid;place-items:center;font-size:17px;font-weight:800;line-height:1}
+.pager .pg-ar{flex:none;width:30px;height:30px;border-radius:50%;background:#e3e8f1;color:var(--acc);display:grid;place-items:center;font-size:17px;font-weight:800;line-height:1}
 .pager .pg-tx{display:flex;flex-direction:column;min-width:0}
 .pager .pg-k{font-size:11.5px;color:var(--mute);line-height:1.3}
 .pager .pg-t{font-size:15px;font-weight:700;line-height:1.35}
@@ -365,6 +380,17 @@ JS = r"""
   var b=ev.target.closest('.row>button');if(!b)return;
   b.parentElement.classList.toggle('open');
  });
+ /* share link + deep link to one item */
+ function openItem(id){var el=document.getElementById(id);if(!el||!el.classList.contains('row'))return false;
+  var pn=el.closest('.panel');if(pn&&window.__go)window.__go(pn.id);
+  el.classList.add('open');setTimeout(function(){el.scrollIntoView({block:'center'});el.classList.remove('flash');void el.offsetWidth;el.classList.add('flash')},60);return true}
+ document.addEventListener('click',function(ev){var b=ev.target.closest('.share');if(!b)return;ev.stopPropagation();
+  var url=location.origin+location.pathname+'#'+b.getAttribute('data-share');
+  var done=function(){var sp=b.querySelector('span');var t=sp.textContent;b.classList.add('ok');sp.textContent='تم نسخ الرابط';setTimeout(function(){b.classList.remove('ok');sp.textContent=t},1800)};
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(url).then(done,function(){prompt('انسخ الرابط',url)})}else{prompt('انسخ الرابط',url)}
+ });
+ window.__openItem=openItem;
+ var h0=window.__h0||'';if(h0&&/^c-/.test(h0)){openItem(h0);window.__h0done=1}
  /* unknown questions: 0 not sent, 1 sent, 2 answered */
  var NAMES=['لم يُرسل','أُرسل','وصل الرد'];
  var uq=[].slice.call(document.querySelectorAll('.uq'));
@@ -397,9 +423,10 @@ JS = r"""
    g.hidden=!any;
   });
   none.hidden=shown>0;
+  var cn=document.getElementById('rcount');if(cn){cn.textContent=(q||only)?(fa(shown)+' من '+fa(rows.length)+' بنداً'+(only?' (غير المثبت فقط)':'')):''}
  }
  if(rf){rf.addEventListener('input',applyRef);
-  [].forEach.call(document.querySelectorAll('.rchip[data-only]'),function(c){c.addEventListener('click',function(){only=!only;c.classList.toggle('on',only);applyRef()})});
+  [].forEach.call(document.querySelectorAll('.rchip[data-only]'),function(c){c.addEventListener('click',function(){only=!only;c.classList.toggle('on',only);c.setAttribute('aria-pressed',only?'true':'false');applyRef()})});
   var p=document.getElementById('rprint');if(p)p.addEventListener('click',function(){rows.forEach(function(r){r.hidden=false});window.print()});}
  /* links inside pages */
  document.addEventListener('click',function(ev){

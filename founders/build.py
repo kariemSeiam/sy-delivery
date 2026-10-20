@@ -231,7 +231,7 @@ P5 = f'''
 if 'class="card open"' in P5: sys.exit("BUILD FAILED: unverified cards do not belong on the road")
 
 SOURCE_TABS = [("company", P2), ("licence", P3), ("platform", P4), ("ops", POPS)]   # facts, written once
-import views
+import views, identity
 _g = []
 for _tid, _html in SOURCE_TABS:
     _by = {}
@@ -244,7 +244,7 @@ tabs = [("picture", "الصورة", _pages["picture"], "١"), ("todo", "المط
         ("ref", "المرجع", _pages["ref"], "٥")]
 
 CSS = """
-:root{--paper:#f3efe6;--card:#fbf9f4;--text:#17202a;--mute:#5d6670;--line:#d9d2c3;--acc:#14532d;--amber:#8a5a00;--amberbg:#fbf1dc}
+:root{--paper:#f1ecdf;--card:#faf7ef;--text:#1b2330;--mute:#5b6270;--line:#d8cfb9;--acc:#1f3b64;--amber:#8f4a14;--amberbg:#f7e9d6}
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%}
 body{background:var(--paper);color:var(--text);font-family:"IBM Plex Sans Arabic","Cairo","Almarai","Noto Naskh Arabic",Tahoma,system-ui,sans-serif;line-height:1.75;-webkit-font-smoothing:antialiased}
@@ -258,8 +258,8 @@ main{flex:1;overflow-y:auto;overflow-x:hidden;padding:18px 18px 28px}
 .lead{font-size:14.5px;color:var(--mute);margin-bottom:14px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 15px;margin-bottom:11px}
 .card h3,.st h3{font-size:15.5px;line-height:1.45;margin-bottom:3px}
-.card p,.st p{font-size:14px;color:#2b3641}
-.card.open{background:var(--amberbg);border-color:#e6d3a3}
+.card p,.st p{font-size:14px;color:#27303c}
+.card.open{background:var(--amberbg);border-color:#e0bd98}
 .card.design{border-style:dashed}
 .fig{font-size:30px;font-weight:800;color:var(--acc);line-height:1.1;margin-bottom:4px}
 .meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
@@ -267,8 +267,8 @@ main{flex:1;overflow-y:auto;overflow-x:hidden;padding:18px 18px 28px}
 .chip.ok{color:var(--acc);border-color:var(--acc)}
 .chip.design{color:var(--text);border-color:var(--mute)}
 .chip.open{color:var(--amber);border-color:var(--amber)}
-.chip.meas{color:#1e3a8a;border-color:#1e3a8a}
-.card.meas{border-inline-start:3px solid #1e3a8a}
+.chip.meas{color:#2e6a58;border-color:#2e6a58}
+.card.meas{border-inline-start:3px solid #2e6a58}
 .src{font-size:12px;color:var(--mute)}
 .route{list-style:none;position:relative;margin:4px 0 14px}
 .route::before{content:"";position:absolute;inset-block:12px;inset-inline-start:15px;width:2px;background:var(--line)}
@@ -287,7 +287,7 @@ main{flex:1;overflow-y:auto;overflow-x:hidden;padding:18px 18px 28px}
 .tabs button[aria-selected=true]{color:var(--acc);font-weight:700}
 .tabs button[aria-selected=true] b{background:var(--acc);color:#fff;border-color:var(--acc)}
 .sec.first{border-top:0;margin-top:14px;padding-top:0}
-.dest{background:var(--text);color:#f3efe6;border-radius:14px;padding:15px 16px 14px}
+.dest{background:var(--text);color:#f1ecdf;border-radius:14px;padding:15px 16px 14px}
 .dest small{font-size:12px;opacity:.7;letter-spacing:.04em}
 .dest b{display:block;font-size:21px;line-height:1.4}
 .dest span{font-size:14px;opacity:.88}
@@ -402,7 +402,7 @@ PANEL = (f'<dialog class="nav-panel" data-navigator-panel aria-label="التنق
 NOJS = ('<noscript><style>.panel{display:block!important}.nav-dock{display:none}</style><nav class="nav-nojs" aria-label="الصفحات">'
         + "".join(f'<a href="#{i}">{esc(t)}</a>' for i, t, _b, _n in tabs) + '</nav></noscript>')
 
-CSS += views.CSS + NAVCSS + """
+CSS = identity.FONTS + CSS + views.CSS + NAVCSS + identity.CSS + """
 .app{position:relative}
 main{padding-bottom:104px}
 .flash{animation:flash 1.6s var(--ease-out-expo)}
@@ -415,18 +415,18 @@ const P=[...document.querySelectorAll('.panel')],M=document.querySelector('main'
 function go(id){
   if(!P.some(p=>p.id===id))id='picture';
   P.forEach(p=>p.classList.toggle('on',p.id===id));
-  M.scrollTop=0; history.replaceState(null,'','#'+id);
+  M.scrollTop=0; if(!(window.__h0&&/^c-/.test(window.__h0)&&!window.__h0done))history.replaceState(null,'','#'+id);
   const i=P.findIndex(p=>p.id===id); K.innerHTML='<span class="kn">'+NAMES[id]+'</span><span class="kp">صفحة '+(i+1).toLocaleString('ar-EG')+' من '+P.length.toLocaleString('ar-EG')+'</span>';
   if(window.__navSync)window.__navSync(id);else window.__navPending=id;
 }
 window.__go=go;
-go(location.hash.slice(1)||'picture');
+window.__h0=location.hash.slice(1);go(window.__h0&&!/^c-/.test(window.__h0)?window.__h0:'picture');
 """ % json.dumps({i: t for i, t, _b, _n in tabs}, ensure_ascii=False)
 
 PAGE = f'''<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>منصة توصيل الطلبات: الأساس القانوني والتقني</title><script>document.documentElement.classList.add('js')</script><style>{CSS}</style></head>
-<body>{NOJS}<div class="app"><header class="top"><h1>منصة توصيل الطلبات</h1><div class="kicker">وثيقة مرجعية للمؤسسين</div></header>
+<title>منصة توصيل الطلبات: الأساس القانوني والتقني</title><meta name="description" content="مرجع موثق للمؤسسين: ما يلزم لإطلاق منصة توصيل طلبات في دمشق وريفها، كل رقم بمادته وصفحته."><meta name="theme-color" content="#f3efe4"><meta property="og:type" content="website"><meta property="og:locale" content="ar_AR"><meta property="og:title" content="منصة توصيل الطلبات: الأساس القانوني والتقني"><meta property="og:description" content="مرجع موثق للمؤسسين، كل رقم بمادته وصفحته."><meta property="og:url" content="https://syria.kariem.dev/"><meta property="og:image" content="https://syria.kariem.dev/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%277%27 fill=%27%231f3b64%27/%3E%3Cpath d=%27M16 6l8 3v6c0 5-3.4 8.4-8 11-4.6-2.6-8-6-8-11V9z%27 fill=%27none%27 stroke=%27%23f3efe4%27 stroke-width=%272%27 stroke-linejoin=%27round%27/%3E%3Cpath d=%27M12.5 16l2.6 2.6 5-5%27 fill=%27none%27 stroke=%27%23f3efe4%27 stroke-width=%272%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27/%3E%3C/svg%3E"><script>document.documentElement.classList.add('js')</script><style>{CSS}</style></head>
+<body>{NOJS}<div class="app"><header class="top"><div class="mast"><h1>منصة توصيل الطلبات</h1><div class="kicker">وثيقة مرجعية للمؤسسين</div></div></header>
 <main>{panels}</main>{DOCK}{PANEL}</div><script type="application/json" id="nav-data">{navdata}</script><script>{JS}</script><script>{NAVJS}</script><script>{views.JS}</script></body></html>'''
 
 # --- hard checks on the final visible text ---
@@ -436,5 +436,10 @@ bad = [b for b in banned if b in text] + (["الأب"] if re.search(r"(?<![\u062
 if bad: sys.exit("BUILD FAILED: banned token(s): " + ", ".join(bad))
 if "[truncated]" in PAGE: sys.exit("BUILD FAILED: truncated literal")
 out = HERE / "dist"; out.mkdir(exist_ok=True)
+# U+00B7 renders as an Arabic-Indic zero (٠) in IBM Plex Sans Arabic on Android, which reads as a
+# wrong number ("٤/٥٠"). Never ship it: comma inside source chips, en dash everywhere else.
+import re as _re
+PAGE = _re.sub(r"<bdi>([^<]*)</bdi>", lambda m: "<bdi>" + m.group(1).replace(" \u00b7 ", "\u060c ") + "</bdi>", PAGE)
+PAGE = PAGE.replace(" \u00b7 ", " \u2013 ").replace("\u00b7", "\u2013")
 (out / "index.html").write_text(PAGE, encoding="utf-8")
 print("ok bytes", len(PAGE), "tabs", len(tabs), "indexed items", len(index))

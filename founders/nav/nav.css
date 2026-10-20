@@ -3,7 +3,7 @@
    to this page's palette. Colours resolve through --accent/--ink/--canvas
    triples, nothing hardcoded except white for glass. */
 :root{
-  --accent:20 83 45; --ink:23 32 42; --canvas:243 239 230;
+  --accent:31 59 100; --ink:23 32 42; --canvas:243 239 230;
   --canvas-secondary:251 249 244; --canvas-tertiary:236 231 219;
   --border:217 210 195; --border-secondary:228 222 208;
   --ink-secondary:93 102 112; --ink-tertiary:128 136 144;
@@ -146,10 +146,10 @@ html.js .nav-compass{display:inline-flex}
 .nav-item-bearing path{fill:rgb(var(--accent));transform:rotate(var(--bearing,0deg));transform-origin:center}
 /* The status dot is the same encoding the cards use: verified / proposed / unverified / measured. */
 .sdot{flex:none;inline-size:9px;block-size:9px;border-radius:50%;border:1.5px solid}
-.sdot.ok{background:#14532d;border-color:#14532d}
-.sdot.design{background:transparent;border-color:#5d6670;border-style:dashed}
-.sdot.open{background:#8a5a00;border-color:#8a5a00}
-.sdot.meas{background:#1e3a8a;border-color:#1e3a8a}
+.sdot.ok{background:#1f3b64;border-color:#1f3b64}
+.sdot.design{background:transparent;border-color:#5b6270;border-style:dashed}
+.sdot.open{background:#8f4a14;border-color:#8f4a14}
+.sdot.meas{background:#2e6a58;border-color:#2e6a58}
 .nav-empty{padding:1.5rem 1rem;text-align:center;font-size:.85rem;color:rgb(var(--ink-tertiary))}
 .nav-empty[hidden]{display:none}
 .nav-foot{display:flex;gap:1rem;padding:.55rem 1rem;border-top:1px solid rgb(var(--border-secondary));background:rgb(var(--canvas-tertiary));font-size:.7rem;color:rgb(var(--ink-tertiary))}

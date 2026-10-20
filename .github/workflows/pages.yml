@@ -29,6 +29,7 @@ jobs:
           python3 proposal/build.py
           mkdir -p site/proposal
           cp founders/dist/index.html site/index.html
+          cp founders/assets/og.png site/og.png
           cp proposal/dist/index.html site/proposal/index.html
           echo "syria.kariem.dev" > site/CNAME
       - uses: actions/configure-pages@v5
