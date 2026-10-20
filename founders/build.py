@@ -4,7 +4,7 @@ Law: every 'ok' (verified) item MUST carry a source (article + page). The build 
 Source of truth: SYTRA model licence for order-delivery platforms, 34 pp, 2023 (read as page images 2026-10-20).
 No builder fee, no equity, no 'partnership', no personal titles anywhere in this file.
 """
-import html, re, sys, pathlib
+import html, re, sys, pathlib, json
 
 PDF = "https://sytpra.gov.sy/public/uploads/files/%D8%AE%D8%AF%D9%85%D8%A7%D8%AA%20%D8%A7%D9%84%D8%A7%D8%AA%D8%B5%D8%A7%D9%84%D8%A7%D8%AA/%D8%A7%D9%84%D8%AA%D8%B1%D8%A7%D8%AE%D9%8A%D8%B5%20%D8%A7%D9%84%D9%86%D9%85%D8%B7%D9%8A%D8%A9%20%D8%A7%D8%AA%D8%B5%D8%A7%D9%84%D8%A7%D8%AA/7.pdf"
 
@@ -178,20 +178,128 @@ T.forEach(b=>b.onclick=()=>go(b.dataset.t));
 go(P.some(p=>p.id===location.hash.slice(1))?location.hash.slice(1):'map');
 """
 
-panels = "".join(f'<section class="panel" id="{i}">{body}<div class="foot">المرجع: <a href="{PDF}">نظام الترخيص النمطي لتقديم خدمة توصيل الطلبات عبر المنصات الإلكترونية</a>، الهيئة الناظمة للاتصالات والبريد، ٣٤ صفحة، ٢٠٢٣. الأرقام موثقة بمادتها وصفحتها.</div></section>' for i, _t, body, _n in tabs)
-tabbar = "".join(f'<button role="tab" data-t="{i}" aria-selected="false"><b>{n}</b>{t}</button>' for i, t, _b, n in tabs)
+
+# ================= NAVIGATOR (the FAB) =================
+# The bottom tab bar is gone: the compass dock replaces it, exactly as on me.kariem.dev.
+HERE = pathlib.Path(__file__).parent
+sys.path.insert(0, str(HERE))
+from nav.compass import dial_svg
+
+NAVCSS = (HERE / "nav" / "nav.css").read_text(encoding="utf-8")
+NAVJS = (HERE / "nav" / "nav.js").read_text(encoding="utf-8")
+
+# one bearing per page, evenly round the dial; the hint says what the page answers
+PAGEMETA = {
+    "map": (0, "الطريق من الفكرة إلى أول طلب"),
+    "company": (72, "من يحمل الترخيص ويتحمل المسؤولية"),
+    "licence": (144, "شروط الهيئة والرسوم والمدد"),
+    "platform": (216, "ما الذي يُبنى وأين يُستضاف"),
+    "road": (288, "الخطوات التالية وما لم يثبت"),
+}
+TABLABEL = {i: t for i, t, _b, _n in tabs}
+plain = lambda s: re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", s)).strip()
+
+index = []          # every addressable item: (tab, id, title, line, kind)
+def annotate(tab, body):
+    n = [0]
+    def card_sub(m):
+        n[0] += 1; cid = f"c-{tab}-{n[0]}"
+        inner = m.group(2)
+        t = re.search(r"<h3>(.*?)</h3>", inner, re.S); p = re.search(r"<p>(.*?)</p>", inner, re.S)
+        index.append((tab, cid, plain(t.group(1)), plain(p.group(1)) if p else "", m.group(1)))
+        return f'<article id="{cid}" class="card {m.group(1)}">{inner}</article>'
+    def st_sub(m):
+        chip = re.search(r'class="chip (\w+)"', m.group(1))
+        if not chip: return m.group(0)
+        n[0] += 1; cid = f"c-{tab}-{n[0]}"
+        t = re.search(r"<h3>(.*?)</h3>", m.group(1), re.S); p = re.search(r"<p>(.*?)</p>", m.group(1), re.S)
+        index.append((tab, cid, plain(t.group(1)), plain(p.group(1)) if p else "", chip.group(1)))
+        return f'<li id="{cid}">{m.group(1)}</li>'
+    body = re.sub(r'<article class="card (\w+)">(.*?)</article>', card_sub, body, flags=re.S)
+    body = re.sub(r"<li>(.*?)</li>", st_sub, body, flags=re.S)
+    return body
+
+order = [i for i, *_ in tabs]
+panels = ""
+for k, (i, t, body, nn) in enumerate(tabs):
+    body = annotate(i, body)
+    prev_i = order[k - 1] if k > 0 else None
+    next_i = order[k + 1] if k < len(order) - 1 else None
+    def pg(target, kind):
+        if not target: return ""
+        b = PAGEMETA[target][0]
+        arrow = "السابق" if kind == "prev" else "التالي"
+        return (f'<a class="{kind}" href="#{target}" data-page="{target}"><span class="nav-item-bearing" style="--bearing:{b}deg" aria-hidden="true">'
+                f'<svg viewBox="0 0 16 16" width="22" height="22"><circle cx="8" cy="8" r="6.4"/><path d="M8 2.6 L9.7 8 L6.3 8 Z"/></svg></span>'
+                f'<span><span class="pg-k">{arrow}</span><br><span class="pg-t">{esc(TABLABEL[target])}</span></span></a>')
+    pager = f'<nav class="pager" aria-label="التنقل بين الصفحات">{pg(next_i, "next") or ""}{pg(prev_i, "prev") or ""}</nav>'
+    panels += (f'<section class="panel" id="{i}" aria-label="{esc(t)}">{body}{pager}'
+               f'<div class="foot">المرجع: <a href="{PDF}">نظام الترخيص النمطي لتقديم خدمة توصيل الطلبات عبر المنصات الإلكترونية</a>، '
+               f'الهيئة الناظمة للاتصالات والبريد، ٣٤ صفحة، ٢٠٢٣. الأرقام موثقة بمادتها وصفحتها.</div></section>')
+
+page_items = "".join(
+    f'<a class="nav-item" href="#{i}" data-nav-item data-page="{i}" data-label="{esc((t + " " + PAGEMETA[i][1]).lower())}">'
+    f'<span class="nav-item-bearing" style="--bearing:{PAGEMETA[i][0]}deg" aria-hidden="true"><svg viewBox="0 0 16 16" width="15" height="15">'
+    f'<circle cx="8" cy="8" r="6.4"/><path d="M8 2.6 L9.7 8 L6.3 8 Z"/></svg></span>'
+    f'<span class="nav-item-body"><span class="nav-item-label">{esc(t)}</span><span class="nav-item-hint">{esc(PAGEMETA[i][1])}</span></span>'
+    f'<span class="nav-item-meta">{PAGEMETA[i][0]}°</span></a>'
+    for i, t, _b, _n in tabs)
+item_rows = "".join(
+    f'<a class="nav-item" href="#{tab}" data-nav-item data-page="{tab}" data-card="{cid}" data-label="{esc((title + " " + line + " " + TABLABEL[tab]).lower())}">'
+    f'<span class="sdot {kind}" aria-hidden="true"></span>'
+    f'<span class="nav-item-body"><span class="nav-item-label">{esc(title)}</span><span class="nav-item-hint">{esc(line[:90])}</span></span>'
+    f'<span class="nav-item-meta">{esc(TABLABEL[tab])}</span></a>'
+    for tab, cid, title, line, kind in index)
+navdata = json.dumps({i: {"bearing": PAGEMETA[i][0], "label": t} for i, t, _b, _n in tabs}, ensure_ascii=False)
+
+SEARCH_SVG = '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="16.5" y1="16.5" x2="21" y2="21"></line></svg>'
+DOCK = (f'<div class="nav-dock"><span class="nav-dock-hint" aria-hidden="true"><span class="nav-dock-place">الخريطة</span></span>'
+        f'<button type="button" class="nav-compass" data-navigator-open aria-haspopup="dialog" aria-expanded="false" '
+        f'aria-keyshortcuts="Meta+K Control+K" aria-label="فتح التنقل" style="--bearing:0deg;--ring-c:{__import__("nav.compass",fromlist=["x"]).RING_C}">{dial_svg()}</button></div>')
+PANEL = (f'<dialog class="nav-panel" data-navigator-panel aria-label="التنقل" tabindex="-1"><div class="nav-panel-inner" tabindex="-1">'
+         f'<div class="nav-search">{SEARCH_SVG}<input type="text" name="destination" data-navigator-filter placeholder="إلى أين؟" aria-label="بحث في الصفحات والبنود" '
+         f'autocomplete="off" autocapitalize="off" autocorrect="off" enterkeyhint="go" spellcheck="false"><kbd>esc</kbd></div>'
+         f'<div class="nav-results" data-navigator-results>'
+         f'<section class="nav-group" data-group="pages"><h2>الصفحات</h2>{page_items}</section>'
+         f'<section class="nav-group" data-group="items"><h2>كل البنود</h2>{item_rows}</section>'
+         f'<p class="nav-empty" data-navigator-empty hidden>لا يوجد بند بهذا الاسم.</p></div>'
+         f'<footer class="nav-foot"><span><kbd>↑</kbd><kbd>↓</kbd> تنقل</span><span><kbd>↵</kbd> انتقال</span></footer></div></dialog>')
+NOJS = ('<noscript><style>.panel{display:block!important}.nav-dock{display:none}</style><nav class="nav-nojs" aria-label="الصفحات">'
+        + "".join(f'<a href="#{i}">{esc(t)}</a>' for i, t, _b, _n in tabs) + '</nav></noscript>')
+
+CSS += NAVCSS + """
+.app{position:relative}
+main{padding-bottom:104px}
+.flash{animation:flash 1.6s var(--ease-out-expo)}
+@keyframes flash{0%{box-shadow:0 0 0 3px rgb(var(--accent)/.55)}100%{box-shadow:0 0 0 3px rgb(var(--accent)/0)}}
+.kicker .pos{color:var(--mute);font-weight:600;margin-inline-start:6px}
+"""
+
+JS = """
+const P=[...document.querySelectorAll('.panel')],M=document.querySelector('main'),K=document.querySelector('.kicker'),NAMES=%s;
+function go(id){
+  if(!P.some(p=>p.id===id))id='map';
+  P.forEach(p=>p.classList.toggle('on',p.id===id));
+  M.scrollTop=0; history.replaceState(null,'','#'+id);
+  const i=P.findIndex(p=>p.id===id); K.innerHTML='وثيقة مرجعية للمؤسسين<span class="pos">· '+NAMES[id]+' · '+(i+1).toLocaleString('ar-EG')+' من '+P.length.toLocaleString('ar-EG')+'</span>';
+  if(window.__navSync)window.__navSync(id);else window.__navPending=id;
+}
+window.__go=go;
+go(location.hash.slice(1)||'map');
+""" % json.dumps({i: t for i, t, _b, _n in tabs}, ensure_ascii=False)
 
 PAGE = f'''<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>منصة توصيل الطلبات: الأساس القانوني والتقني</title><style>{CSS}</style></head>
-<body><div class="app"><header class="top"><div class="kicker">وثيقة مرجعية للمؤسسين</div><h1>منصة توصيل الطلبات</h1><div class="sub">الأساس القانوني والتقني، دمشق وريف دمشق</div></header>
-<main>{panels}</main><nav class="tabs" role="tablist">{tabbar}</nav></div><script>{JS}</script></body></html>'''
+<title>منصة توصيل الطلبات: الأساس القانوني والتقني</title><script>document.documentElement.classList.add('js')</script><style>{CSS}</style></head>
+<body>{NOJS}<div class="app"><header class="top"><div class="kicker">وثيقة مرجعية للمؤسسين</div><h1>منصة توصيل الطلبات</h1><div class="sub">الأساس القانوني والتقني، دمشق وريف دمشق</div></header>
+<main>{panels}</main>{DOCK}{PANEL}</div><script type="application/json" id="nav-data">{navdata}</script><script>{JS}</script><script>{NAVJS}</script></body></html>'''
 
 # --- hard checks on the final visible text ---
 text = re.sub(r"<style.*?</style>|<script.*?</script>|<[^>]+>", " ", PAGE, flags=re.S)
 banned = ["شراكة", "بدري", "Bosla", "بوصلة", "MVP", "$", "دولار", "8,000", "8k"]
 bad = [b for b in banned if b in text] + (["الأب"] if re.search(r"(?<![\u0621-\u064A])الأب(?![\u0621-\u064A])", text) else [])
 if bad: sys.exit("BUILD FAILED: banned token(s): " + ", ".join(bad))
-out = pathlib.Path(__file__).parent / "dist"; out.mkdir(exist_ok=True)
+if "[truncated]" in PAGE: sys.exit("BUILD FAILED: truncated literal")
+out = HERE / "dist"; out.mkdir(exist_ok=True)
 (out / "index.html").write_text(PAGE, encoding="utf-8")
-print("ok bytes", len(PAGE), "tabs", len(tabs))
+print("ok bytes", len(PAGE), "tabs", len(tabs), "indexed items", len(index))

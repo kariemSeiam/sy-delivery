@@ -1,0 +1,175 @@
+/* Navigator for the founders site: the instrument from me.kariem.dev
+   (Compass.astro + the dock in Layout.astro + NavigatorPanel.astro), re-tokened
+   to this page's palette. Colours resolve through --accent/--ink/--canvas
+   triples, nothing hardcoded except white for glass. */
+:root{
+  --accent:20 83 45; --ink:23 32 42; --canvas:243 239 230;
+  --canvas-secondary:251 249 244; --canvas-tertiary:236 231 219;
+  --border:217 210 195; --border-secondary:228 222 208;
+  --ink-secondary:93 102 112; --ink-tertiary:128 136 144;
+  --ease-out-expo:cubic-bezier(.16,1,.3,1); --ease-out-back:cubic-bezier(.34,1.56,.64,1);
+  --shadow-soft-sm:0 2px 8px rgba(0,0,0,.04),0 4px 16px rgba(0,0,0,.04);
+  --shadow-soft-xl:0 16px 48px rgba(0,0,0,.1),0 32px 80px rgba(0,0,0,.08);
+  --spring:linear(0,.38 8%,.9 18%,1.12 29%,1.08 37%,.965 48%,.99 58%,1.006 70%,1);
+}
+
+/* ── Dock: the housing. Glass, thickness from a lit top edge and a shaded bottom edge ── */
+.nav-dock{
+  --dial:3rem; --lift-hi:.9; --lift-lo:.06; --lift-drop:.16; --dock-glow:0 0 0 0 rgb(var(--accent)/0);
+  position:absolute; z-index:40; display:flex; align-items:center; justify-content:center;
+  inset-block-end:calc(1rem + env(safe-area-inset-bottom,0px)); inset-inline-end:1rem;
+  padding:.2rem; border:1px solid rgb(var(--border)); border-radius:9999px;
+  background:rgb(var(--canvas)/.72); -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px);
+  box-shadow:inset 0 1px 0 rgb(255 255 255/var(--lift-hi)),inset 0 -1px 0 rgb(0 0 0/var(--lift-lo)),
+    var(--shadow-soft-sm),0 10px 22px -10px rgb(0 0 0/var(--lift-drop)),var(--dock-glow);
+  transition:border-color .3s var(--ease-out-expo),box-shadow .3s var(--ease-out-expo),
+    translate .4s var(--ease-out-expo),scale .45s var(--ease-out-back),opacity .25s var(--ease-out-expo);
+}
+@media (hover:hover){.nav-dock:hover{border-color:rgb(var(--accent)/.5);--dock-glow:0 0 22px -6px rgb(var(--accent)/.42)}}
+.nav-dock:has(.nav-compass:active){
+  scale:.94;
+  box-shadow:inset 0 2px 7px rgb(0 0 0/.3),inset 0 -1px 0 rgb(255 255 255/.05),var(--shadow-soft-sm);
+  transition:border-color .3s var(--ease-out-expo),box-shadow .1s var(--ease-out-expo),scale .12s var(--ease-out-expo);
+}
+/* Going down the page the dock gets out of the way; it returns on the first upward move. */
+.nav-dock.is-stowed:not(:has(:focus-visible)){translate:0 calc(100% + 2rem);scale:.86;opacity:0;pointer-events:none}
+.nav-dock-hint{
+  display:flex; align-items:center; max-width:0; overflow:hidden; white-space:nowrap; opacity:0;
+  font-size:.74rem; color:rgb(var(--ink-tertiary));
+  transition:max-width .4s var(--ease-out-expo),opacity .3s var(--ease-out-expo),padding-inline .4s var(--ease-out-expo);
+}
+.nav-dock:hover .nav-dock-hint,.nav-dock:focus-within .nav-dock-hint{max-width:16rem;opacity:1;padding-inline:.7rem}
+.nav-dock-place{color:rgb(var(--ink-secondary))}
+@media (hover:none){.nav-dock-hint{display:none}}
+html:not(.js) .nav-dock{display:none}
+
+/* ── Compass ── */
+.nav-compass{
+  --glint-a:.7; --sheen-a:.5; --rim-c:15 23 42; --rim-a:.11; --bezel-hi-a:.95; --bezel-lo-a:.12; --dish-a:.09;
+  --face-hi:color-mix(in srgb,rgb(var(--canvas)) 55%,white);
+  --face-edge:color-mix(in srgb,rgb(var(--canvas)) 94%,rgb(var(--ink)));
+  display:none; position:relative; inline-size:var(--dial); block-size:var(--dial);
+  padding:0; border:0; border-radius:50%; background:none; color:rgb(var(--ink-secondary));
+  cursor:pointer; touch-action:manipulation; -webkit-tap-highlight-color:transparent;
+}
+html.js .nav-compass{display:inline-flex}
+.nav-compass::after{content:"";position:absolute;inset:-.27rem;border-radius:50%}
+.nav-dial{display:block;inline-size:100%;block-size:100%;overflow:visible}
+.nav-gauge{position:absolute;inset:0;inline-size:100%;block-size:100%;overflow:visible;pointer-events:none;will-change:transform}
+
+.nav-bezel{fill:rgb(var(--ink)/.045);stroke:rgb(var(--ink)/.22);stroke-width:.9}
+.nav-bezel-glint{fill:none;stroke:url(#nav-glint-fill);stroke-opacity:var(--bezel-hi-a);stroke-width:1;stroke-linecap:round}
+.nav-bezel-shade{fill:none;stroke:rgb(var(--rim-c));stroke-opacity:var(--bezel-lo-a);stroke-width:1;stroke-linecap:round}
+.nav-grad{fill:none;stroke:rgb(var(--ink)/.34);stroke-width:.8;stroke-linecap:round}
+.nav-grad.quarter{stroke:rgb(var(--ink)/.62);stroke-width:1.15}
+.nav-grad.north{stroke:rgb(var(--accent));stroke-width:1.6}
+.nav-ring-track{fill:none;stroke:rgb(var(--ink)/.11);stroke-width:1.9}
+
+/* The depth gauge: starts at 12 o'clock, has a 6% floor so an empty ring never reads as a spinner. */
+.nav-ring-fill,.nav-bead,.nav-bead-halo{
+  fill:none; stroke-linecap:round; transform:rotate(-90deg); transform-origin:center;
+  stroke-dasharray:var(--ring-c);
+  stroke-dashoffset:calc(var(--ring-c) * 1px * (1 - max(var(--depth,0),.06)));
+}
+.nav-ring-fill{stroke:rgb(var(--accent));stroke-width:1.9}
+.nav-bead-halo,.nav-bead{stroke-dasharray:0 var(--ring-c)}
+.nav-bead-halo{stroke:rgb(var(--canvas));stroke-width:5.1}
+.nav-bead{stroke:rgb(var(--accent));stroke-width:3.3}
+
+.nav-face{fill:url(#nav-face-fill);stroke:rgb(var(--ink)/.2);stroke-width:.8}
+.nav-sheen{fill:url(#nav-sheen-fill);pointer-events:none}
+.nav-sheen-a{stop-color:rgb(255 255 255);stop-opacity:var(--sheen-a)}
+.nav-sheen-b{stop-color:rgb(255 255 255);stop-opacity:0}
+.nav-dish{fill:none;stroke:rgb(0 0 0);stroke-opacity:var(--dish-a);stroke-width:1.9;stroke-linecap:round}
+.nav-face-a{stop-color:var(--face-hi)}
+.nav-face-b{stop-color:var(--face-edge)}
+.nav-cardinals{fill:none;stroke:rgb(var(--ink)/.3);stroke-width:1.1;stroke-linecap:round}
+.nav-glint{fill:none;stroke:url(#nav-glint-fill);stroke-opacity:var(--glint-a);stroke-width:1.2;stroke-linecap:round}
+.nav-rim{fill:none;stroke:rgb(var(--rim-c));stroke-opacity:var(--rim-a);stroke-width:1.1;stroke-linecap:round}
+
+/* The needle turns to the bearing of the page you are on, on a damped spring (the site's signature). */
+.nav-needle{transform-box:view-box;transform-origin:50% 50%;transform:rotate(var(--bearing,0deg));
+  transition:transform 1.5s var(--spring)}
+.nav-cast polygon{fill:rgb(0 0 0);fill-opacity:.32}
+.nav-point-lit{fill:rgb(var(--accent))}
+.nav-point-shade{fill:color-mix(in srgb,rgb(var(--accent)) 64%,black)}
+.nav-tail-lit{fill:rgb(var(--ink)/.34)}
+.nav-tail-shade{fill:rgb(var(--ink)/.55)}
+.nav-hub{fill:rgb(var(--canvas));stroke:rgb(var(--ink)/.5);stroke-width:.9}
+.nav-jewel{fill:url(#nav-jewel-fill)}
+.nav-jewel-a{stop-color:color-mix(in srgb,rgb(var(--accent)) 40%,white)}
+.nav-jewel-b{stop-color:rgb(var(--accent))}
+.nav-jewel-c{stop-color:color-mix(in srgb,rgb(var(--accent)) 62%,black)}
+.nav-jewel-glint{fill:rgb(255 255 255);fill-opacity:.85}
+
+.nav-compass:focus-visible{outline:2px solid rgb(var(--accent));outline-offset:3px}
+.nav-compass:focus-visible .nav-ring-track{stroke:rgb(var(--accent)/.34)}
+.nav-compass:focus-visible .nav-grad:not(.north){stroke:rgb(var(--accent)/.75)}
+@media (hover:hover){
+  .nav-compass:hover .nav-ring-track{stroke:rgb(var(--accent)/.34)}
+  .nav-compass:hover .nav-grad:not(.north){stroke:rgb(var(--accent)/.75)}
+}
+.nav-compass:active .nav-glint{stroke-opacity:calc(var(--glint-a) * .35)}
+.nav-ring-track,.nav-grad{transition:stroke .3s var(--ease-out-expo)}
+
+/* ── Panel: a boring, keyboard-first list inside a native <dialog> ── */
+.nav-panel{
+  width:min(34rem,calc(100vw - 2rem)); max-height:min(32rem,calc(var(--nav-vvh,100dvh) - 7rem));
+  margin:0 auto; margin-top:clamp(2.5rem,calc(var(--nav-vvh,100dvh) * .1),7rem); padding:0;
+  border:1px solid rgb(var(--border)); border-radius:16px; background:rgb(var(--canvas-secondary));
+  color:rgb(var(--ink)); box-shadow:var(--shadow-soft-xl); overflow:hidden;
+}
+.nav-panel::backdrop{background:rgb(var(--canvas)/.6);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.nav-panel[open]{transform-origin:var(--nav-from,0% 100%);animation:nav-panel-in .36s var(--ease-out-back)}
+@keyframes nav-panel-in{from{opacity:0;transform:scale(.9)}}
+.nav-panel-inner{display:flex;flex-direction:column;max-height:inherit}
+.nav-search{display:flex;align-items:center;gap:.6rem;padding:.85rem 1rem;border-bottom:1px solid rgb(var(--border-secondary));color:rgb(var(--ink-tertiary))}
+.nav-search svg,.nav-search kbd{flex:none}
+.nav-search input{flex:1;min-width:0;border:0;background:transparent;color:rgb(var(--ink));font:inherit;font-size:.95rem;outline:none}
+.nav-search input::placeholder{color:rgb(var(--ink-tertiary))}
+@media (hover:none){.nav-search kbd{display:none}}
+.nav-results{overflow-y:auto;padding:.4rem 0;scrollbar-width:none}
+.nav-results::-webkit-scrollbar{display:none}
+.nav-group[hidden]{display:none}
+.nav-group h2{padding:.6rem 1rem .35rem;font-size:.7rem;font-weight:700;letter-spacing:.04em;color:rgb(var(--ink-tertiary))}
+.nav-item{display:flex;align-items:center;gap:.7rem;width:100%;padding:.5rem 1rem;text-align:start;text-decoration:none;color:inherit;border:0;background:transparent;font:inherit;cursor:pointer}
+.nav-item[hidden]{display:none}
+.nav-item:hover,.nav-item[data-active]{background:rgb(var(--accent)/.09)}
+.nav-item[data-active]{box-shadow:inset -2px 0 0 rgb(var(--accent))}
+.nav-item[aria-current="page"] .nav-item-label{color:rgb(var(--accent))}
+.nav-item-body{display:flex;min-width:0;flex:1;flex-direction:column}
+.nav-item-label{font-size:.92rem;font-weight:600;color:rgb(var(--ink));line-height:1.5}
+.nav-item-hint{overflow:hidden;font-size:.76rem;color:rgb(var(--ink-tertiary));text-overflow:ellipsis;white-space:nowrap}
+.nav-item-meta{flex-shrink:0;font-size:.72rem;color:rgb(var(--ink-tertiary))}
+.nav-item-bearing svg{display:block}
+.nav-item-bearing circle{fill:none;stroke:rgb(var(--border));stroke-width:1.2}
+.nav-item-bearing path{fill:rgb(var(--accent));transform:rotate(var(--bearing,0deg));transform-origin:center}
+/* The status dot is the same encoding the cards use: verified / proposed / unverified / measured. */
+.sdot{flex:none;inline-size:9px;block-size:9px;border-radius:50%;border:1.5px solid}
+.sdot.ok{background:#14532d;border-color:#14532d}
+.sdot.design{background:transparent;border-color:#5d6670;border-style:dashed}
+.sdot.open{background:#8a5a00;border-color:#8a5a00}
+.sdot.meas{background:#1e3a8a;border-color:#1e3a8a}
+.nav-empty{padding:1.5rem 1rem;text-align:center;font-size:.85rem;color:rgb(var(--ink-tertiary))}
+.nav-empty[hidden]{display:none}
+.nav-foot{display:flex;gap:1rem;padding:.55rem 1rem;border-top:1px solid rgb(var(--border-secondary));background:rgb(var(--canvas-tertiary));font-size:.7rem;color:rgb(var(--ink-tertiary))}
+@media (max-width:30rem){.nav-foot{display:none}}
+.nav-foot kbd,.nav-search kbd{padding:.05rem .3rem;border:1px solid rgb(var(--border));border-radius:4px;background:rgb(var(--canvas));font-family:ui-monospace,monospace;font-size:.65rem;color:rgb(var(--ink-tertiary))}
+.nav-nojs{display:flex;flex-wrap:wrap;gap:1rem;padding:.6rem 18px;border-bottom:1px solid rgb(var(--border));font-size:.85rem}
+.nav-nojs a{color:rgb(var(--accent));text-decoration:none}
+
+/* ── Pager: where else can I go, at the foot of every page ── */
+.pager{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:22px}
+.pager a{display:flex;align-items:center;gap:10px;padding:11px 13px;border:1px solid rgb(var(--border));border-radius:12px;background:rgb(var(--canvas-secondary));color:inherit;text-decoration:none;transition:border-color .3s var(--ease-out-expo)}
+.pager a:hover{border-color:rgb(var(--accent)/.5)}
+.pager a.next{grid-column:2}
+.pager a.prev{grid-column:1}
+.pager .pg-k{font-size:.7rem;color:rgb(var(--ink-tertiary))}
+.pager .pg-t{font-size:.92rem;font-weight:700;line-height:1.35}
+.pager .nav-item-bearing{flex:none}
+
+@media (prefers-reduced-motion:reduce){
+  .nav-needle{transition:none}
+  .nav-panel[open]{animation:none}
+  .nav-dock,.nav-ring-track,.nav-grad{transition:none}
+}
