@@ -30,7 +30,8 @@ def parse_cards(panel_html):
         fig = re.search(r'<div class="fig">(.*?)</div>', inner, re.S)
         title = re.search(r"<h3>(.*?)</h3>", inner, re.S).group(1)
         p = re.search(r"<p>(.*?)</p>", inner, re.S)
-        src = re.search(r'<span class="src">(.*?)</span>', inner, re.S)
+        srcs = re.findall(r'<span class="src">(.*?)</span>', inner, re.S)
+        src = re.match(r"(.*)", srcs[-1], re.S) if srcs else None
         extra = re.search(r'(<div class="bars">.*?)<div class="meta">', inner, re.S)
         out.append(dict(group=group, kind=kind, title=plain(title), line=p.group(1) if p else "",
                         src=plain(src.group(1)) if src else "", fig=plain(fig.group(1)) if fig else "",
@@ -250,6 +251,11 @@ def build(groups, ASK, stations_n, CLOCK, BEFORE):
         '<a href="#todo" data-page="todo">قائمة ما يلزم، بندًا بندًا ←</a></div>')
 
     pages = dict(picture=picture, todo=todo_page, bodies=bodies_page, unknown=unknown_page, ref=ref_page)
+    for _grp, _cs in groups:
+        for _c in _cs:
+            if _c["kind"] in ("ok", "meas") and not _c["src"]:
+                sys.exit("BUILD FAILED: verified item without source in reference -> " + _c["title"])
+    if len(index) < 100: sys.exit("BUILD FAILED: reference lost items (%d)" % len(index))
     return pages, index, ref_count
 
 
